@@ -1,4 +1,4 @@
-/*³ª¼º¼ö*/
+/*ë‚˜ì„±ìˆ˜*/
 package model;
 
 public class StudentDao {
