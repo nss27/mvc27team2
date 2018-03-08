@@ -1,6 +1,6 @@
-/*³ªÀ±ÁÖ*/
+/*ë‚˜ìœ¤ì£¼*/
 package model;
 
 public class TeacherDao {
-
 }
+

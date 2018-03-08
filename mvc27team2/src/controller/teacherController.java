@@ -1,4 +1,4 @@
-/*³ªÀ±ÁÖ*/
+/*ë‚˜ìœ¤ì£¼*/
 package controller;
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 public class teacherController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		request.getRequestDispatcher("/WEB-INF/views/addTeacher.jsp").forward(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
