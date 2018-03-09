@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Student;
+import model.StudentDao;
 
 @WebServlet("/addStudentController.team2")
 public class AddStudentController extends HttpServlet {
@@ -25,6 +26,8 @@ public class AddStudentController extends HttpServlet {
 		student.setStudentId(studentId);
 		student.setStudentPw(studentPw);
 		
+		StudentDao studentDao = new StudentDao();
+		int result = studentDao.insertStudent(student);
 		
 		response.sendRedirect(request.getContextPath()+"/getStudentListController.team2");
 	}

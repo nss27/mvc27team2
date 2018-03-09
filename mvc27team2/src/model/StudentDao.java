@@ -11,16 +11,26 @@ public class StudentDao {
 	/**
 	 * 학생 등록
 	 * @param student
-	 * @return 학생 넘버(student_no)
+	 * @return preparedStatement.executeUpdate()
 	 */
 	public int insertStudent(Student student) {
+		int result = 0;
 		try {
 			connection = DriverDB.driverDB();
 			
+			preparedStatement = connection.prepareStatement("INSERT INTO student (student_id, student_pw) VALUES (?, ?)");
+			preparedStatement.setString(1, student.getStudentId());
+			preparedStatement.setString(2, student.getStudentPw());
+			
+			result = preparedStatement.executeUpdate();
+			System.out.println(result);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
 		}
 		
-		return 0;
+		return result;
 	}
 }
