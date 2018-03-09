@@ -20,6 +20,7 @@
 		padding: 10px 10px 10px 10px;
 		width: 60%;
 		background-color:#ffffff;
+		border-radius : 7px;
 	}
 	
 </style>
@@ -65,17 +66,31 @@
 				$("p.teacherPwCheck").show();
 			}
 		});
+		$("button").click(function(){
+			if($("input.teacherId").val() == "" || $("input.teacherId").val().length < 5){
+				alert("아이디를 다시 입력하세요");
+				$("input.teacherId").focus();
+			}else if($("input.teacherPw").val() == "" || $("input.teacherPw").val().length < 10){
+				alert("비밀번호를 다시 입력하세요");
+				$("input.teacherPw").focus();
+			}else if($("input.teacherPwCheck").val() == "" || $("input.teacherPw").val() == "" || $("input.teacherId").val() == ""){
+				alert("비밀번호가 일치하는지 확인하세요.");
+				$("input.teacherPw").focus();
+			}else{
+				$("form").submit();
+			}
+		});
 	});
 </script>
 </head>
 	<body>
 		<h2>addTeacher</h2>
 			<div id="form">
-			<form method="post" action="<%=request.getContextPath()%>/teacherController.team2" class="form-horizontal">
+			<form method="post" action="<%=request.getContextPath()%>/addteacherController.team2" class="form-horizontal">
 			<div class="teacherId form-group has-feedback">
 				<label for="teacherId" class="col-sm-2 control-label">Teacher_id</label>
 				<div class="col-sm-10">
-					<input type="text" id="teacherId" name="teacherId" class="teacherId form-control" placeholder="아이디를 입력하세요.">
+					<input type="text" id="teacherId" name="teacherId" class="teacherId form-control" placeholder="아이디를 입력하세요">
 					<span class="teacherId form-control-feedback"></span>
 					<p class="teacherId">아이디는 5글자 이상입니다</p>
 				</div>
@@ -83,7 +98,7 @@
 			<div class="teacherPw form-group has-feedback">
 				<label for="teacherPw" class="col-sm-2 control-label">Teacher_pw</label>
 				<div class="col-sm-10">
-					<input type="password" id="teacherPw" name="teacherPw" class="teacherPw form-control" placeholder="비밀번호를 입력하세요.">
+					<input type="password" id="teacherPw" name="teacherPw" class="teacherPw form-control" placeholder="비밀번호를 입력하세요" >
 					<span class="teacherPw form-control-feedback"></span>
 					<p class="teacherPw">비밀번호는 10글자 이상입니다</p>
 				</div>
@@ -91,12 +106,12 @@
 				<div class="teacherPwCheck form-group has-feedback">
 				<label for="teacherPwCheck" class="col-sm-2 control-label">Teacher_pw확인</label>
 				<div class="col-sm-10">
-					<input type="password" id="teacherPwCheck" name="teacherPwCheck" class="teacherPwCheck form-control" placeholder="비밀번호를 재입력해주세요.">
+					<input type="password" id="teacherPwCheck" name="teacherPwCheck" class="teacherPwCheck form-control" placeholder="입력한 비밀번호를 확인해주세요">
 					<span class="teacherPwCheck form-control-feedback"></span>
 					<p class="teacherPwCheck">비밀번호가 일치하지않습니다</p>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary btn-lg btn-block">teacher추가</button>
+			<button type="button" class="btn btn-primary btn-lg btn-block">teacher추가</button>
 		</form>
 		</div>
 	</body>
