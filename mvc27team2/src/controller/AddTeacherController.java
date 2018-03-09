@@ -13,7 +13,7 @@ import model.TeacherDao;
 
 @WebServlet("/addteacherController.team2")
 public class AddTeacherController extends HttpServlet {
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/views/addTeacher.jsp").forward(request,response);
 	}
@@ -27,8 +27,8 @@ public class AddTeacherController extends HttpServlet {
 		teacher.setTeacherPw(teacherPw);
 		
 		TeacherDao teacherDao = new TeacherDao();
-		
 		teacherDao.insertTeacher(teacher);
+		
 		response.sendRedirect(request.getContextPath()+"/getTeacherListController.team2");
 	}
 }
