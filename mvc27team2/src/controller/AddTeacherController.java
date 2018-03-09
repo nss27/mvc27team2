@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Teacher;
+import model.TeacherDao;
+
 @WebServlet("/addteacherController.team2")
 public class AddTeacherController extends HttpServlet {
 
@@ -16,7 +19,16 @@ public class AddTeacherController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String teacherId = request.getParameter("teacherId");
+		String teacherPw = request.getParameter("teacherPw");
 		
+		Teacher teacher = new Teacher();
+		teacher.setTeacherId(teacherId);
+		teacher.setTeacherPw(teacherPw);
+		
+		TeacherDao teacherDao = new TeacherDao();
+		
+		teacherDao.insertTeacher(teacher);
 		response.sendRedirect(request.getContextPath()+"/getTeacherListController.team2");
 	}
 }
