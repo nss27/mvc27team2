@@ -15,7 +15,25 @@
 	});
 </script>
 </head>
-<body>
-	<h1>getTeacherList.jsp</h1>
-</body>
+	<body>
+		<h1>getTeacherList</h1>
+		<table>
+		<thead>
+			<tr>
+				<th>
+					teacherNo
+				</th>
+				<th>
+					teacherId
+				</th>
+				<th>
+					teacherPw
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+				
+		</tbody>
+		</table>
+	</body>
 </html>

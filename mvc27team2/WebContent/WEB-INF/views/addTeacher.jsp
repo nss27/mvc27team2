@@ -9,18 +9,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
 	body{
-		background: linear-gradient(to right, rgba(255,0,0,0.5), rgba(209,178,255,1));
+		background: linear-gradient(to right, rgba(255,0,0,.5), rgba(209,178,255,1));
 	}
 	h2{
 		text-align: center;
 		padding-bottom: 20px;
 	}
 	div#form{
-		margin: 0 auto;
+		margin: 30px auto;
 		padding: 10px 10px 10px 10px;
 		width: 60%;
-		background-color:#ffffff;
+		background-color: rgba(255,255,255,.5);
 		border-radius : 7px;
+		box-shadow: 5px 5px 5px rgba(58,58,58,.5);
 	}
 	
 </style>
@@ -84,8 +85,8 @@
 </script>
 </head>
 	<body>
-		<h2>addTeacher</h2>
-			<div id="form">
+		<div id="form">
+			<h2>addTeacher</h2>
 			<form method="post" action="<%=request.getContextPath()%>/addteacherController.team2" class="form-horizontal">
 			<div class="teacherId form-group has-feedback">
 				<label for="teacherId" class="col-sm-2 control-label">Teacher_id</label>
@@ -113,6 +114,6 @@
 			</div>
 			<button type="button" class="btn btn-primary btn-lg btn-block">teacher추가</button>
 		</form>
-		</div>
+	</div>
 	</body>
 </html>
