@@ -19,6 +19,7 @@
 			padding: 10px 10px 10px 10px;
 			width: 60%;
 			background-color: #ffffff;
+			border-radius: 7px;
 		}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -64,17 +65,31 @@
 					$("p.studentPwCheck").show();
 				}
 			});
+			$("button").click(function(){
+				if($("input.studentId").val() == "" || $("input.studentId").val().length < 5){
+					alert("아이디를 다시입력하세요");
+					$("input.studentId").focus();
+				}else if($("input.studentPw").val() == "" || $("input.studentPw").val().length < 10){
+					alert("비밀번호를 다시입력하세요");
+					$("input.studentPw").focus();
+				}else if($("input.studentPwCheck").val() == "" || $("input.studentPwCheck").val() != $("input.studentPw").val()){
+					alert("비밀번호가 일치하는지 확인하세요");
+					$("input.studentPwCheck").focus();
+				}else{
+					$("form").submit();
+				}
+			});
 		});
 	</script>
 </head>
 <body>
 	<h2>addStudent</h2>
 	<div id="form">
-		<form method="post" action="<%=request.getContextPath()%>/studentController.team2" class="form-horizontal">
+		<form method="post" action="<%=request.getContextPath()%>/addStudentController.team2" class="form-horizontal">
 			<div class="studentId form-group has-feedback">
 				<label for="studentId" class="col-sm-2 control-label">student_id</label>
 				<div class="col-sm-10">
-					<input type="text" name="studentId" class="studentId form-control" >
+					<input type="text" name="studentId" class="studentId form-control" placeholder="아이디를 입력하세요">
 					<span class="studentId form-control-feedback"></span>
 					<p class="studentId">아이디는 5글자 이상입니다</p>
 				</div>
@@ -82,7 +97,7 @@
 			<div class="studentPw form-group has-feedback">
 				<label for="studentPw" class="col-sm-2 control-label">student_pw</label>
 				<div class="col-sm-10">
-					<input type="password" name="studentPw" class="studentPw form-control">
+					<input type="password" name="studentPw" class="studentPw form-control" placeholder="비밀번호를 입력하세요">
 					<span class="studentPw form-control-feedback"></span>
 					<p class="studentPw">비밀번호는 10글자 이상입니다</p>
 				</div>
@@ -90,12 +105,12 @@
 			<div class="studentPwCheck form-group has-feedback">
 				<label for="studentPwCheck" class="col-sm-2 control-label">student_pw 확인</label>
 				<div class="col-sm-10">
-					<input type="password" name="studentPwCheck" class="studentPwCheck form-control">
+					<input type="password" name="studentPwCheck" class="studentPwCheck form-control"  placeholder="입력한 비밀번호를 확인해주세요">
 					<span class="studentPwCheck form-control-feedback"></span>
 					<p class="studentPwCheck">비밀번호가 일치하지 않습니다</p>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary btn-lg btn-block">student추가</button>			 
+			<button type="button" class="btn btn-primary btn-lg btn-block">student추가</button>			 
 		  	</div>
 		</form>
 	</div>
