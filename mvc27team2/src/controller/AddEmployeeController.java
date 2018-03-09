@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Employee;
+import model.EmployeeDao;
 
 @WebServlet("/addEmployeeController.team2")
 public class AddEmployeeController extends HttpServlet {
@@ -25,6 +26,8 @@ public class AddEmployeeController extends HttpServlet {
 		employee.setEmployeeId(employeeId);
 		employee.setEmployeePw(employeePw);
 		
+		EmployeeDao employeeDao = new EmployeeDao();
+		int result = employeeDao.insertEmployee(employee);
 		
 		response.sendRedirect(request.getContextPath() +"/getEmployeeListController.team2");
 		
