@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Student;
+
 @WebServlet("/addStudentController.team2")
 public class AddStudentController extends HttpServlet {
 	
@@ -16,6 +18,13 @@ public class AddStudentController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String studentId = request.getParameter("studentId");
+		String studentPw = request.getParameter("studentPw");
+		
+		Student student = new Student();
+		student.setStudentId(studentId);
+		student.setStudentPw(studentPw);
+		
 		
 		response.sendRedirect(request.getContextPath()+"/getStudentListController.team2");
 	}
