@@ -18,8 +18,10 @@
 			 margin: 0 auto;
 			 padding: 10px 10px 10px 10px;
 			 width: 60%;
-			 background-color: #ffffff;
+			 background-color: rgba(255, 255, 255, 5);
 			 border-radius: 7px;
+			 box-shadow: 5px, 5px, 5px rgba(58, 58, 58, 5);
+			 
 		 }
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

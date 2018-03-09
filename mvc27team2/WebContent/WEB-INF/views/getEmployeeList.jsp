@@ -7,6 +7,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>getEmployeeList.jsp</h1>
+	<h1>getEmployeeList</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>
+					employeeNo
+				</th>
+				<th>
+					employeeId
+				</th>
+				<th>
+					employeePw
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+		</tbody>
+	
+	</table>
 </body>
 </html>
