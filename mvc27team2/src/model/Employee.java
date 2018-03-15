@@ -23,6 +23,11 @@ public class Employee {
 	public void setEmployeePw(String employeePw) {
 		this.employeePw = employeePw;
 	}
+	@Override
+	public String toString() {
+		return "Employee [employeeNo=" + employeeNo + ", employeeId=" + employeeId + ", employeePw=" + employeePw + "]";
+	}
+	
 	
 	
 }

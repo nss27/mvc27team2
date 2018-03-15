@@ -1,3 +1,4 @@
+/*배건혜*/
 package controller;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class UpdateEmployeeController extends HttpServlet {
 		EmployeeDao employeeDao = new EmployeeDao();
 		Employee employee = employeeDao.selectEmployeeOne(employeeNo);
 		request.setAttribute("employee", employee);
-		request.getRequestDispatcher("WEB-INF/views/updateEmployee.jsp").forward(request,  response);
+		request.getRequestDispatcher("WEB-INF/views/employee/updateEmployee.jsp").forward(request,  response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
