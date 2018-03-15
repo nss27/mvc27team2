@@ -49,13 +49,13 @@
 						*****
 					</th>
 					<th>
-						<a>주소추가</a>
+						<a href="<%=request.getContextPath()%>/addStudentAddrController.team2?studentNo=<%=student.getStudentNo() %>">주소추가</a>
 					</th>
 					<th>
-						<a>수정하기</a>
+						<a href="<%=request.getContextPath()%>/updateStudentController.team2?studentNo=<%=student.getStudentNo() %>">수정하기</a>
 					</th>
 					<th>
-						<a>삭제하기</a>
+						<a href="<%=request.getContextPath()%>/deleteStudentController.team2?studentNo=<%=student.getStudentNo() %>">삭제하기</a>
 					</th>
 				</tr>
 		<%
