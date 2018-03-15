@@ -7,19 +7,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class DeleteEmployeeController
- */
+import model.EmployeeDao;
+
 @WebServlet("/deleteEmployeeController.team2")
 public class DeleteEmployeeController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		int employeeNo = Integer.parseInt(request.getParameter("employeeNo")); 
+		EmployeeDao employeeDao = new EmployeeDao();
+		employeeDao.deleteEmployee(employeeNo);
+		response.sendRedirect(request.getContextPath() + "/getEmployeeListController.team2");
 	}
 
 }

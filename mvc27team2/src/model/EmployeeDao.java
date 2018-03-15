@@ -14,6 +14,60 @@ public class EmployeeDao {
 	Employee employee;
 	ArrayList<Employee> list;
 	/**
+	 * 
+	 * @param employeeNo
+	 * @return
+	 */
+	
+	public int deleteEmployee(int employeeNo) {
+		int result = 0;
+		try {	
+			//드라이버 연결, 로딩
+			connection = DriverDB.driverDB();
+			//쿼리 실행
+			preparedStatement = connection.prepareStatement("DELETE FROM employee WHERE employee_no=?");
+			preparedStatement.setInt(1, employeeNo);
+			
+			result = preparedStatement.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(preparedStatement !=null) try{preparedStatement.close();} catch(SQLException e){}; 
+			if(connection != null)try {connection.close();}catch (SQLException e) {};	
+			}
+		return result;
+		
+	}
+	/**
+	 * 직원 정보 수정 처리 메서드 
+	 * @param employee
+	 * @return result = preparedStatement.executeUpdate();
+	 */
+	public int updateEmployee(Employee employee) {
+		int result = 0;
+		try {	
+			//드라이버 연결, 로딩
+			connection = DriverDB.driverDB();
+			//쿼리 실행
+			preparedStatement = connection.prepareStatement("UPDATE employee SET employee_pw=? WHERE employee_no=?");
+			preparedStatement.setString(1, employee.getEmployeePw());
+			preparedStatement.setInt(2, employee.getEmployeeNo());
+			
+			result = preparedStatement.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(preparedStatement !=null) try{preparedStatement.close();} catch(SQLException e){}; 
+			if(connection != null)try {connection.close();}catch (SQLException e) {};	
+			}
+		
+		return result;
+		
+	}
+	
+	
+	
+	/**
 	 * 직원한명 데이터 출력
 	 * @return 직원한명의 데이터
 	 */
