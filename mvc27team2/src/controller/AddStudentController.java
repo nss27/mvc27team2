@@ -19,6 +19,7 @@ public class AddStudentController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf8");
 		String studentId = request.getParameter("studentId");
 		String studentPw = request.getParameter("studentPw");
 		

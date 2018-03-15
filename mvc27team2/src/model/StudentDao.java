@@ -13,6 +13,48 @@ public class StudentDao {
 	ResultSet resultSet;
 	Student student;
 	ArrayList<Student> list;
+	public int deleteStudent(int studentNo) {
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("DELETE FROM student WHERE student_no=?");
+			preparedStatement.setInt(1, studentNo);
+			
+			result = preparedStatement.executeUpdate();
+			System.out.println(result);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		return result;
+	}
+	/**
+	 * 학생 정보 수정 처리 메서드
+	 * @param student
+	 * @return preparedStatement.executeUpdate()
+	 */
+	public int updateStudent(Student student) {
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("UPDATE student	SET student_pw=? WHERE student_no = ?");
+			preparedStatement.setString(1, student.getStudentPw());
+			preparedStatement.setInt(2, student.getStudentNo());
+			
+			result = preparedStatement.executeUpdate();
+			System.out.println(result);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		return result;
+	}
 	/**
 	 * 학생한명의 데이터 출력
 	 * @return 학생 한명의 데이터

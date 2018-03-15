@@ -23,7 +23,17 @@ public class UpdateStudentController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf8");
+		int studentNo = Integer.parseInt(request.getParameter("studentNo"));
+		String studentId = request.getParameter("studentId");
+		String studentPw = request.getParameter("studentPw");
+		Student student = new Student();
+		student.setStudentNo(studentNo);
+		student.setStudentId(studentId);
+		student.setStudentPw(studentPw);
+		StudentDao studentDao = new StudentDao();
+		studentDao.updateStudent(student);
+		response.sendRedirect(request.getContextPath()+"/getStudentListController.team2");
 	}
 
 }
