@@ -22,5 +22,4 @@ public class GetTeacherListController extends HttpServlet {
 		
 		request.getRequestDispatcher("/WEB-INF/views/getTeacherList.jsp").forward(request, response);
 	}
-
 }

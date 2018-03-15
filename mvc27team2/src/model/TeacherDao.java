@@ -12,6 +12,39 @@ public class TeacherDao {
 	ResultSet resultSet;
 	Teacher teacher;
 	ArrayList<Teacher> list;
+	
+	/**
+	 * 선생님한명출력
+	 * @param teacher
+	 * @return 선생님한명데이터
+	 */
+	
+	public Teacher selectTeacherOne(int TeacherNo) {
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("SELECT teacher_no AS teacherNo,teacher_id AS teacherId, teacher_pw AS teacherPw FROM teacher WHERE teacher_no=?");
+			preparedStatement.setInt(1, TeacherNo);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				teacher = new Teacher();
+				teacher.setTeacherNo(resultSet.getInt("teacherNo"));
+				teacher.setTeacherId(resultSet.getString("teacherId"));
+				teacher.setTeacherPw(resultSet.getString("teacherPw"));
+			}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		return teacher;
+	}
+	
 	/**
 	 * 선생님리스트출력
 	 * @param teacher
@@ -21,7 +54,7 @@ public class TeacherDao {
 		try {
 			connection = DriverDB.driverDB();
 			
-			preparedStatement = connection.prepareStatement("SELECT teacher_no AS teacherNo,teacher_id AS teacherId FROM teacher");
+			preparedStatement = connection.prepareStatement("SELECT teacher_no AS teacherNo,teacher_id AS teacherId FROM teacher ORDER BY teacher_no ASC");
 			
 			resultSet = preparedStatement.executeQuery();
 			
