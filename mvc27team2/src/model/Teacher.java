@@ -24,5 +24,8 @@ public class Teacher {
 	public void setTeacherPw(String teacherPw) {
 		this.teacherPw = teacherPw;
 	}
-
+	@Override
+	public String toString() {
+		return "Teacher [teacherNo=" + teacherNo + ", teacherId=" + teacherId + ", teacherPw=" + teacherPw + "]";
+	}
 }

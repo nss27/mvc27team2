@@ -12,7 +12,11 @@ public class TeacherDao {
 	ResultSet resultSet;
 	Teacher teacher;
 	ArrayList<Teacher> list;
-	
+	/**
+	 * 선생님 삭제 메서드
+	 * @param teacherNo
+	 * @return preparedStatement.executeUpdate
+	 */
 	public int deleteTeacher(int teacherNo) { //Teacher teacher로 매개변수 변경 가능.
 
 		int teacherdelete=0;
@@ -37,7 +41,7 @@ public class TeacherDao {
 	/**
 	 * 선생님 정보 수정 처리 메서드
 	 * @param teacher
-	 * @return 선생님 정보 수정값
+	 * @return preparedStatement.executeUpdate
 	 */
 	public int updateTeacher(Teacher teacher) {
 		int result = 0;
@@ -63,7 +67,7 @@ public class TeacherDao {
 	/**
 	 * 선생님한명 검색 메서드
 	 * @param teacher
-	 * @return 선생님한명데이터
+	 * @return preparedStatement.executeQuery
 	 */
 	
 	public Teacher selectTeacherOne(int TeacherNo) {
@@ -95,7 +99,7 @@ public class TeacherDao {
 	/**
 	 * 선생님리스트 메서드
 	 * @param teacher
-	 * @return 선생님리스트
+	 * @return preparedStatement.executeQuery
 	 */
 	public ArrayList<Teacher> selectTeacherList() {
 		try {
