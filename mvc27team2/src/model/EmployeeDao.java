@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class EmployeeDao {
 	Connection connection;
-	PreparedStatement prparedStatement;
+	PreparedStatement preparedStatement;
 	ResultSet resultSet;
 	Employee employee;
 	ArrayList<Employee> list;
@@ -18,20 +18,19 @@ public class EmployeeDao {
 	 * @param employee
 	 * @return 직원리스트
 	 */
-	public ArrayList<Employee> selectEmployee() {
+	public ArrayList<Employee> selectEmployeeList() {
 		try {	
 			//드라이버 연결, 로딩
 			connection = DriverDB.driverDB();
 			//쿼리 실행
-			prparedStatement = connection.prepareStatement("SELECT employee_no AS employeeNo, employee_id AS employeeId,  employee_pw AS employeePw FROM employee");
-			resultSet = prparedStatement.executeQuery();
+			preparedStatement = connection.prepareStatement("SELECT employee_no AS employeeNo, employee_id AS employeeId FROM employee");
+			resultSet = preparedStatement.executeQuery();
 			
 			list = new ArrayList<Employee>();
 			while(resultSet.next()) {
 				employee = new Employee();
 				employee.setEmployeeNo(resultSet.getInt("employeeNo"));
 				employee.setEmployeeId(resultSet.getString("employeeId"));
-				employee.setEmployeePw(resultSet.getString("employeePw"));
 				list.add(employee);
 				
 			}
@@ -39,7 +38,7 @@ public class EmployeeDao {
 			e.printStackTrace();
 		}finally {
 			if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
-			if(prparedStatement !=null) try{prparedStatement.close();} catch(SQLException e){}; 
+			if(preparedStatement !=null) try{preparedStatement.close();} catch(SQLException e){}; 
 			if(connection != null)try {connection.close();}catch (SQLException e) {};
 				
 			}
@@ -52,7 +51,7 @@ public class EmployeeDao {
 	/**
 	 * 직원 등록
 	 * @param employee
-	 * @return  prparedStatement.executeUpdate();
+	 * @return  preparedStatement.executeUpdate();
 	 */
 	public int insertEmployee(Employee employee) {			
 		int result = 0;
@@ -60,15 +59,15 @@ public class EmployeeDao {
 			//드라이버 연결, 로딩
 			connection = DriverDB.driverDB();
 			//쿼리 실행
-			prparedStatement = connection.prepareStatement("INSERT INTO employee(employee_id, employee_pw)VALUES (?, ?)");
-			prparedStatement.setString(1, employee.getEmployeeId());
-			prparedStatement.setString(2, employee.getEmployeePw());
+			preparedStatement = connection.prepareStatement("INSERT INTO employee(employee_id, employee_pw)VALUES (?, ?)");
+			preparedStatement.setString(1, employee.getEmployeeId());
+			preparedStatement.setString(2, employee.getEmployeePw());
 			
-		result = prparedStatement.executeUpdate();
+		result = preparedStatement.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}finally {
-			if(prparedStatement !=null) try{prparedStatement.close();} catch(SQLException e){}; 
+			if(preparedStatement !=null) try{preparedStatement.close();} catch(SQLException e){}; 
 			if(connection != null)try {connection.close();}catch (SQLException e) {};	
 			}
 		return result;

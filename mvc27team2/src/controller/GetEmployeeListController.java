@@ -17,7 +17,8 @@ import model.EmployeeDao;
 public class GetEmployeeListController extends HttpServlet {	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EmployeeDao  employeeDao = new EmployeeDao();
-		ArrayList<Employee> list = employeeDao.selectEmployee();
+		ArrayList<Employee> list = employeeDao.selectEmployeeList();
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("WEB-INF/views/getEmployeeList.jsp").forward(request,  response);
 	}
 

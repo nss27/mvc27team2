@@ -1,5 +1,7 @@
 <!-- 배건혜 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="EUC-KR"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import = "model.Employee"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,10 +22,48 @@
 				<th>
 					employeePw
 				</th>
+				<th>
+					주소
+				</th>
+				<th>
+					수정
+				</th>
+				<th>
+					삭제
+				</th>
+				
 			</tr>
 		</thead>
 		<tbody>
-		
+		<%
+			ArrayList<Employee> list = (ArrayList<Employee>) request.getAttribute("list");
+			for(Employee employee : list){
+				
+			
+		%>
+				<tr>
+					<th>
+						<%=employee.getEmployeeNo() %>
+					</th>
+					<th>
+						<%=employee.getEmployeeId() %>
+					</th>
+					<th>
+						*************
+					</th>
+					<th>
+						<a>주소추가</a>
+					</th>
+					<th>
+						<a>수정하기</a>
+					</th>
+					<th>
+						<a>삭제하기</a>
+					</th>
+				</tr>
+			<%
+				}
+			%>
 		</tbody>
 	
 	</table>
