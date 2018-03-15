@@ -19,12 +19,12 @@ public class TeacherDao {
 	 * @param teacher
 	 * @return 선생님 리스트
 	 */
-	public ArrayList<Teacher> selectTeacher() {
+	public ArrayList<Teacher> selectTeacherList() {
 		try {
 		//드라이버 로딩 DB연결
 		connection = DriverDB.driverDB();
 		//쿼리작성
-		preparedStatement = connection.prepareStatement("SELECT teacher_no AS teacherNo teacher_id AS teacherId teacher_pw AS teacherPw FROM teacher");
+		preparedStatement = connection.prepareStatement("SELECT teacher_no AS teacherNo teacher_id AS teacherId FROM teacher");
 		//쿼리실행
 		resultset = preparedStatement.executeQuery();
 		list = new ArrayList<Teacher>();
@@ -33,7 +33,6 @@ public class TeacherDao {
 			teacher = new Teacher();
 			teacher.setTeacherNo(resultset.getInt("teacherNo"));
 			teacher.setTeacherId(resultset.getNString("teacherId"));
-			teacher.setTeacherPw(resultset.getString("teacherPw"));
 			list.add(teacher);
 			}
 		//예외잡기
