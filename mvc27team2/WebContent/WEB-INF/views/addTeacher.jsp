@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
@@ -26,55 +25,55 @@
 	<script>
 		$(document).ready(function(){
 			$("p").hide();
-			$("input.studentId").blur(function(){
-				if($("input.studentId").val().length < 5){
-					$("div.studentId").addClass("has-error");
-					$("span.studentId").addClass("glyphicon glyphicon-alert");
-					$("p.studentId").show();
+			$("input.teacherId").blur(function(){
+				if($("input.teacherId").val().length < 5){
+					$("div.teacherId").addClass("has-error");
+					$("span.teacherId").addClass("glyphicon glyphicon-alert");
+					$("p.teacherId").show();
 				}else{
-					$("div.studentId").removeClass("has-error");
-					$("div.studentId").addClass("has-success");
-					$("span.studentId").removeClass("glyphicon glyphicon-alert");
-					$("span.studentId").addClass("glyphicon glyphicon-ok");
-					$("p.studentId").hide();
+					$("div.teacherId").removeClass("has-error");
+					$("div.teacherId").addClass("has-success");
+					$("span.teacherId").removeClass("glyphicon glyphicon-alert");
+					$("span.teacherId").addClass("glyphicon glyphicon-ok");
+					$("p.teacherId").hide();
 				}
 			});
-			$("input.studentPw").blur(function(){
-				if($("input.studentPw").val().length < 10){
-					$("div.studentPw").addClass("has-error");
-					$("span.studentPw").addClass("glyphicon glyphicon-alert");
-					$("p.studentPw").show();
+			$("input.teacherPw").blur(function(){
+				if($("input.teacherPw").val().length < 10){
+					$("div.teacherPw").addClass("has-error");
+					$("span.teacherPw").addClass("glyphicon glyphicon-alert");
+					$("p.teacherPw").show();
 				}else{
-					$("div.studentPw").removeClass("has-error");
-					$("div.studentPw").addClass("has-success");
-					$("span.studentPw").removeClass("glyphicon glyphicon-alert");
-					$("span.studentPw").addClass("glyphicon glyphicon-ok");
-					$("p.studentPw").hide();
+					$("div.teacherPw").removeClass("has-error");
+					$("div.teacherPw").addClass("has-success");
+					$("span.teacherPw").removeClass("glyphicon glyphicon-alert");
+					$("span.teacherPw").addClass("glyphicon glyphicon-ok");
+					$("p.teacherPw").hide();
 				}
 			});
-			$("input.studentPwCheck").blur(function(){
-				if($("input.studentPwCheck").val() === $("input.studentPw").val()){
-					$("div.studentPwCheck").removeClass("has-error");
-					$("div.studentPwCheck").addClass("has-success");
-					$("span.studentPwCheck").removeClass("glyphicon glyphicon-alert");
-					$("span.studentPwCheck").addClass("glyphicon glyphicon-ok");
-					$("p.studentPwCheck").hide();
+			$("input.teacherPwCheck").blur(function(){
+				if($("input.teacherPwCheck").val() === $("input.studentPw").val()){
+					$("div.teacherPwCheck").removeClass("has-error");
+					$("div.teacherPwCheck").addClass("has-success");
+					$("span.teacherPwCheck").removeClass("glyphicon glyphicon-alert");
+					$("span.teacherPwCheck").addClass("glyphicon glyphicon-ok");
+					$("p.teacherPwCheck").hide();
 				}else{
-					$("div.studentPwCheck").addClass("has-error");
-					$("span.studentPwCheck").addClass("glyphicon glyphicon-alert");
-					$("p.studentPwCheck").show();
+					$("div.teacherPwCheck").addClass("has-error");
+					$("span.teacherPwCheck").addClass("glyphicon glyphicon-alert");
+					$("p.teacherPwCheck").show();
 				}
 			});
 			$("button").click(function(){
-				if($("input.studentId").val() == "" || $("input.studentId").val().length < 5){
+				if($("input.teacherId").val() == "" || $("input.teacherId").val().length < 5){
 					alert("아이디를 다시입력하세요");
-					$("input.studentId").focus();
-				}else if($("input.studentPw").val() == "" || $("input.studentPw").val().length < 10){
+					$("input.teacherId").focus();
+				}else if($("input.teacherPw").val() == "" || $("input.teacherPw").val().length < 10){
 					alert("비밀번호를 다시입력하세요");
-					$("input.studentPw").focus();
-				}else if($("input.studentPwCheck").val() == "" || $("input.studentPwCheck").val() != $("input.studentPw").val()){
+					$("input.teacherPw").focus();
+				}else if($("input.teacherPwCheck").val() == "" || $("input.teacherPwCheck").val() != $("input.teacherPw").val()){
 					alert("비밀번호가 일치하는지 확인하세요");
-					$("input.studentPwCheck").focus();
+					$("input.teacherPwCheck").focus();
 				}else{
 					$("form").submit();
 				}
@@ -83,34 +82,34 @@
 	</script>
 </head>
 <body>
-	<h2>addStudent</h2>
+	<h2>addTeacher</h2>
 	<div id="form">
 		<form method="post" action="<%=request.getContextPath()%>/addTeacherController.team2" class="form-horizontal">
-			<div class="studentId form-group has-feedback">
-				<label for="studentId" class="col-sm-2 control-label">student_id</label>
+			<div class="teacherId form-group has-feedback">
+				<label for="teacherId" class="col-sm-2 control-label">teacher_Id</label>
 				<div class="col-sm-10">
-					<input type="text" name="studentId" class="studentId form-control" placeholder="아이디를 입력하세요">
-					<span class="studentId form-control-feedback"></span>
-					<p class="studentId">아이디는 5글자 이상입니다</p>
+					<input type="text" name="teacherId" class="teacherId form-control" placeholder="아이디를 입력하세요">
+					<span class="teacherId form-control-feedback"></span>
+					<p class="teacherId">아이디는 5글자 이상입니다</p>
 				</div>
 			</div>
-			<div class="studentPw form-group has-feedback">
-				<label for="studentPw" class="col-sm-2 control-label">student_pw</label>
+			<div class="teacherPw form-group has-feedback">
+				<label for="teacherPw" class="col-sm-2 control-label">teacher_pw</label>
 				<div class="col-sm-10">
-					<input type="password" name="studentPw" class="studentPw form-control" placeholder="비밀번호를 입력하세요">
-					<span class="studentPw form-control-feedback"></span>
-					<p class="studentPw">비밀번호는 10글자 이상입니다</p>
+					<input type="password" name="teacherPw" class="teacherPw form-control" placeholder="비밀번호를 입력하세요">
+					<span class="teacherPw form-control-feedback"></span>
+					<p class="teacherPw">비밀번호는 10글자 이상입니다</p>
 				</div>
 			</div>
-			<div class="studentPwCheck form-group has-feedback">
-				<label for="studentPwCheck" class="col-sm-2 control-label">student_pw 확인</label>
+			<div class="teacherPwCheck form-group has-feedback">
+				<label for="teacherPwCheck" class="col-sm-2 control-label">teacher_pw 확인</label>
 				<div class="col-sm-10">
-					<input type="password" name="studentPwCheck" class="studentPwCheck form-control"  placeholder="입력한 비밀번호를 확인해주세요">
-					<span class="studentPwCheck form-control-feedback"></span>
-					<p class="studentPwCheck">비밀번호가 일치하지 않습니다</p>
+					<input type="password" name="teacherPwCheck" class="teacherPwCheck form-control"  placeholder="입력한 비밀번호를 확인해주세요">
+					<span class="teacherPwCheck form-control-feedback"></span>
+					<p class="teacherPwCheck">비밀번호가 일치하지 않습니다</p>
 				</div>
 			</div>
-			<button type="button" class="btn btn-primary btn-lg btn-block">student추가</button>			 
+			<button type="button" class="btn btn-primary btn-lg btn-block">teacher추가</button>			 
 		  	</div>
 		</form>
 	</div>
