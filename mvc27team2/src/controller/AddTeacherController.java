@@ -18,17 +18,18 @@ public class AddTeacherController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf8");
+		
 		String teacherId = request.getParameter("teacherId");
 		String teacherPw = request.getParameter("teacherPw");
-		
+		//sql에 보내줄 값 셋팅
 		Teacher teacher = new Teacher();
 		teacher.setTeacherId(teacherId);
 		teacher.setTeacherPw(teacherPw);
-		
+		//결과값 dao 호출
 		TeacherDao teacherDao = new TeacherDao();
 		int result = teacherDao.insertTeacher(teacher);
 		
 		response.sendRedirect(request.getContextPath()+"/getTeacherListController.team2");
 	}
-
 }

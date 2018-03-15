@@ -22,6 +22,19 @@ public class UpdateTeacherController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setCharacterEncoding("utf8");
+		int teacherNo = Integer.parseInt(request.getParameter("teacherNo"));
+		String teacherId = request.getParameter("teacherId");
+		String teacherPw = request.getParameter("teacherPw");
+		//쿼리 mysql에 보내기위해 값을 다시 셋팅
+		Teacher teacher = new Teacher();
+		teacher.setTeacherNo(teacherNo);
+		teacher.setTeacherPw(teacherPw);
+		teacher.setTeacherPw(teacherPw);
+		//dao 호출
+		TeacherDao teacherDao = new TeacherDao();
+		teacherDao.updateTeacher(teacher);
+		//넘겨줄 페이지 
+		response.sendRedirect(request.getContextPath()+"/getTeacherListController.team2");
 	}
 }

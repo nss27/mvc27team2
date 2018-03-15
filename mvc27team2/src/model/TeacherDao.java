@@ -13,8 +13,55 @@ public class TeacherDao {
 	Teacher teacher;
 	ArrayList<Teacher> list;
 	
+	public int deleteTeacher(int teacherNo) { //Teacher teacher로 매개변수 변경 가능.
+
+		int teacherdelete=0;
+		
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("DELETE FROM teacher WHERE teacher_no=?");
+			preparedStatement.setInt(1, teacherNo);
+			
+			teacherdelete = preparedStatement.executeUpdate();
+			System.out.println(teacherdelete);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		return teacherdelete;
+	}
+	
 	/**
-	 * 선생님한명출력
+	 * 선생님 정보 수정 처리 메서드
+	 * @param teacher
+	 * @return 선생님 정보 수정값
+	 */
+	public int updateTeacher(Teacher teacher) {
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("UPDATE teacher SET teacher_pw=? WHERE teacher_no=?");
+			preparedStatement.setString(1, teacher.getTeacherPw());
+			preparedStatement.setInt(2, teacher.getTeacherNo());
+			
+			result = preparedStatement.executeUpdate();
+			System.out.println(result);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 선생님한명 검색 메서드
 	 * @param teacher
 	 * @return 선생님한명데이터
 	 */
@@ -46,7 +93,7 @@ public class TeacherDao {
 	}
 	
 	/**
-	 * 선생님리스트출력
+	 * 선생님리스트 메서드
 	 * @param teacher
 	 * @return 선생님리스트
 	 */
