@@ -52,13 +52,13 @@
 						*************
 					</th>
 					<th>
-						<a>주소추가</a>
+						<a href="<%=request.getContextPath()%>/addEmployeeAddrController.team2?employeeNo=<%=employee.getEmployeeNo() %>">주소추가</a>
 					</th>
 					<th>
-						<a>수정하기</a>
+						<a href="<%=request.getContextPath()%>/updateEmployeeController.team2?employeeNo=<%=employee.getEmployeeNo() %>">수정하기</a>
 					</th>
 					<th>
-						<a>삭제하기</a>
+						<a href="<%=request.getContextPath()%>/deleteEmployeeController.team2?employeeNo=<%=employee.getEmployeeNo() %>">삭제하기</a>
 					</th>
 				</tr>
 			<%

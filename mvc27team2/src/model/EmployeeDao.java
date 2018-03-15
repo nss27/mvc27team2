@@ -14,6 +14,37 @@ public class EmployeeDao {
 	Employee employee;
 	ArrayList<Employee> list;
 	/**
+	 * 직원한명 데이터 출력
+	 * @return 직원한명의 데이터
+	 */
+	public Employee selectEmployeeOne(int employeeNo ) {
+		try {	
+			//드라이버 연결, 로딩
+			connection = DriverDB.driverDB();
+			//쿼리 실행
+			preparedStatement = connection.prepareStatement("SELECT employee_no AS employeeNo, employee_id AS employeeId, employee_pw AS employeePw FROM employee Where employee_no = ?");
+			preparedStatement.setInt(1, employeeNo);
+			resultSet = preparedStatement.executeQuery();
+	
+			while(resultSet.next()) {
+				employee = new Employee();
+				employee.setEmployeeNo(resultSet.getInt("employeeNo"));
+				employee.setEmployeeId(resultSet.getString("employeeId"));
+				employee.setEmployeePw(resultSet.getString("employeePw"));
+				
+			}
+		}catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
+			if(preparedStatement !=null) try{preparedStatement.close();} catch(SQLException e){}; 
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+				
+		}
+		
+		return employee;
+	}
+	/**
 	 * 직원리스트출력
 	 * @param employee
 	 * @return 직원리스트
@@ -23,7 +54,7 @@ public class EmployeeDao {
 			//드라이버 연결, 로딩
 			connection = DriverDB.driverDB();
 			//쿼리 실행
-			preparedStatement = connection.prepareStatement("SELECT employee_no AS employeeNo, employee_id AS employeeId FROM employee");
+			preparedStatement = connection.prepareStatement("SELECT employee_no AS employeeNo, employee_id AS employeeId FROM employee ORDER BY employee_no ASC ");
 			resultSet = preparedStatement.executeQuery();
 			
 			list = new ArrayList<Employee>();
