@@ -23,4 +23,8 @@ public class Student {
 	public void setStudentPw(String studentPw) {
 		this.studentPw = studentPw;
 	}
+	@Override
+	public String toString() {
+		return "Student [studentNo=" + studentNo + ", studentId=" + studentId + ", studentPw=" + studentPw + "]";
+	}
 }

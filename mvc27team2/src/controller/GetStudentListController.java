@@ -20,7 +20,7 @@ public class GetStudentListController extends HttpServlet {
 		ArrayList<Student> list = studentDao.selectStudentList();
 		request.setAttribute("list", list);
 		
-		request.getRequestDispatcher("/WEB-INF/views/getStudentList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/student/getStudentList.jsp").forward(request, response);
 	}
 
 }

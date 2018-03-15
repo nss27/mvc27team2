@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h2>addStudentAddr.jsp</h2>
+	<%
+		int studentNo = Integer.parseInt(request.getParameter("studentNo"));
+	%>
 </body>
 </html>

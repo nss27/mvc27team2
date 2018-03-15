@@ -19,7 +19,7 @@ public class UpdateStudentController extends HttpServlet {
 		StudentDao studentDao = new StudentDao();
 		Student student = studentDao.selectStudentOne(studentNo);
 		request.setAttribute("student", student);
-		request.getRequestDispatcher("/WEB-INF/views/updateStudent.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/student/updateStudent.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
