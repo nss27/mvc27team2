@@ -18,11 +18,11 @@ public class StudentDao {
 	 * @param student
 	 * @return 학생리스트
 	 */
-	public ArrayList<Student> selectStudent() {
+	public ArrayList<Student> selectStudentList() {
 		try {
 			connection = DriverDB.driverDB();
 			
-			preparedStatement = connection.prepareStatement("SELECT student_no AS studentNo,student_id AS studentId,student_pw AS studentPw FROM student");
+			preparedStatement = connection.prepareStatement("SELECT student_no AS studentNo,student_id AS studentId FROM student");
 			
 			resultSet = preparedStatement.executeQuery();
 			
@@ -31,7 +31,6 @@ public class StudentDao {
 				student = new Student();
 				student.setStudentNo(resultSet.getInt("studentNo"));
 				student.setStudentId(resultSet.getString("studentId"));
-				student.setStudentPw(resultSet.getString("studentPw"));
 				list.add(student);
 			}
 		} catch (ClassNotFoundException | SQLException e) {

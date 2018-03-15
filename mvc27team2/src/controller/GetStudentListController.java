@@ -17,7 +17,8 @@ import model.StudentDao;
 public class GetStudentListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		StudentDao studentDao = new StudentDao();
-		ArrayList<Student> list = studentDao.selectStudent();
+		ArrayList<Student> list = studentDao.selectStudentList();
+		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("/WEB-INF/views/getStudentList.jsp").forward(request, response);
 	}
