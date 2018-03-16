@@ -17,7 +17,7 @@ public class GetTeacherAddrListController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		TeacherAddrDao teacherAddrDao = new TeacherAddrDao();
-		ArrayList<TeacherAddr> list = teacherAddrDao.selectTeacherList();
+		ArrayList<TeacherAddr> list = teacherAddrDao.selectTeacherAddrList();
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/views/teacher/getTeacherAddrList.jsp").forward(request, response);
 	}

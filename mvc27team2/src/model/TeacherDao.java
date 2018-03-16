@@ -7,11 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class TeacherDao {
-	Connection connection;
-	PreparedStatement preparedStatement;
-	ResultSet resultSet;
-	Teacher teacher;
-	ArrayList<Teacher> list;
+
 	/**
 	 * 선생님 삭제 메서드
 	 * @param teacherNo
@@ -21,7 +17,11 @@ public class TeacherDao {
 
 		int teacherdelete=0;
 		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
 		try {
+			
 			connection = DriverDB.driverDB();
 			
 			preparedStatement = connection.prepareStatement("DELETE FROM teacher WHERE teacher_no=?");
@@ -45,6 +45,9 @@ public class TeacherDao {
 	 */
 	public int updateTeacher(Teacher teacher) {
 		int result = 0;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		try {
 			connection = DriverDB.driverDB();
 			
@@ -60,7 +63,6 @@ public class TeacherDao {
 			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
 			if(connection != null)try {connection.close();}catch (SQLException e) {};
 		}
-		
 		return result;
 	}
 	
@@ -71,7 +73,13 @@ public class TeacherDao {
 	 */
 	
 	public Teacher selectTeacherOne(int TeacherNo) {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Teacher teacher = null;
 		try {
+
 			connection = DriverDB.driverDB();
 			
 			preparedStatement = connection.prepareStatement("SELECT teacher_no AS teacherNo,teacher_id AS teacherId, teacher_pw AS teacherPw FROM teacher WHERE teacher_no=?");
@@ -102,6 +110,11 @@ public class TeacherDao {
 	 * @return preparedStatement.executeQuery
 	 */
 	public ArrayList<Teacher> selectTeacherList() {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Teacher teacher;
+		ArrayList<Teacher> list = null;
 		try {
 			connection = DriverDB.driverDB();
 			
@@ -123,7 +136,6 @@ public class TeacherDao {
 			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
 			if(connection != null)try {connection.close();}catch (SQLException e) {};
 		}
-		
 		return list;
 	}
 	/**
@@ -133,6 +145,8 @@ public class TeacherDao {
 	 */
 	public int insertTeacher(Teacher teacher) {
 		int result = 0;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		try {
 			connection = DriverDB.driverDB();
 			

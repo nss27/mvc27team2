@@ -28,7 +28,9 @@
 	$(document).ready(function(){
 		$("input.address").blur(function(){
 			if($("input.address").val() == ""){
+				$("div.address").removeClass("has-success");
 				$("div.address").addClass("has-error");
+				$("span.address").removeClass("glyphicon glyphicon-ok");
 				$("span.address").addClass("glyphicon glyphicon-alert");
 			}else{
 				$("div.address").removeClass("has-error");

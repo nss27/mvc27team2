@@ -29,7 +29,9 @@
 				$("p").hide();
 				$("input.teacherId").blur(function(){
 					if($("input.teacherId").val().length < 5){
+						$("div.teacherId").removeClass("has-success");
 						$("div.teacherId").addClass("has-error");
+						$("span.teacherId").removeClass("glyphicon glyphicon-ok");
 						$("span.teacherId").addClass("glyphicon glyphicon-alert");
 						$("p.teacherId").show();
 					}else{
@@ -42,7 +44,9 @@
 				});
 				$("input.teacherPw").blur(function(){
 					if($("input.teacherPw").val().length < 10){
+						$("div.teacherPw").removeClass("has-success");
 						$("div.teacherPw").addClass("has-error");
+						$("span.teacherPw").removeClass("glyphicon glyphicon-ok");
 						$("span.teacherPw").addClass("glyphicon glyphicon-alert");
 						$("p.teacherPw").show();
 					}else{
@@ -61,7 +65,9 @@
 						$("span.teacherPwCheck").addClass("glyphicon glyphicon-ok");
 						$("p.teacherPwCheck").hide();
 					}else{
+						$("div.teacherPwCheck").removeClass("has-success");
 						$("div.teacherPwCheck").addClass("has-error");
+						$("span.teacherPwCheck").removeClass("glyphicon glyphicon-ok");
 						$("span.teacherPwCheck").addClass("glyphicon glyphicon-alert");
 						$("p.teacherPwCheck").show();
 					}
