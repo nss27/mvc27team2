@@ -21,9 +21,12 @@ public class AddStudentAddrController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int studentNo = Integer.parseInt(request.getParameter("studentNo"));
 		studentDao = new StudentDao();
+		studentAddrDao = new StudentAddrDao();
 		Student student = studentDao.selectStudentOne(studentNo);
 		request.setAttribute("studentNo", student.getStudentNo());
 		request.setAttribute("studentId", student.getStudentId());
+		int count = studentAddrDao.countStudentAddrList();
+		request.setAttribute("count", count);
 		request.getRequestDispatcher("/WEB-INF/views/student/addStudentAddr.jsp").forward(request, response);
 	}
 

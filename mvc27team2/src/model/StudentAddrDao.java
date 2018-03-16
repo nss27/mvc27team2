@@ -9,10 +9,41 @@ import java.util.ArrayList;
 
 public class StudentAddrDao {
 	/**
-	 * 학생 주소 리스트 출력
+	 * 학생 주소 리스트 카운트 메서드
+	 * @return 카운트 값
+	 */
+	public int countStudentAddrList() {
+		System.out.println("학생 주소 리스트 카운트 메서드 호출");
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countStudentAddrList FROM student_addr");
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				result = resultSet.getInt("countStudentAddrList");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		
+		return result;
+	}
+	/**
+	 * 학생 주소 리스트 출력 메서드
 	 * @return 학생 주소 리스트
 	 */
 	public ArrayList<StudentAddr> selectStudentAddrList() {
+		System.out.println("학생 주소 리스트 출력 메서드 호출");
 		Connection connection =null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -21,8 +52,9 @@ public class StudentAddrDao {
 		try {
 			connection = DriverDB.driverDB();
 			/*
-			 * student와 student_addr테이블을 조인하여
-			 * 
+			 * student와 student_addr테이블을 조인한 이유는
+			 * 학생 주소 등록 번호,학생 등록 번호,학생 아이디,학생 주소 값을 출력해서
+			 * 리스트로 보여주기 위함이다
 			 */
 			preparedStatement = connection.prepareStatement("SELECT student_addr_no as studentAddrNo,student.student_no as studentNo,student_id as studentId,address FROM student join student_addr ON student.student_no = student_addr.student_no ORDER BY student_addr_no ASC");
 			
@@ -53,6 +85,7 @@ public class StudentAddrDao {
 	 * @return preparedStatement.executeUpdate
 	 */
 	public int insertStudentAddr(StudentAddr studentAddr) {
+		System.out.println("학생 주소 등록 메서드 호출");
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;

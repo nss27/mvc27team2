@@ -26,6 +26,13 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
+		<%
+			int count = (int)request.getAttribute("count");
+		%>
+			var count = <%=count%>;
+			if(count>=5){
+				$('input.address').attr('disabled','disabled');
+			}
 			$("input.address").blur(function(){
 				if($("input.address").val() == ""){
 					$("div.address").removeClass("has-success");
@@ -40,7 +47,9 @@
 				}
 			});
 			$("button").click(function(){
-				if($("input.address").val() == ""){
+				if($('input.address').attr('disabled')){
+					alert('주소 등록 횟수를 초과하였습니다');
+				}else if($("input.address").val() == ""){
 					alert("주소를 입력해주세요");
 					$("input.address").focus();
 				}else{
