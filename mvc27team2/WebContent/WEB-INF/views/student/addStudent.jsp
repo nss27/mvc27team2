@@ -90,7 +90,7 @@
 			<div class="studentId form-group has-feedback">
 				<label for="studentId" class="col-sm-2 control-label">student_id</label>
 				<div class="col-sm-10">
-					<input type="text" name="studentId" class="studentId form-control" placeholder="아이디를 입력하세요">
+					<input type="text" id="studentId" name="studentId" class="studentId form-control" placeholder="아이디를 입력하세요">
 					<span class="studentId form-control-feedback"></span>
 					<p class="studentId">아이디는 5글자 이상입니다</p>
 				</div>
@@ -98,7 +98,7 @@
 			<div class="studentPw form-group has-feedback">
 				<label for="studentPw" class="col-sm-2 control-label">student_pw</label>
 				<div class="col-sm-10">
-					<input type="password" name="studentPw" class="studentPw form-control" placeholder="비밀번호를 입력하세요">
+					<input type="password" id="studentPw" name="studentPw" class="studentPw form-control" placeholder="비밀번호를 입력하세요">
 					<span class="studentPw form-control-feedback"></span>
 					<p class="studentPw">비밀번호는 10글자 이상입니다</p>
 				</div>
@@ -106,7 +106,7 @@
 			<div class="studentPwCheck form-group has-feedback">
 				<label for="studentPwCheck" class="col-sm-2 control-label">student_pw 확인</label>
 				<div class="col-sm-10">
-					<input type="password" name="studentPwCheck" class="studentPwCheck form-control"  placeholder="입력한 비밀번호를 확인해주세요">
+					<input type="password" id="studentPwCheck" name="studentPwCheck" class="studentPwCheck form-control"  placeholder="입력한 비밀번호를 확인해주세요">
 					<span class="studentPwCheck form-control-feedback"></span>
 					<p class="studentPwCheck">비밀번호가 일치하지 않습니다</p>
 				</div>

@@ -4,6 +4,7 @@ package model;
 public class StudentAddr {
 	private int studentAddrNo;
 	private int studentNo;
+	private String studentId;
 	private String address;
 	public int getStudentAddrNo() {
 		return studentAddrNo;
@@ -17,6 +18,12 @@ public class StudentAddr {
 	public void setStudentNo(int studentNo) {
 		this.studentNo = studentNo;
 	}
+	public String getStudentId() {
+		return studentId;
+	}
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
+	}
 	public String getAddress() {
 		return address;
 	}
@@ -25,7 +32,7 @@ public class StudentAddr {
 	}
 	@Override
 	public String toString() {
-		return "StudentAddr [studentAddrNo=" + studentAddrNo + ", studentNo=" + studentNo + ", address=" + address
-				+ "]";
+		return "StudentAddr [studentAddrNo=" + studentAddrNo + ", studentNo=" + studentNo + ", studentId=" + studentId
+				+ ", address=" + address + "]";
 	}
 }

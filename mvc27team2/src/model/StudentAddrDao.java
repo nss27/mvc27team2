@@ -5,12 +5,45 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class StudentAddrDao {
 	Connection connection;
 	PreparedStatement preparedStatement;
 	ResultSet resultSet;
 	StudentAddr studentAddr;
+	ArrayList<StudentAddr> list;
+	/**
+	 * 학생 주소 리스트 출력
+	 * @return 학생 주소 리스트
+	 */
+	public ArrayList<StudentAddr> selectStudentList() {
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("SELECT student_addr_no as studentAddrNo,student.student_no as studentNo,student_id as studentId,address FROM student RIGHT join student_addr ON student.student_no = student_addr.student_no ORDER BY student_addr_no ASC");
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			list = new ArrayList<StudentAddr>();
+			while(resultSet.next()) {
+				studentAddr = new StudentAddr();
+				studentAddr.setStudentAddrNo(resultSet.getInt("studentAddrNo"));
+				studentAddr.setStudentNo(resultSet.getInt("studentNo"));
+				studentAddr.setStudentId(resultSet.getString("studentId"));
+				studentAddr.setAddress(resultSet.getString("address"));
+				list.add(studentAddr);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		
+		return list;
+	}
 	/**
 	 * 학생 주소 등록 메서드
 	 * @param studentAddr

@@ -70,7 +70,7 @@
 			<div class="studentPw form-group has-feedback">
 				<label for="studentPw" class="col-sm-2 control-label">student_pw</label>
 				<div class="col-sm-10">
-					<input type="text" class="studentPw form-control" name="studentPw" value="<%=student.getStudentPw()%>">
+					<input type="text" class="studentPw form-control" id="studentPw" name="studentPw" value="<%=student.getStudentPw()%>">
 					<span class="studentPw form-control-feedback"></span>
 					<p class="studentPw">비밀번호는 10글자 이상입니다</p>
 				</div>
