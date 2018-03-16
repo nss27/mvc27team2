@@ -56,7 +56,7 @@ h2 {
 		</thead>
 		<tbody>
 			<%
-				ArrayList<EmployeeAddr> list = (ArrayList<EmployeeAddr>)request.getAttribute("list");
+				ArrayList<EmployeeAddr> list = (ArrayList<EmployeeAddr>) request.getAttribute("list");
 				for(EmployeeAddr employeeAddr : list){
 			
 			%>

@@ -16,29 +16,26 @@ import model.EmployeeDao;
 
 @WebServlet("/addEmployeeAddrController.team2")
 public class AddEmployeeAddrController extends HttpServlet {	
-	private Employee employee;
-	private EmployeeAddr employeeAddr;
+	private EmployeeDao employeeDao = null;
+	private EmployeeAddrDao employeeAddrDao = null;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int employeeNo = Integer.parseInt(request.getParameter("employeeNo"));
 		EmployeeDao employeeDao = new EmployeeDao();
-		this.employee = employeeDao.selectEmployeeOne(employeeNo);
-		request.setAttribute("employeeNo",this.employee.getEmployeeNo());
-		request.setAttribute("employeeId", this.employee.getEmployeeId());
-		request.getRequestDispatcher("WEB-INF/views/employee/addEmployeeAddr.jsp").forward(request,  response);
+		Employee employee = employeeDao.selectEmployeeOne(employeeNo);
+		request.setAttribute("employeeNo",employee.getEmployeeNo());
+		request.setAttribute("employeeId",employee.getEmployeeId());
+		request.getRequestDispatcher("/WEB-INF/views/employee/addEmployeeAddr.jsp").forward(request,  response);
 	}
-	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf8");
-		int employeeNo =Integer.parseInt(request.getParameter("employeeNo"));
-		String address = request.getParameter("address");
-		
-		employeeAddr = new EmployeeAddr();
-		this.employeeAddr.setEmployeeNo(employeeNo);
-		this.employeeAddr.setAddress(address);
+		int employeeNo = Integer.parseInt(request.getParameter("employeeNo"));
+		String address = request.getParameter("address");		
+		EmployeeAddr employeeAddr = new EmployeeAddr();
+		employeeAddr.setEmployeeNo(employeeNo);
+		employeeAddr.setAddress(address);
 		EmployeeAddrDao employeeAddrDao = new EmployeeAddrDao();
-		employeeAddrDao.insertEmployeeAddr(this.employeeAddr);
-		
+		employeeAddrDao.insertEmployeeAddr(employeeAddr);		
 		response.sendRedirect(request.getContextPath()+"/getEmplyeeAddrListController.team2");
 	}
 

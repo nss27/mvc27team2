@@ -8,16 +8,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EmployeeAddrDao {
-	Connection connection;
-	PreparedStatement preparedStatement;
-	ResultSet resultSet;
-	EmployeeAddr employeeAddr = null;
-	ArrayList<EmployeeAddr> list;
 	/**
 	 * 직원 주소리스트 출력
 	 * @return 직원 주소리스트
 	 */
-	public ArrayList<EmployeeAddr> selectEmployeeList() {
+	public ArrayList<EmployeeAddr> selectEmployeeAddrList() {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		EmployeeAddr employeeAddr = null;
+		ArrayList<EmployeeAddr> list = null;
 		try {	
 			//드라이버 연결, 로딩
 			connection = DriverDB.driverDB();
@@ -32,8 +32,7 @@ public class EmployeeAddrDao {
 				employeeAddr.setEmployeeNo(resultSet.getInt("employeeNo"));
 				employeeAddr.setEmployeeId(resultSet.getString("employeeId"));
 				employeeAddr.setAddress(resultSet.getString("address"));
-				list.add(employeeAddr);
-				
+				list.add(employeeAddr);				
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
@@ -42,12 +41,8 @@ public class EmployeeAddrDao {
 			if(preparedStatement !=null) try{preparedStatement.close();} catch(SQLException e){}; 
 			if(connection != null)try {connection.close();}catch (SQLException e) {};
 				
-			}
-		
-		
-		
+			}		
 		return list;
-		
 	}
 	/**
 	 * 직원주소등록메서드
@@ -55,6 +50,9 @@ public class EmployeeAddrDao {
 	 * @return
 	 */
 	public int insertEmployeeAddr(EmployeeAddr employeeAddr) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;		
+		ArrayList<EmployeeAddr> list;
 		int result =0;
 		try {	
 			//드라이버 연결, 로딩
@@ -62,9 +60,8 @@ public class EmployeeAddrDao {
 			//쿼리 실행
 			preparedStatement = connection.prepareStatement("INSERT INTO employee_addr(employee_no, address) VALUES (?, ?)");
 			preparedStatement.setInt(1,employeeAddr.getEmployeeNo());
-			preparedStatement.setString(2,employeeAddr.getAddress());
-			
-		result = preparedStatement.executeUpdate();
+			preparedStatement.setString(2,employeeAddr.getAddress());			
+			result = preparedStatement.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}finally {

@@ -8,11 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EmployeeDao {
-	Connection connection;
-	PreparedStatement preparedStatement;
-	ResultSet resultSet;
-	Employee employee;
-	ArrayList<Employee> list;
+	
 	/**
 	 * 직원 삭제 처리 메서드
 	 * @param employeeNo
@@ -20,6 +16,8 @@ public class EmployeeDao {
 	 */
 	
 	public int deleteEmployee(int employeeNo) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		int result = 0;
 		try {	
 			//드라이버 연결, 로딩
@@ -38,12 +36,15 @@ public class EmployeeDao {
 		return result;
 		
 	}
+	
 	/**
 	 * 직원 정보 수정 처리 메서드 
 	 * @param employee
 	 * @return result = preparedStatement.executeUpdate();
 	 */
 	public int updateEmployee(Employee employee) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		int result = 0;
 		try {	
 			//드라이버 연결, 로딩
@@ -59,19 +60,19 @@ public class EmployeeDao {
 		}finally {
 			if(preparedStatement !=null) try{preparedStatement.close();} catch(SQLException e){}; 
 			if(connection != null)try {connection.close();}catch (SQLException e) {};	
-			}
-		
-		return result;
-		
+			}	
+		return result;		
 	}
-	
-	
 	
 	/**
 	 * 직원한명 데이터 출력
 	 * @return 직원한명의 데이터
 	 */
 	public Employee selectEmployeeOne(int employeeNo ) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Employee employee = null;
 		try {	
 			//드라이버 연결, 로딩
 			connection = DriverDB.driverDB();
@@ -94,16 +95,20 @@ public class EmployeeDao {
 			if(preparedStatement !=null) try{preparedStatement.close();} catch(SQLException e){}; 
 			if(connection != null)try {connection.close();}catch (SQLException e) {};
 				
-		}
-		
+		}		
 		return employee;
 	}
+	
 	/**
 	 * 직원리스트출력
 	 * @param employee
 	 * @return 직원리스트
 	 */
 	public ArrayList<Employee> selectEmployeeList() {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		ArrayList<Employee> list = null;
 		try {	
 			//드라이버 연결, 로딩
 			connection = DriverDB.driverDB();
@@ -113,7 +118,7 @@ public class EmployeeDao {
 			
 			list = new ArrayList<Employee>();
 			while(resultSet.next()) {
-				employee = new Employee();
+				Employee employee = new Employee();
 				employee.setEmployeeNo(resultSet.getInt("employeeNo"));
 				employee.setEmployeeId(resultSet.getString("employeeId"));
 				list.add(employee);
@@ -126,19 +131,18 @@ public class EmployeeDao {
 			if(preparedStatement !=null) try{preparedStatement.close();} catch(SQLException e){}; 
 			if(connection != null)try {connection.close();}catch (SQLException e) {};
 				
-			}
-		
-		
-		
-		return list;
-		
+			}	
+		return list;		
 	}
+	
 	/**
 	 * 직원 등록
 	 * @param employee
 	 * @return  preparedStatement.executeUpdate();
 	 */
-	public int insertEmployee(Employee employee) {			
+	public int insertEmployee(Employee employee) {	
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		int result = 0;
 		try {	
 			//드라이버 연결, 로딩
@@ -157,5 +161,4 @@ public class EmployeeDao {
 			}
 		return result;
 	}
-	
 }

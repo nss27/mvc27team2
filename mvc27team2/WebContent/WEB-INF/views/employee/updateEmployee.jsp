@@ -34,6 +34,7 @@ div#form {
 		$("p.employeePw").hide();
 		$("input.employeePw").blur(function(){
 			if($("input.employeePw").val().length<10){
+				$("div.employeePw").removeClass("has-success");
 				$("div.employeePw").addClass("has-error");
 				$("span.employeePw").addClass("glyphicon glyphicon-alert");	
 				$("p.employeePw").show();

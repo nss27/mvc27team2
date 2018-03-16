@@ -13,8 +13,6 @@ import model.EmployeeDao;
 
 @WebServlet("/updateEmployeeController.team2")
 public class UpdateEmployeeController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int employeeNo = Integer.parseInt( request.getParameter("employeeNo"));
 		EmployeeDao employeeDao = new EmployeeDao();
@@ -34,8 +32,6 @@ public class UpdateEmployeeController extends HttpServlet {
 		employee.setEmployeePw(employeePw);
 		EmployeeDao employeeDao = new EmployeeDao();
 		employeeDao.updateEmployee(employee);
-		response.sendRedirect(request.getContextPath() + "/getEmployeeListController.team2");
-		
+		response.sendRedirect(request.getContextPath() + "/getEmployeeListController.team2");	
 	}
-
 }

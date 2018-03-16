@@ -30,6 +30,7 @@
 			$("p").hide();
 			$("input.employeeId").blur(function(){
 				if($("input.employeeId").val().length<5){
+					$("div.employeeId").removeClass("has-success");
 					$("div.employeeId").addClass("has-error");
 					$("span.employeeId").addClass("glyphicon glyphicon-alert");	
 					$("p.employeeId").show();
@@ -44,6 +45,7 @@
 			});
 		$("input.employeePw").blur(function(){
 			if($("input.employeePw").val().length<10){
+				$("div.employeePw").removeClass("has-success");
 				$("div.employeePw").addClass("has-error");
 				$("span.employeePw").addClass("glyphicon glyphicon-alert");	
 				$("p.employeePw").show();
@@ -64,6 +66,7 @@
 				$("span.employeePwCheck").addClass("glyphicon glyphicon-ok");
 				$("p.employeePwCheck").hide();
 			}else{
+				$("div.employeePwCheck").removeClass("has-success");
 				$("div.employeePwCheck").addClass("has-error");
 				$("span.employeePwCheck").addClass("glyphicon glyphicon-alert");	
 				$("p.employeePwCheck").show();
