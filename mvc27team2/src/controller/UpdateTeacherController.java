@@ -29,7 +29,7 @@ public class UpdateTeacherController extends HttpServlet {
 		//쿼리 mysql에 보내기위해 값을 다시 셋팅
 		Teacher teacher = new Teacher();
 		teacher.setTeacherNo(teacherNo);
-		teacher.setTeacherPw(teacherPw);
+		teacher.setTeacherId(teacherId);
 		teacher.setTeacherPw(teacherPw);
 		//dao 호출
 		TeacherDao teacherDao = new TeacherDao();

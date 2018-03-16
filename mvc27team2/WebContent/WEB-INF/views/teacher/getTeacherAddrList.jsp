@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model.Teacher" %>
-
+<%@ page import="model.TeacherAddr" %>
+<!DOCTYPE html>
+<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>getTeacherList</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>getTeacherAddrList</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<style>
 		body{
@@ -23,11 +24,14 @@
 	</style>
 </head>
 <body>
-	<h2>getTeacherList</h2>
-	<div class="center-block">
+	<h2>getTeacherAddrList</h2>
+		<div class="center-block">
 		<table class="table table-hover table-condensed">
 			<thead>
 				<tr>
+					<th>
+						teacherAddrNo
+					</th>
 					<th>
 						teacherNo
 					</th>
@@ -35,10 +39,7 @@
 						teacherId
 					</th>
 					<th>
-						teacherPw
-					</th>
-					<th>
-						주소
+						address
 					</th>
 					<th>
 						수정
@@ -50,27 +51,28 @@
 			</thead>
 			<tbody>
 			<%
-				ArrayList<Teacher> list = (ArrayList<Teacher>)request.getAttribute("list");
-				for(Teacher teacher : list){
+				//TeacherAddr의 리스트를 정렬 시켜준다.
+				ArrayList<TeacherAddr> list = (ArrayList<TeacherAddr>)request.getAttribute("list");
+				for( TeacherAddr teacherAddr : list){
 			%>
-					<tr >
+					<tr>
 						<td>
-							<%=teacher.getTeacherNo() %>
+							<%=teacherAddr.getTeacherAddrNo() %>
 						</td>
 						<td>
-							<%=teacher.getTeacherId() %>
+							<%=teacherAddr.getTeacherNo() %>
 						</td>
 						<td>
-							*****
+							<%=teacherAddr.getTeacherId() %>
 						</td>
 						<td>
-							<a href="<%=request.getContextPath()%>/addTeacherAddrController.team2?teacherNo=<%=teacher.getTeacherNo() %>">주소추가</a>
+							<%=teacherAddr.getAddress() %>
 						</td>
 						<td>
-							<a href="<%=request.getContextPath()%>/updateTeacherController.team2?teacherNo=<%=teacher.getTeacherNo() %>">수정하기</a>
+							<a href="#">수정하기</a>
 						</td>
 						<td>
-							<a href="<%=request.getContextPath()%>/deleteTeacherController.team2?teacherNo=<%=teacher.getTeacherNo() %>">삭제하기</a>
+							<a href="#">삭제하기</a>
 						</td>
 					</tr>
 			<%
