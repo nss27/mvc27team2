@@ -1,3 +1,4 @@
+<!-- 나성수 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,7 +28,9 @@
 		$(document).ready(function(){
 			$("input.address").blur(function(){
 				if($("input.address").val() == ""){
+					$("div.address").removeClass("has-success");
 					$("div.address").addClass("has-error");
+					$("span.address").removeClass("glyphicon glyphicon-ok");
 					$("span.address").addClass("glyphicon glyphicon-alert");
 				}else{
 					$("div.address").removeClass("has-error");

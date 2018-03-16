@@ -8,13 +8,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class StudentDao {
-	Connection connection;
-	PreparedStatement preparedStatement;
-	ResultSet resultSet;
-	Student student;
-	ArrayList<Student> list;
+	/**
+	 * 학생 데이터 삭제 메서드
+	 * @param studentNo
+	 * @return preparedStatement.executeUpdate
+	 */
 	public int deleteStudent(int studentNo) {
 		int result = 0;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 		try {
 			connection = DriverDB.driverDB();
 			
@@ -34,10 +37,14 @@ public class StudentDao {
 	/**
 	 * 학생 정보 수정 처리 메서드
 	 * @param student
-	 * @return preparedStatement.executeUpdate()
+	 * @return preparedStatement.executeUpdate
 	 */
 	public int updateStudent(Student student) {
 		int result = 0;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		ArrayList<Student> list = null;
 		try {
 			connection = DriverDB.driverDB();
 			
@@ -60,6 +67,10 @@ public class StudentDao {
 	 * @return 학생 한명의 데이터
 	 */
 	public Student selectStudentOne(int studentNo) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Student student = null;
 		try {
 			connection = DriverDB.driverDB();
 			
@@ -89,6 +100,11 @@ public class StudentDao {
 	 * @return 학생리스트
 	 */
 	public ArrayList<Student> selectStudentList() {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Student student = null;
+		ArrayList<Student> list = null;
 		try {
 			connection = DriverDB.driverDB();
 			
@@ -116,10 +132,13 @@ public class StudentDao {
 	/**
 	 * 학생 등록
 	 * @param student
-	 * @return preparedStatement.executeUpdate()
+	 * @return preparedStatement.executeUpdate
 	 */
 	public int insertStudent(Student student) {
 		int result = 0;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 		try {
 			connection = DriverDB.driverDB();
 			

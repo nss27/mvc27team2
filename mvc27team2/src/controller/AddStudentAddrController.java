@@ -1,3 +1,4 @@
+/*나성수*/
 package controller;
 
 import java.io.IOException;
@@ -14,15 +15,15 @@ import model.StudentDao;
 
 @WebServlet("/addStudentAddrController.team2")
 public class AddStudentAddrController extends HttpServlet {
-	private Student student;
-	private StudentAddr studentAddr;
+	private StudentDao studentDao = null;
+	private StudentAddrDao studentAddrDao = null;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int studentNo = Integer.parseInt(request.getParameter("studentNo"));
-		StudentDao studentDao = new StudentDao();
-		this.student = studentDao.selectStudentOne(studentNo);
-		request.setAttribute("studentNo", this.student.getStudentNo());
-		request.setAttribute("studentId", this.student.getStudentId());
+		studentDao = new StudentDao();
+		Student student = studentDao.selectStudentOne(studentNo);
+		request.setAttribute("studentNo", student.getStudentNo());
+		request.setAttribute("studentId", student.getStudentId());
 		request.getRequestDispatcher("/WEB-INF/views/student/addStudentAddr.jsp").forward(request, response);
 	}
 
@@ -30,11 +31,11 @@ public class AddStudentAddrController extends HttpServlet {
 		request.setCharacterEncoding("utf8");
 		int studentNo = Integer.parseInt(request.getParameter("studentNo"));
 		String address = request.getParameter("address");
-		this.studentAddr = new StudentAddr();
-		this.studentAddr.setStudentNo(studentNo);
-		this.studentAddr.setAddress(address);
-		StudentAddrDao studentAddrDao = new StudentAddrDao();
-		studentAddrDao.insertStudentAddr(this.studentAddr);
+		StudentAddr studentAddr = new StudentAddr();
+		studentAddr.setStudentNo(studentNo);
+		studentAddr.setAddress(address);
+		studentAddrDao = new StudentAddrDao();
+		studentAddrDao.insertStudentAddr(studentAddr);
 		response.sendRedirect(request.getContextPath()+"/getStudentAddrListController.team2");
 	}
 

@@ -1,3 +1,4 @@
+/*나성수*/
 package controller;
 
 import java.io.IOException;
@@ -14,10 +15,11 @@ import model.StudentAddrDao;
 
 @WebServlet("/getStudentAddrListController.team2")
 public class GetStudentAddrListController extends HttpServlet {
+	private StudentAddrDao studentAddrDao = null;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		StudentAddrDao studentAddrDao = new StudentAddrDao();
-		ArrayList<StudentAddr> list = studentAddrDao.selectStudentList();
+		studentAddrDao = new StudentAddrDao();
+		ArrayList<StudentAddr> list = studentAddrDao.selectStudentAddrList();
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/views/student/getStudentAddrList.jsp").forward(request, response);
 	}

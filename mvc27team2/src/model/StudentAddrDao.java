@@ -8,20 +8,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class StudentAddrDao {
-	Connection connection;
-	PreparedStatement preparedStatement;
-	ResultSet resultSet;
-	StudentAddr studentAddr;
-	ArrayList<StudentAddr> list;
 	/**
 	 * 학생 주소 리스트 출력
 	 * @return 학생 주소 리스트
 	 */
-	public ArrayList<StudentAddr> selectStudentList() {
+	public ArrayList<StudentAddr> selectStudentAddrList() {
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		StudentAddr studentAddr = null;
+		ArrayList<StudentAddr> list = null;
 		try {
 			connection = DriverDB.driverDB();
-			
-			preparedStatement = connection.prepareStatement("SELECT student_addr_no as studentAddrNo,student.student_no as studentNo,student_id as studentId,address FROM student RIGHT join student_addr ON student.student_no = student_addr.student_no ORDER BY student_addr_no ASC");
+			/*
+			 * student와 student_addr테이블을 조인하여
+			 * 
+			 */
+			preparedStatement = connection.prepareStatement("SELECT student_addr_no as studentAddrNo,student.student_no as studentNo,student_id as studentId,address FROM student join student_addr ON student.student_no = student_addr.student_no ORDER BY student_addr_no ASC");
 			
 			resultSet = preparedStatement.executeQuery();
 			
@@ -50,6 +53,9 @@ public class StudentAddrDao {
 	 * @return preparedStatement.executeUpdate
 	 */
 	public int insertStudentAddr(StudentAddr studentAddr) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 		int result = 0;
 		try {
 			connection = DriverDB.driverDB();

@@ -12,11 +12,11 @@ import model.StudentDao;
 
 @WebServlet("/updateStudentController.team2")
 public class UpdateStudentController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private StudentDao studentDao = null;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int studentNo = Integer.parseInt(request.getParameter("studentNo"));
-		StudentDao studentDao = new StudentDao();
+		studentDao = new StudentDao();
 		Student student = studentDao.selectStudentOne(studentNo);
 		request.setAttribute("student", student);
 		request.getRequestDispatcher("/WEB-INF/views/student/updateStudent.jsp").forward(request, response);
@@ -31,7 +31,7 @@ public class UpdateStudentController extends HttpServlet {
 		student.setStudentNo(studentNo);
 		student.setStudentId(studentId);
 		student.setStudentPw(studentPw);
-		StudentDao studentDao = new StudentDao();
+		studentDao = new StudentDao();
 		studentDao.updateStudent(student);
 		response.sendRedirect(request.getContextPath()+"/getStudentListController.team2");
 	}

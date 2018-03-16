@@ -1,3 +1,4 @@
+/*나성수*/
 package controller;
 
 import java.io.IOException;
@@ -11,10 +12,11 @@ import model.StudentDao;
 
 @WebServlet("/deleteStudentController.team2")
 public class DeleteStudentController extends HttpServlet {
+	private StudentDao studentDao = null;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int studentNo = Integer.parseInt(request.getParameter("studentNo"));
-		StudentDao studentDao = new StudentDao();
+		studentDao = new StudentDao();
 		studentDao.deleteStudent(studentNo);
 		response.sendRedirect(request.getContextPath()+"/getStudentListController.team2");
 	}

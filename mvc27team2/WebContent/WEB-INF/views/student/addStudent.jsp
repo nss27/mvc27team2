@@ -29,7 +29,9 @@
 			$("p").hide();
 			$("input.studentId").blur(function(){
 				if($("input.studentId").val().length < 5){
+					$("div.studentId").removeClass("has-success");
 					$("div.studentId").addClass("has-error");
+					$("span.studentId").removeClass("glyphicon glyphicon-ok");
 					$("span.studentId").addClass("glyphicon glyphicon-alert");
 					$("p.studentId").show();
 				}else{
@@ -42,7 +44,9 @@
 			});
 			$("input.studentPw").blur(function(){
 				if($("input.studentPw").val().length < 10){
+					$("div.studentPw").removeClass("has-success");
 					$("div.studentPw").addClass("has-error");
+					$("span.studentPw").removeClass("glyphicon glyphicon-ok");
 					$("span.studentPw").addClass("glyphicon glyphicon-alert");
 					$("p.studentPw").show();
 				}else{
@@ -61,12 +65,14 @@
 					$("span.studentPwCheck").addClass("glyphicon glyphicon-ok");
 					$("p.studentPwCheck").hide();
 				}else{
+					$("div.studentPwCheck").removeClass("has-success");
 					$("div.studentPwCheck").addClass("has-error");
+					$("span.studentPwCheck").removeClass("glyphicon glyphicon-ok");
 					$("span.studentPwCheck").addClass("glyphicon glyphicon-alert");
 					$("p.studentPwCheck").show();
 				}
 			});
-			$("button").click(function(){
+			$("button#add").click(function(){
 				if($("input.studentId").val() == "" || $("input.studentId").val().length < 5){
 					alert("아이디를 다시입력하세요");
 					$("input.studentId").focus();
@@ -110,9 +116,9 @@
 					<span class="studentPwCheck form-control-feedback"></span>
 					<p class="studentPwCheck">비밀번호가 일치하지 않습니다</p>
 				</div>
-			</div>
-			<button type="button" class="btn btn-primary btn-lg btn-block">student추가</button>			 
-		  	</div>
+			</div>	
+				<button type="button" id="add" class="btn btn-primary btn-lg btn-block">student추가</button>	
+				<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/indexController.team2'">메인으로 돌아가기</button>
 		</form>
 	</div>
 </body>

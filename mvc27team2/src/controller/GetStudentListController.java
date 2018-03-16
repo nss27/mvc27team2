@@ -15,8 +15,10 @@ import model.StudentDao;
 
 @WebServlet("/getStudentListController.team2")
 public class GetStudentListController extends HttpServlet {
+	private StudentDao studentDao = null;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		StudentDao studentDao = new StudentDao();
+		studentDao = new StudentDao();
 		ArrayList<Student> list = studentDao.selectStudentList();
 		request.setAttribute("list", list);
 		

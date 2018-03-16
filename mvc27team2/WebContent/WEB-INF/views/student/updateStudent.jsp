@@ -30,7 +30,9 @@
 			$("p.studentPw").hide();
 			$("input.studentPw").blur(function(){
 				if($("input.studentPw").val().length < 10){
+					$("div.studentPw").removeClass("has-success");
 					$("div.studentPw").addClass("has-error");
+					$("span.studentPw").removeClass("glyphicon glyphicon-ok");
 					$("span.studentPw").addClass("glyphicon glyphicon-alert");
 					$("p.studentPw").show();
 				}else{
