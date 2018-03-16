@@ -3,7 +3,9 @@ package model;
 public class EmployeeAddr {
 	private int employeeAddrNo;
 	private int employeeNo;
+	private String employeeId;
 	private String address;
+	
 	public int getEmployeeAddrNo() {
 		return employeeAddrNo;
 	}
@@ -16,6 +18,12 @@ public class EmployeeAddr {
 	public void setEmployeeNo(int employeeNo) {
 		this.employeeNo = employeeNo;
 	}
+	public String getEmployeeId() {
+		return employeeId;
+	}
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
+	}
 	public String getAddress() {
 		return address;
 	}
@@ -24,9 +32,11 @@ public class EmployeeAddr {
 	}
 	@Override
 	public String toString() {
-		return "EmployeeAddr [employeeAddrNo=" + employeeAddrNo + ", employeeNo=" + employeeNo + ", address=" + address
-				+ "]";
+		return "EmployeeAddr [employeeAddrNo=" + employeeAddrNo + ", employeeNo=" + employeeNo + ", employeeId="
+				+ employeeId + ", address=" + address + "]";
 	}
+	
+	
 	
 	
 }

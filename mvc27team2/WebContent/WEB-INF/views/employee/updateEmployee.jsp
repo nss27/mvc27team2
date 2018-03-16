@@ -76,7 +76,7 @@ div#form {
 			<div class="employeePw form-group has-feedback" >
 				<label for="employeePw" class="col-sm-2 control-label">Password</label>
 				<div class="col-sm-10">
-					<input type="text" class="employeePw form-control" name="employeePw" value="<%=employee.getEmployeePw()%>">
+					<input type="text" class="employeePw form-control" id="employeePw" name="employeePw" value="<%=employee.getEmployeePw()%>">
 					<span class="employeePwCheck form-control-feedback"></span>
 					<p class="employeePwCheck">비밀번호가 일치하지 않습니다</p>
 				</div>

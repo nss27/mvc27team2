@@ -95,7 +95,7 @@
 			 <div class="employeeId form-group has-feedback">
 				<label for="employeeId" class="col-sm-2 control-label">employee_id</label>
 				<div class="col-sm-10">
-					<input type="text" name="employeeId" class="employeeId form-control" placeholder="아이디를 입력하세요">
+					<input type="text" name="employeeId" id="employeeId" class="employeeId form-control" placeholder="아이디를 입력하세요">
 					<span class="employeeId form-control-feedback"></span>
 					<p class="employeeId">아이디는 5글자 이상입니다</p>
 				</div>
@@ -103,7 +103,7 @@
 			<div class="employeePw form-group has-feedback">
 				<label for="employeePw" class="col-sm-2 control-label">employee_pw</label>
 				<div class="col-sm-10">
-					<input type="password" name="employeePw" class="employeePw form-control" placeholder="비밀번호를 입력하세요">
+					<input type="password" name="employeePw" id="employeePw" class="employeePw form-control" placeholder="비밀번호를 입력하세요">
 					<span class="employeePw form-control-feedback"></span>
 					<p class="employeePw">비밀번호는 10글자 이상입니다</p>
 				</div>
@@ -111,7 +111,7 @@
 			<div class="employeePwCheck form-group has-feedback">
 				<label for="employeePwCheck" class="col-sm-2 control-label">employee_pw 확인</label>
 				<div class="col-sm-10">
-					<input type="password" name="employeePwCheck" class="employeePwCheck form-control" placeholder="입력한 비밀번호를  확인해주세요">
+					<input type="password" name="employeePwCheck" id="employeePwCheck" class="employeePwCheck form-control" placeholder="입력한 비밀번호를  확인해주세요">
 					<span class="employeePwCheck form-control-feedback"></span>
 					<p class="employeePwCheck">비밀번호가 일치하지 않습니다</p>
 				</div>

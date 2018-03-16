@@ -1,4 +1,3 @@
-/*배건혜*/
 package controller;
 
 import java.io.IOException;
@@ -10,14 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Employee;
-import model.EmployeeDao;
+import model.EmployeeAddr;
+import model.EmployeeAddrDao;
 
-@WebServlet("/getEmployeeListController.team2")
-public class GetEmployeeListController extends HttpServlet {	
+@WebServlet("/getEmplyeeAddrListController.team2")
+public class GetEmplyeeAddrListController extends HttpServlet {
+	
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EmployeeDao  employeeDao = new EmployeeDao();
-		ArrayList<Employee> list = employeeDao.selectEmployeeList();
+		EmployeeAddrDao employeeAddrDao = new EmployeeAddrDao();
+		ArrayList<EmployeeAddr> list = employeeAddrDao.selectEmployeeList();
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/views/employee/getEmployeeAddrList.jsp").forward(request,  response);
 	}

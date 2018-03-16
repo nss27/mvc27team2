@@ -14,7 +14,7 @@ public class EmployeeDao {
 	Employee employee;
 	ArrayList<Employee> list;
 	/**
-	 * 
+	 * 직원 삭제 처리 메서드
 	 * @param employeeNo
 	 * @return
 	 */

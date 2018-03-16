@@ -8,16 +8,38 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Employee;
+import model.EmployeeAddr;
+import model.EmployeeAddrDao;
+import model.EmployeeDao;
+
 
 @WebServlet("/addEmployeeAddrController.team2")
 public class AddEmployeeAddrController extends HttpServlet {	
+	private Employee employee;
+	private EmployeeAddr employeeAddr;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int employeeNo = Integer.parseInt(request.getParameter("employeeNo"));
+		EmployeeDao employeeDao = new EmployeeDao();
+		this.employee = employeeDao.selectEmployeeOne(employeeNo);
+		request.setAttribute("employeeNo",this.employee.getEmployeeNo());
+		request.setAttribute("employeeId", this.employee.getEmployeeId());
 		request.getRequestDispatcher("WEB-INF/views/employee/addEmployeeAddr.jsp").forward(request,  response);
 	}
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf8");
+		int employeeNo =Integer.parseInt(request.getParameter("employeeNo"));
+		String address = request.getParameter("address");
 		
+		employeeAddr = new EmployeeAddr();
+		this.employeeAddr.setEmployeeNo(employeeNo);
+		this.employeeAddr.setAddress(address);
+		EmployeeAddrDao employeeAddrDao = new EmployeeAddrDao();
+		employeeAddrDao.insertEmployeeAddr(this.employeeAddr);
+		
+		response.sendRedirect(request.getContextPath()+"/getEmplyeeAddrListController.team2");
 	}
 
 }
