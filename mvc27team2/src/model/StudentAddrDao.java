@@ -9,6 +9,57 @@ import java.util.ArrayList;
 
 public class StudentAddrDao {
 	/**
+	 * 학생 주소 하나 삭제하는 메서드
+	 * @param studentAddrNo
+	 * @return preparedStatement.executeUpdate
+	 */
+	public int deleteStudentAddrOne(int studentAddrNo) {
+		System.out.println("학생 주소 하나 삭제하는 메서드 호출");
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+
+			preparedStatement = connection.prepareStatement("DELETE FROM student_addr where student_addr_no=?");
+			preparedStatement.setInt(1, studentAddrNo);
+			
+			result = preparedStatement.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		
+		return result;
+	}
+	/**
+	 * 학생 주소 전체 삭제하는 메서드
+	 * @param tableName
+	 * @return preparedStatement.executeUpdate
+	 */
+	public int deleteStudentAddrAll(String tableName) {
+		System.out.println("학생 주소 전체 삭제하는 메서드 호출");
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("DELETE FROM "+tableName);
+			
+			result = preparedStatement.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		
+		return result;
+	}
+	/**
 	 * 학생 주소 리스트 카운트 메서드
 	 * @return 카운트 값
 	 */
@@ -98,7 +149,6 @@ public class StudentAddrDao {
 			preparedStatement.setString(2, studentAddr.getAddress());
 			
 			result = preparedStatement.executeUpdate();
-			System.out.println(result);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		} finally {

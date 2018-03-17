@@ -11,9 +11,8 @@
 		body{
 			background: linear-gradient(to right,rgba(255,0,0,0.5), rgba(209,178,255,1));
 		}
-		h2{
+		.page-header{
 			text-align: center;
-			padding-bottom: 20px;
 		}
 		div#form{
 			margin: 0 auto;
@@ -43,7 +42,7 @@
 					$("p.studentPw").hide();
 				}
 			});
-			$("button").click(function(){
+			$("button#add").click(function(){
 				if($("input.studentPw").val() == "" || $("input.studentPw").val().length < 10){
 					alert("비밀번호를 다시입력하세요");
 					$("input.studentPw").focus();
@@ -55,7 +54,14 @@
 	</script>
 </head>
 <body>
-	<h2>updateStudent</h2>
+	<div class="page-header">
+		<h1>
+			updateStudent
+			<small>
+				학생수정
+			</small>
+		</h1>
+	</div>
 	<%
 	Student student = (Student)request.getAttribute("student");
 	%>
@@ -77,7 +83,8 @@
 					<p class="studentPw">비밀번호는 10글자 이상입니다</p>
 				</div>
 			</div>
-			<button type="button" class="btn btn-primary btn-lg btn-block">student수정</button>	
+			<button type="button" id="add" class="btn btn-primary btn-lg btn-block">student수정</button>
+			<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/getStudentListController.team2'">학생리스트으로 돌아가기</button>
 		</form>
 	</div>
 </body>

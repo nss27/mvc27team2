@@ -12,9 +12,8 @@
 		body{
 			background: linear-gradient(to right,rgba(255,0,0,0.5), rgba(209,178,255,1));
 		}
-		h2{
+		.page-header{
 			text-align: center;
-			padding-bottom: 20px;
 		}
 		.center-block{
 			width: 50%;
@@ -25,7 +24,14 @@
 	</style>
 </head>
 <body>
-	<h2>getStudentAddrList.jsp</h2>
+	<div class="page-header">
+		<h1>
+			getStudentAddrList
+			<small>
+				학생주소리스트
+			</small>
+		</h1>
+	</div>
 	<div class="center-block">
 		<table class="table table-hover table-condensed">
 			<thead>
@@ -72,7 +78,7 @@
 							<a href="#">수정하기</a>
 						</td>
 						<td>
-							<a href="#">삭제하기</a>
+							<a href="<%=request.getContextPath()%>/deleteStudentAddrController.team2?studentAddrNo=<%=studentAddr.getStudentAddrNo() %>">삭제하기</a>
 						</td>
 					</tr>
 			<%
@@ -80,6 +86,8 @@
 			%>
 			</tbody>
 		</table>
+		<button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/deleteStudentAddrController.team2?tableName=student_addr'">전체삭제하기</button>
+		<button type="button" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/indexController.team2'">메인으로 돌아가기</button>
 	</div>
 </body>
 </html>

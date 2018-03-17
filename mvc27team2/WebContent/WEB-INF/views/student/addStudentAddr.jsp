@@ -10,9 +10,8 @@
 		body{
 			background: linear-gradient(to right,rgba(255,0,0,0.5), rgba(209,178,255,1));
 		}
-		h2{
+		.page-header{
 			text-align: center;
-			padding-bottom: 20px;
 		}
 		div#form{
 			margin: 0 auto;
@@ -46,7 +45,7 @@
 					$("span.address").addClass("glyphicon glyphicon-ok");
 				}
 			});
-			$("button").click(function(){
+			$("button#add").click(function(){
 				if($('input.address').attr('disabled')){
 					alert('주소 등록 횟수를 초과하였습니다');
 				}else if($("input.address").val() == ""){
@@ -60,7 +59,14 @@
 	</script>
 </head>
 <body>
-	<h2>addStudentAddr.jsp</h2>
+	<div class="page-header">
+		<h1>
+			addStudentAddr
+			<small>
+				학생주소추가
+			</small>
+		</h1>
+	</div>
 	<%
 		int studentNo = (int)request.getAttribute("studentNo");
 		String studentId = (String)request.getAttribute("studentId");
@@ -87,7 +93,8 @@
 					<span class="address form-control-feedback"></span>
 				</div>
 			</div>
-			<button type="button" class="btn btn-primary btn-lg btn-block">studentAddress 추가</button>
+			<button type="button" id="add" class="btn btn-primary btn-lg btn-block">studentAddress 추가</button>
+			<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/getStudentListController.team2'">학생리스트으로 돌아가기</button>
 		</form>
 	</div>
 </body>

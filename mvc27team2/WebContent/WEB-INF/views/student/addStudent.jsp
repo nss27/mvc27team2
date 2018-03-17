@@ -10,9 +10,8 @@
 		body{
 			background: linear-gradient(to right,rgba(255,0,0,0.5), rgba(209,178,255,1));
 		}
-		h2{
+		.page-header{
 			text-align: center;
-			padding-bottom: 20px;
 		}
 		div#form{
 			margin: 0 auto;
@@ -90,7 +89,14 @@
 	</script>
 </head>
 <body>
-	<h2>addStudent</h2>
+	<div class="page-header">
+		<h1>
+			addStudent
+			<small>
+				학생추가
+			</small>
+		</h1>
+	</div>
 	<div id="form">
 		<form method="post" action="<%=request.getContextPath()%>/addStudentController.team2" class="form-horizontal">
 			<div class="studentId form-group has-feedback">

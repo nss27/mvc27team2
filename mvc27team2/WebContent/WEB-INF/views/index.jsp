@@ -10,14 +10,20 @@
 		body{
 			background: linear-gradient(to right,rgba(255,0,0,0.5), rgba(209,178,255,1));
 		}
-		h2{
+		.page-header{
 			text-align: center;
-			padding-bottom: 20px;
 		}
 	</style>
 </head>
 <body>
-	<h2>index</h2>
+	<div class="page-header">
+		<h1>
+			index
+			<small>
+				메인
+			</small>
+		</h1>
+	</div>
 	<!-- 나성수 -->
 	<div class="row">
 		<div class="col-xs-6 col-md-4">
