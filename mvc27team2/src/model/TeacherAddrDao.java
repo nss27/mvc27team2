@@ -9,6 +9,63 @@ import java.util.ArrayList;
 public class TeacherAddrDao {
 	
 	/**
+	 * 선생님 주소 삭제하는 메서드
+	 * @param teacherAddrNo
+	 * @return preparedStatement.executeUpdate();
+	 */
+	public int deleteTeacherAddr(int teacherAddrNo) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("DELETE FROM teacher_addr where teacher_addr_no=?");
+			preparedStatement.setInt(1, teacherAddrNo);
+			
+			result = preparedStatement.executeUpdate();
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 선생님 주소 리스트 카운트 메서드
+	 * @return resultSet.getInt("countTeacherAddrList")
+	 */
+	public int countTeacherAddrList() {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countTeacherAddrList FROM teacher_addr");
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				result = resultSet.getInt("countTeacherAddrList");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		
+		return result;
+	}
+	
+	/**
 	 * 선생님 주소 리스트 출력
 	 * @param teacherAddrList
 	 * @return list

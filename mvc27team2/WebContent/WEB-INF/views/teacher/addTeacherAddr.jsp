@@ -12,7 +12,6 @@
 	}
 	h2{
 		text-align: center;
-		padding-bottom: 20px;
 	}
 	div#form{
 		margin: 0 auto;
@@ -26,6 +25,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+	<%
+		int count = (int)request.getAttribute("count");
+	%>
+		var count = <%=count%>;
+		if(count>=5){
+			$('input.address').attr('disabled','disabled');
+		}
 		$("input.address").blur(function(){
 			if($("input.address").val() == ""){
 				$("div.address").removeClass("has-success");
@@ -39,8 +45,10 @@
 				$("span.address").addClass("glyphicon glyphicon-ok");
 			}
 		});
-		$("button").click(function(){
-			if($("input.address").val() == ""){
+		$("button#add").click(function(){
+			if($('input.address').attr('disabled')){
+				alert('주소 등록 횟수를 초과하였습니다');
+			}else if($("input.address").val() == ""){
 				alert("주소를 입력해주세요");
 				$("input.address").focus();
 			}else{
@@ -51,7 +59,14 @@
 </script>
 </head>
 <body>
-<h2>addTeacherAddr.jsp</h2>
+	<div class="page-header">
+		<h1>
+			addTeacherAddr
+			<small>
+				선생님주소추가
+			</small>
+		</h1>
+	</div>
 <%	
 	int teacherNo = (int)request.getAttribute("teacherNo");
 	String teacherId = (String)request.getAttribute("teacherId");
@@ -80,6 +95,7 @@
 				</div>
 			</div>
 			<button type="button" class="btn btn-default btn-lg btn-block">teacherAddress 추가</button>
+			<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/getTeacherListController.team2'">선생리스트으로 돌아가기</button>
 		</form>
 	</div>
 </body>

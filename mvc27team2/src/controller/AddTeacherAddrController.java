@@ -20,9 +20,8 @@ public class AddTeacherAddrController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//주소추가할 선생님 한명의 데이터를 받아오기 위해
 		//여기서만 사용하도록 private 선언.
-		Teacher teacher = null;
+		Teacher teacher = new Teacher();;
 		int teacherNo=Integer.parseInt(request.getParameter("teacherNo"));
-		teacher = new Teacher();
 		this.teacherDao = new TeacherDao();
 		teacher = this.teacherDao.selectTeacherOne(teacherNo); 
 		request.setAttribute("teacherNo", teacher.getTeacherNo());
@@ -32,11 +31,11 @@ public class AddTeacherAddrController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf8");
 		//addTeacherAddr 폼에서 보낸것을 받아온다. 그래서 getParameter를 사용.
-		TeacherAddr teacherAddr = null;
+		
 		int teacherNo = Integer.parseInt(request.getParameter("teacherNo"));
 		String address = request.getParameter("address");
 		//참조변수 선언을 해서 주소를 불러온다. 담을공간을 준비
-		teacherAddr = new TeacherAddr();
+		TeacherAddr teacherAddr = new TeacherAddr();
 		//값 셋팅
 		teacherAddr.setTeacherNo(teacherNo);
 		teacherAddr.setAddress(address);

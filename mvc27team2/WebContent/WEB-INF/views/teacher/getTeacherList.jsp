@@ -12,7 +12,6 @@
 		}
 		h2{
 			text-align: center;
-			padding-bottom: 20px;
 		}
 		.center-block{
 			width: 50%;	
@@ -78,6 +77,7 @@
 			%>
 			</tbody>
 		</table>
+		<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/indexController.team2'">메인으로 돌아가기</button>
 	</div>
 </body>
 </html>
