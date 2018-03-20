@@ -12,7 +12,7 @@ public class EmployeeDao {
 	/**
 	 * 직원 삭제 처리 메서드
 	 * @param employeeNo
-	 * @return
+	 * @return preparedStatement.executeUpdate
 	 */
 	
 	public int deleteEmployee(int employeeNo) {
@@ -33,14 +33,13 @@ public class EmployeeDao {
 			if(preparedStatement !=null) try{preparedStatement.close();} catch(SQLException e){}; 
 			if(connection != null)try {connection.close();}catch (SQLException e) {};	
 			}
-		return result;
-		
+		return result;	
 	}
 	
 	/**
 	 * 직원 정보 수정 처리 메서드 
 	 * @param employee
-	 * @return result = preparedStatement.executeUpdate();
+	 * @return preparedStatement.executeUpdate();
 	 */
 	public int updateEmployee(Employee employee) {
 		Connection connection = null;
@@ -65,7 +64,7 @@ public class EmployeeDao {
 	}
 	
 	/**
-	 * 직원한명 데이터 출력
+	 * 직원한명 데이터 출력 메서드
 	 * @return 직원한명의 데이터
 	 */
 	public Employee selectEmployeeOne(int employeeNo ) {
@@ -100,7 +99,7 @@ public class EmployeeDao {
 	}
 	
 	/**
-	 * 직원리스트출력
+	 * 직원리스트출력 메서드
 	 * @param employee
 	 * @return 직원리스트
 	 */
@@ -136,7 +135,7 @@ public class EmployeeDao {
 	}
 	
 	/**
-	 * 직원 등록
+	 * 직원 등록 메서드
 	 * @param employee
 	 * @return  preparedStatement.executeUpdate();
 	 */

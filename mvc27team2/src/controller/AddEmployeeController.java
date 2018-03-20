@@ -13,12 +13,14 @@ import model.EmployeeDao;
 
 @WebServlet("/addEmployeeController.team2")
 public class AddEmployeeController extends HttpServlet {
+	private EmployeeDao employeeDao = null;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/views/employee/addEmployee.jsp").forward(request,  response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf8");
 		String employeeId = request.getParameter("employeeId");
 		String employeePw = request.getParameter("employeePw");
 		
@@ -26,7 +28,7 @@ public class AddEmployeeController extends HttpServlet {
 		employee.setEmployeeId(employeeId);
 		employee.setEmployeePw(employeePw);
 		
-		EmployeeDao employeeDao = new EmployeeDao();
+		employeeDao = new EmployeeDao();
 		int result = employeeDao.insertEmployee(employee);
 		
 		response.sendRedirect(request.getContextPath() +"/getEmployeeListController.team2");

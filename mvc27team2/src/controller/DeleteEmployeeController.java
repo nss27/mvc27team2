@@ -12,10 +12,11 @@ import model.EmployeeDao;
 
 @WebServlet("/deleteEmployeeController.team2")
 public class DeleteEmployeeController extends HttpServlet {
+	private EmployeeDao employeeDao = null;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		int employeeNo = Integer.parseInt(request.getParameter("employeeNo")); 
-		EmployeeDao employeeDao = new EmployeeDao();
+		employeeDao = new EmployeeDao();
 		employeeDao.deleteEmployee(employeeNo);
 		response.sendRedirect(request.getContextPath() + "/getEmployeeListController.team2");
 	}

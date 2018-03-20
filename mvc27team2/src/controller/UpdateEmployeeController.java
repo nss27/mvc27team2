@@ -13,9 +13,10 @@ import model.EmployeeDao;
 
 @WebServlet("/updateEmployeeController.team2")
 public class UpdateEmployeeController extends HttpServlet {
+	private EmployeeDao employeeDao = null;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int employeeNo = Integer.parseInt( request.getParameter("employeeNo"));
-		EmployeeDao employeeDao = new EmployeeDao();
+		employeeDao = new EmployeeDao();
 		Employee employee = employeeDao.selectEmployeeOne(employeeNo);
 		request.setAttribute("employee", employee);
 		request.getRequestDispatcher("WEB-INF/views/employee/updateEmployee.jsp").forward(request,  response);

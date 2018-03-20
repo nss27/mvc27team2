@@ -9,7 +9,63 @@ import java.util.ArrayList;
 
 public class EmployeeAddrDao {
 	/**
-	 * 직원 주소리스트 출력
+	 * 직원 주소 삭제하는 메서드
+	 * @param employeeAddrNo
+	 * @return preparedStatement.executeUpdate
+	 */
+	public int deleteEmployeeAddr(int employeeAddrNo) {
+		System.out.println("직원 주소 하나 삭제하는 메서드 호출");
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+
+			preparedStatement = connection.prepareStatement("DELETE FROM employee_addr where employee_addr_no=?");
+			preparedStatement.setInt(1, employeeAddrNo);
+			
+			result = preparedStatement.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}	
+		return result;
+	}
+	
+	/**
+	 * 직원 주소 리스트 카운트 메서드
+	 * @return 카운트 값
+	 */
+	public int countEmployeeAddrList() {
+		System.out.println("직원 주소 리스트 카운트 메서드 호출");
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countEmployeeAddrList FROM employee_addr");
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				result = resultSet.getInt("countEmployeeAddrList");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		return result;
+	}
+	
+	/**
+	 * 직원 주소리스트 출력 메서드
 	 * @return 직원 주소리스트
 	 */
 	public ArrayList<EmployeeAddr> selectEmployeeAddrList() {
@@ -47,12 +103,11 @@ public class EmployeeAddrDao {
 	/**
 	 * 직원주소등록메서드
 	 * @param employeeAddr
-	 * @return
+	 * @return preparedStatement.executeUpdate
 	 */
 	public int insertEmployeeAddr(EmployeeAddr employeeAddr) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;		
-		ArrayList<EmployeeAddr> list;
 		int result =0;
 		try {	
 			//드라이버 연결, 로딩
@@ -67,7 +122,7 @@ public class EmployeeAddrDao {
 		}finally {
 			if(preparedStatement !=null) try{preparedStatement.close();} catch(SQLException e){}; 
 			if(connection != null)try {connection.close();}catch (SQLException e) {};	
-			}
+		}
 		return result;
 	}
 }

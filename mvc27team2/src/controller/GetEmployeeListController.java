@@ -14,9 +14,11 @@ import model.Employee;
 import model.EmployeeDao;
 
 @WebServlet("/getEmployeeListController.team2")
-public class GetEmployeeListController extends HttpServlet {	
+public class GetEmployeeListController extends HttpServlet {
+	private EmployeeDao employeeDao = null;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EmployeeDao  employeeDao = new EmployeeDao();
+		employeeDao = new EmployeeDao();
 		ArrayList<Employee> list = employeeDao.selectEmployeeList();
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/views/employee/getEmployeeList.jsp").forward(request,  response);

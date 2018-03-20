@@ -14,8 +14,10 @@ import model.EmployeeAddrDao;
 
 @WebServlet("/getEmplyeeAddrListController.team2")
 public class GetEmplyeeAddrListController extends HttpServlet {	
+	private EmployeeAddrDao employeeAddrDao = null;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EmployeeAddrDao employeeAddrDao = new EmployeeAddrDao();
+		employeeAddrDao = new EmployeeAddrDao();
 		ArrayList<EmployeeAddr> list = employeeAddrDao.selectEmployeeAddrList();
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/views/employee/getEmployeeAddrList.jsp").forward(request,  response);
