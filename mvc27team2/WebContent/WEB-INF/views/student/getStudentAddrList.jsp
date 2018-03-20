@@ -22,6 +22,26 @@
 			background-color: rgba(245,245,245,.5);
 		}
 	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('input#allAddrNo').click(function(){
+				var allCheck = $('input#allAddrNo').is(':checked');
+				if(allCheck == true){
+					$('input:checkbox').prop('checked',true);
+				}else{
+					$('input:checkbox').prop('checked',false);
+				}
+			});
+			$('button#delete').click(function(){
+				if($('input:checkbox').is(':checked')){
+					$('form').submit();
+				}else{
+					alert('선택한 항목이 없습니다');
+				}
+			});
+		});
+	</script>
 </head>
 <body>
 	<div class="page-header">
@@ -33,60 +53,58 @@
 		</h1>
 	</div>
 	<div class="center-block">
-		<table class="table table-hover table-condensed">
-			<thead>
-				<tr>
-					<th>
-						studentAddrNo
-					</th>
-					<th>
-						studentNo
-					</th>
-					<th>
-						studentId
-					</th>
-					<th>
-						address
-					</th>
-					<th>
-						수정
-					</th>
-					<th>
-						삭제
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-			<%
-				ArrayList<StudentAddr> list = (ArrayList<StudentAddr>)request.getAttribute("list");
-				for(StudentAddr studentAddr : list){
-			%>
+		<form action="<%=request.getContextPath()%>/deleteStudentAddrController.team2" method="post">
+			<table class="table table-hover table-condensed">
+				<thead>
 					<tr>
-						<td>
-							<%=studentAddr.getStudentAddrNo() %>
-						</td>
-						<td>
-							<%=studentAddr.getStudentNo() %>
-						</td>
-						<td>
-							<%=studentAddr.getStudentId() %>
-						</td>
-						<td>
-							<%=studentAddr.getAddress() %>
-						</td>
-						<td>
-							<a href="#">수정하기</a>
-						</td>
-						<td>
-							<a href="<%=request.getContextPath()%>/deleteStudentAddrController.team2?studentAddrNo=<%=studentAddr.getStudentAddrNo() %>">삭제하기</a>
-						</td>
+						<th>
+							<input type="checkbox" id="allAddrNo">
+							studentAddrNo
+						</th>
+						<th>
+							studentNo
+						</th>
+						<th>
+							studentId
+						</th>
+						<th>
+							address
+						</th>
+						<th>
+							수정
+						</th>
 					</tr>
-			<%
-				}
-			%>
-			</tbody>
-		</table>
-		<button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/deleteStudentAddrController.team2?tableName=student_addr'">전체삭제하기</button>
+				</thead>
+				<tbody>
+				<%
+					ArrayList<StudentAddr> list = (ArrayList<StudentAddr>)request.getAttribute("list");
+					for(StudentAddr studentAddr : list){
+				%>
+						<tr>
+							<td>
+								<input type="checkbox" name="studentAddrNo" value="<%=studentAddr.getStudentAddrNo() %>">
+								<%=studentAddr.getStudentAddrNo() %>
+							</td>
+							<td>
+								<%=studentAddr.getStudentNo() %>
+							</td>
+							<td>
+								<%=studentAddr.getStudentId() %>
+							</td>
+							<td>
+								<%=studentAddr.getAddress() %>
+							</td>
+							<td>
+								<a href="#">수정하기</a>
+							</td>
+						</tr>
+				<%
+					}
+				%>
+				</tbody>
+			</table>
+		</form>
+		<button id="delete" type="button" class="btn btn-primary btn-lg btn-block">삭제하기</button>
 		<button type="button" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/indexController.team2'">메인으로 돌아가기</button>
 	</div>
 </body>

@@ -13,17 +13,15 @@ import model.StudentAddrDao;
 public class DeleteStudentAddrController extends HttpServlet {
 	private StudentAddrDao studentAddrDao;
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String tableName = request.getParameter("tableName");
-		if(tableName != null) {
-			System.out.println(tableName);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String[] checked = request.getParameterValues("studentAddrNo");
+		
+		for(int i = 0; i<checked.length; i++) {
+			int studentAddrNo = Integer.parseInt(checked[i]);
 			studentAddrDao = new StudentAddrDao();
-			studentAddrDao.deleteStudentAddrAll(tableName);
-		}else {
-			int studentAddrNo = Integer.parseInt(request.getParameter("studentAddrNo"));
-			studentAddrDao = new StudentAddrDao();
-			studentAddrDao.deleteStudentAddrOne(studentAddrNo);
+			studentAddrDao.deleteStudentAddr(studentAddrNo);
 		}
+		
 		response.sendRedirect(request.getContextPath()+"/getStudentAddrListController.team2");
 	}
 
