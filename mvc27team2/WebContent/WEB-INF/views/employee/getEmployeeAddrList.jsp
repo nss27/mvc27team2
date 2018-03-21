@@ -95,7 +95,7 @@
 							<%=employeeAddr.getAddress()%>
 						</td>
 						<td>
-							<a href="#>">수정하기</a>
+							<a href="<%=request.getContextPath() %>/updateEmployeeAddrComtroller.team2?employeeAddrNo=<%=employeeAddr.getEmployeeAddrNo()%>">수정하기</a>
 						</td>
 					</tr>
 					<%
