@@ -42,7 +42,7 @@
 					$("p.studentPw").hide();
 				}
 			});
-			$("button#add").click(function(){
+			$("button#change").click(function(){
 				if($("input.studentPw").val() == "" || $("input.studentPw").val().length < 10){
 					alert("비밀번호를 다시입력하세요");
 					$("input.studentPw").focus();
@@ -72,7 +72,6 @@
 				<label class="col-sm-2 control-label">student_id</label>
 				<div class="col-sm-10">
 					<p class="form-control-static"><%=student.getStudentId()%></p>
-					<input type="hidden" name="studentId" value="<%=student.getStudentId()%>">
 				</div>
 			</div>
 			<div class="studentPw form-group has-feedback">
@@ -83,7 +82,7 @@
 					<p class="studentPw">비밀번호는 10글자 이상입니다</p>
 				</div>
 			</div>
-			<button type="button" id="add" class="btn btn-primary btn-lg btn-block">student수정</button>
+			<button type="button" id="change" class="btn btn-primary btn-lg btn-block">student수정</button>
 			<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/getStudentListController.team2'">학생리스트으로 돌아가기</button>
 		</form>
 	</div>

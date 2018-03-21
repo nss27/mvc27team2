@@ -18,7 +18,6 @@ public class StudentDao {
 		int result = 0;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
 		try {
 			connection = DriverDB.driverDB();
 			
@@ -45,8 +44,6 @@ public class StudentDao {
 		int result = 0;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-		ArrayList<Student> list = null;
 		try {
 			connection = DriverDB.driverDB();
 			

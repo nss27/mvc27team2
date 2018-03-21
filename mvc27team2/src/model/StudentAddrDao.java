@@ -9,6 +9,66 @@ import java.util.ArrayList;
 
 public class StudentAddrDao {
 	/**
+	 * 학생 주소 정보 수정 처리 메서드
+	 * @param studentAddr
+	 * @return preparedStatement.executeUpdate
+	 */
+	public int updateStudentAddr(StudentAddr studentAddr) {
+		System.out.println("학생 주소 정보 수정 처리 메서드 호출");
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+
+			preparedStatement = connection.prepareStatement("UPDATE student_addr SET address=? WHERE student_addr_no = ?");
+			preparedStatement.setString(1, studentAddr.getAddress());
+			preparedStatement.setInt(2, studentAddr.getStudentAddrNo());
+			
+			result = preparedStatement.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		return result;
+	}
+	/**
+	 * 학생 한명의 주소를 조회하는 메서드
+	 * @param studentAddrNo
+	 * @return 학생 한명의 주소
+	 */
+	public StudentAddr selectStudentAddrOne(int studentAddrNo) {
+		System.out.println("학생 한명의 주소를 조회하는 메서드 호출");
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		StudentAddr studentAddr = null;
+		try {
+			connection = DriverDB.driverDB();
+
+			preparedStatement = connection.prepareStatement("SELECT student_addr_no AS studentAddrNo,student_id AS studentId,address FROM student JOIN student_addr ON student.student_no = student_addr.student_no WHERE student_addr.student_addr_no = ?");
+			preparedStatement.setInt(1, studentAddrNo);
+			
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				studentAddr = new StudentAddr();
+				studentAddr.setStudentAddrNo(resultSet.getInt("studentAddrNo"));
+				studentAddr.setStudentId(resultSet.getString("studentId"));
+				studentAddr.setAddress(resultSet.getString("address"));
+			}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		return studentAddr;
+	}
+	/**
 	 * 학생 주소 삭제하는 메서드
 	 * @param studentAddrNo
 	 * @return preparedStatement.executeUpdate
