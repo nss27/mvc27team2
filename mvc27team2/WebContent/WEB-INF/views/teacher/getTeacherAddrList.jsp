@@ -4,21 +4,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>getTeacherAddrList</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>getTeacherAddrList</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<style>
+	<style type="text/css">
 		body{
 			background: linear-gradient(to right,rgba(255,0,0,0.5), rgba(209,178,255,1));
 		}
-		h2{
+		.page-header{
 			text-align: center;
 		}
 		.center-block{
-			width: 50%;	
+			width: 50%;
 		}
 		.table-hover > tbody > tr:hover{
-			background-color:rgba(245,245,245,.5);
+			background-color: rgba(245,245,245,.5);
 		}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

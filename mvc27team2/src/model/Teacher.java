@@ -5,7 +5,7 @@ public class Teacher {
 	private int teacherNo;
 	private String teacherId;
 	private String teacherPw;
-	
+	private int teacherAddrCount;
 	public int getTeacherNo() {
 		return teacherNo;
 	}
@@ -24,8 +24,16 @@ public class Teacher {
 	public void setTeacherPw(String teacherPw) {
 		this.teacherPw = teacherPw;
 	}
+	public int getTeacherAddrCount() {
+		return teacherAddrCount;
+	}
+	public void setTeacherAddrCount(int teacherAddrCount) {
+		this.teacherAddrCount = teacherAddrCount;
+	}
 	@Override
 	public String toString() {
-		return "Teacher [teacherNo=" + teacherNo + ", teacherId=" + teacherId + ", teacherPw=" + teacherPw + "]";
+		return "Teacher [teacherNo=" + teacherNo + ", teacherId=" + teacherId + ", teacherPw=" + teacherPw
+				+ ", teacherAddrCount=" + teacherAddrCount + "]";
 	}
+	
 }

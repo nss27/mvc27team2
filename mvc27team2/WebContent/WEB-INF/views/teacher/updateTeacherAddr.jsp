@@ -1,12 +1,12 @@
 <!-- 나윤주 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>updateTeacherAddr.jsp</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<style type="text/css">
 		body{
 			background: linear-gradient(to right,rgba(255,0,0,0.5), rgba(209,178,255,1));
@@ -59,10 +59,6 @@
 			</small>
 		</h1>
 	</div>
-<%-- 	<%
-	TeacherAddr teacherAddr = (TeacherAddr)request.getAttribute("teacherAddr");
-	%> --%>
-	${teacherAddr}
 	<div id="form">
 		<form action="${pageContext.request.contextPath}/updateTeacherAddrController.team2" class="form-horizontal" method="post">
 			<input type="hidden" name="teacherAddrNo" value="${teacherAddr.teacherAddrNo}">
@@ -80,7 +76,7 @@
 				</div>
 			</div>
 			<button type="button" id="change" class="btn btn-primary btn-lg btn-block">teacherAddr 수정</button>
-			<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/getTeacherAddrListController.team2'">학생주소리스트로 돌아가기</button>
+			<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/getTeacherAddrListController.team2'">선생님주소리스트로 돌아가기</button>
 		</form>
 	</div>
 </body>

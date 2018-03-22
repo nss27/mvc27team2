@@ -20,16 +20,8 @@ public class DeleteTeacherAddrController extends HttpServlet {
 		for(int i = 0; i<checked.length; i++) {
 			int teacherAddrNo = Integer.parseInt(checked[i]);
 			teacherAddrDao = new TeacherAddrDao();
-			int result = 0;
-			result = teacherAddrDao.deleteTeacherAddr(teacherAddrNo);
-			
-			if(result == 0) {
-				TeacherDao teacherDao = new TeacherDao();
-
-		}else {
-		response.sendRedirect(request.getContextPath()+"/getTeacherAddrListController.team2");
+			teacherAddrDao.deleteTeacherAddr(teacherAddrNo);
 		}
+		response.sendRedirect(request.getContextPath()+"/getTeacherAddrListController.team2");
 	}
-}
-	
 }

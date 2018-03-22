@@ -11,7 +11,7 @@
 		body{
 			background: linear-gradient(to right,rgba(255,0,0,0.5), rgba(209,178,255,1));
 		}
-		h2{
+		.page-header{
 			text-align: center;
 		}
 		div#form{
@@ -62,7 +62,6 @@
 			</small>
 		</h1>
 	</div>
-	${teacher}
 	<div id="form">
 		<form action="${pageContext.request.contextPath}/updateTeacherController.team2"class="form-horizontal" method="post">
 			<input type="hidden" name="teacherNo" value="${teacher.teacherNo}">
@@ -82,7 +81,7 @@
 				</div>
 			</div>
 			<button type="button" class="btn btn-primary btn-lg btn-block">teacher수정</button>
-			<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'">선생님리스트 돌아가기</button>
+			<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'">리스트 돌아가기</button>
 		</form>
 	</div>
 </body>

@@ -2,22 +2,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>getTeacherList</title>
+	<title>getTeacherList.jsp</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<style>
 		body{
 			background: linear-gradient(to right,rgba(255,0,0,0.5), rgba(209,178,255,1));
 		}
-		h2{
+		.page-header{
 			text-align: center;
 		}
 		.center-block{
-			width: 50%;	
+			width: 50%;
 		}
 		.table-hover > tbody > tr:hover{
-			background-color:rgba(245,245,245,.5);
+			background-color: rgba(245,245,245,.5);
 		}
 	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('a.delete').click(function(){
+				var count = $(this).parents('tr').find('span.teacherAddrCount').text();
+				if(count != 0){
+					alert('등록된 주소 '+count+'개를 모두 지우시면 삭제가능합니다');
+					$(this).attr('href','#');
+				}
+			});
+		});
+	</script>
 </head>
 <body>
 	<div class="page-header">
@@ -29,6 +41,8 @@
 		</h1>
 	</div>
 	<div class="center-block">
+	<jsp:include page="/WEB-INF/views/teacher/searchTeacherAddr.jsp"" />
+
 		<table class="table table-hover table-condensed">
 			<thead>
 				<tr>
@@ -72,7 +86,7 @@
 								<a href="${pageContext.request.contextPath}/updateTeacherController.team2?teacherNo=${teacher.teacherNo}">수정하기</a>
 							</td>
 							<td>
-								<a href="${pageContext.request.contextPath}/deleteTeacherController.team2?teacherNo=${teacher.teacherNo}">삭제하기</a>
+								<a class="delete" href="${pageContext.request.contextPath}/deleteTeachertController.team2?teacherNo=${teacher.teacherNo}" >삭제하기</a>
 							</td>
 						</tr>
 				</c:forEach>
