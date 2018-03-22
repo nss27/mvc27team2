@@ -7,6 +7,67 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class TeacherAddrDao {
+	/**
+	 * 선생님 주소 정보 수정 처리 메서드
+	 * @param teacherAddr
+	 * @return preparedStatement.executeUpdate();
+	 */
+	
+	public int updateTeacherAddr(TeacherAddr teacherAddr) {
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+
+			preparedStatement = connection.prepareStatement("UPDATE teacher_addr SET address=? WHERE teacher_addr_no = ?");
+			preparedStatement.setString(1, teacherAddr.getAddress());
+			preparedStatement.setInt(2, teacherAddr.getTeacherAddrNo());
+			
+			result = preparedStatement.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		return result;
+	}
+	
+	/**
+	 * 선생님 한명 주소를 조회하는 메서드
+	 * @param teacherAddrNo
+	 * @return 선생님 한명의 주소
+	 */
+	
+	public TeacherAddr selectTeacherAddrOne(int teacherAddrNo) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		TeacherAddr teacherAddr = null;
+
+		try{
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("SELECT teacher_addr_no AS teacherAddrNo,teacher_id AS teacherId,address FROM teacher JOIN teacher_addr ON teacher.teacher_no = teacher_addr.teacher_no WHERE teacher_addr.teacher_addr_no = ?");
+			preparedStatement.setInt(1, teacherAddrNo);
+			
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				teacherAddr = new TeacherAddr();
+				teacherAddr.setTeacherAddrNo(resultSet.getInt("teacherAddrNo"));
+				teacherAddr.setTeacherId(resultSet.getString("teacherId"));
+				teacherAddr.setAddress(resultSet.getString("address"));
+				}
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			} finally {
+				if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
+				if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+				if(connection != null)try {connection.close();}catch (SQLException e) {};
+			}
+			return teacherAddr;
+	}
 	
 	/**
 	 * 선생님 주소 삭제하는 메서드

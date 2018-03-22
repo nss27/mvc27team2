@@ -1,5 +1,6 @@
 <!-- 나윤주 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,7 +72,7 @@
 					$("p.teacherPwCheck").show();
 				}
 			});
-			$("button").click(function(){
+			$("button#add").click(function(){
 				if($("input.teacherId").val() == "" || $("input.teacherId").val().length < 5){
 					alert("아이디를 다시입력하세요");
 					$("input.teacherId").focus();
@@ -89,9 +90,16 @@
 	</script>
 </head>
 	<body>
-		<h2>addTeacher</h2>
+	<div class="page-header">
+		<h1>
+			addTeacher
+			<small>
+				선생님추가
+			</small>
+		</h1>
+	</div>
 		<div id="form">
-			<form method="post" action="<%=request.getContextPath()%>/addTeacherController.team2" class="form-horizontal">
+			<form method="post" action="${pageContext.request.contextPath}/addTeacherController.team2" class="form-horizontal">
 				<div class="teacherId form-group has-feedback">
 					<label for="teacherId" class="col-sm-2 control-label">teacher_Id</label>
 					<div class="col-sm-10">
@@ -117,7 +125,7 @@
 					</div>
 				</div>
 				<button type="button" class="btn btn-primary btn-lg btn-block">teacher추가</button>	
-				<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/indexController.team2'">메인으로 돌아가기</button>		 
+				<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'">메인으로 돌아가기</button>		 
 			</form>
 		</div>
 	</body>

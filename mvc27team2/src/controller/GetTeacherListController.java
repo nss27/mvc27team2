@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import model.Teacher;
 import model.TeacherDao;
 
-
 @WebServlet("/getTeacherListController.team2")
 public class GetTeacherListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

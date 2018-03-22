@@ -1,7 +1,6 @@
 <!-- 나윤주 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="model.TeacherAddr" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,71 +43,64 @@
 	</script>
 </head>
 <body>
-	<div class="page-header">
-		<h1>
-			getTeacherAddrList
-			<small>
-				선생님주소리스트
-			</small>
-		</h1>
-	</div>
-		<div class="center-block">
-		<form action="<%=request.getContextPath()%>/deleteTeacherAddrController.team2" method="post">
-		<table class="table table-hover table-condensed">
-			<thead>
-				<tr>
-					<th>
-						<input type="checkbox" id="allAddrNo">
-						teacherAddrNo
-					</th>
-					<th>
-						teacherNo
-					</th>
-					<th>
-						teacherId
-					</th>
-					<th>
-						address
-					</th>
-					<th>
-						수정
-					</th>
-					<th>
-						삭제
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-			<%
-				//TeacherAddr의 리스트를 정렬 시켜준다.
-				ArrayList<TeacherAddr> list = (ArrayList<TeacherAddr>)request.getAttribute("list");
-				for( TeacherAddr teacherAddr : list){
-			%>
+		<div class="page-header">
+			<h1>
+				getTeacherAddrList
+				<small>
+					선생님주소리스트
+				</small>
+			</h1>
+		</div>
+			<div class="center-block">
+			<form action="${pageContext.request.contextPath}/deleteTeacherAddrController.team2" method="post">
+			<table class="table table-hover table-condensed">
+				<thead>
 					<tr>
-						<td>
-							<input type="checkbox" name="teacherAddrNo" value="<%=teacherAddr.getTeacherAddrNo() %>">
-							<%=teacherAddr.getTeacherAddrNo() %>
-						</td>
-						<td>
-							<%=teacherAddr.getTeacherNo() %>
-						</td>
-						<td>
-							<%=teacherAddr.getTeacherId() %>
-						</td>
-						<td>
-							<%=teacherAddr.getAddress() %>
-						</td>
-						<td>
-							<a href="#">수정하기</a>
-						</td>
+						<th>
+							<input type="checkbox" id="allAddrNo">
+							teacherAddrNo
+						</th>
+						<th>
+							teacherNo
+						</th>
+						<th>
+							teacherId
+						</th>
+						<th>
+							address
+						</th>
+						<th>
+							수정
+						</th>
 					</tr>
-			<%
-				}
-			%>
-			</tbody>
-		</table>
-		<button id="delete" type="button" class="btn btn-primary btn-lg btn-block">삭제하기</button>
-		<button type="button" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/indexController.team2'">메인으로 돌아가기</button>
-	</div>
+				</thead>
+				<tbody>
+
+				<c:forEach var="teacherAddr" items="${list}">
+						<tr>
+							<td>
+								<input type="checkbox" name="teacherAddrNo" value="${teacherAddr.teacherAddrNo}">
+								${teacherAddr.teacherAddrNo}
+							</td>
+							<td>
+								${teacherAddr.teacherNo}
+							</td>
+							<td>
+								${teacherAddr.teacherId}
+							</td>
+							<td>
+								${teacherAddr.address}
+							</td>
+							<td>
+								<a href="${pageContext.request.contextPath}/updateTeacherAddrController.team2?teacherAddrNo=${teacherAddr.teacherAddrNo}">수정하기</a>
+							</td>
+						</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+			</form>
+			<button id="delete" type="button" class="btn btn-primary btn-lg btn-block">삭제하기</button>
+			<button type="button" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'">메인으로 돌아가기</button>
+		</div>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <!-- 나윤주 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,10 +26,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-	<%
+ <%-- 	<%
 		int count = (int)request.getAttribute("count");
-	%>
-		var count = <%=count%>;
+	%> --%>
+		${count}
+		<%-- var count = <%=count%>; --%>
 		if(count>=5){
 			$('input.address').attr('disabled','disabled');
 		}
@@ -67,23 +69,21 @@
 			</small>
 		</h1>
 	</div>
-<%	
-	int teacherNo = (int)request.getAttribute("teacherNo");
-	String teacherId = (String)request.getAttribute("teacherId");
-%>
+		${teacherNo}
+		${teacherId}
 	<div id="form">
-		<form action="<%=request.getContextPath() %>/addTeacherAddrController.team2" method="post" class="form-horizontal">
+		<form action="${pageContext.request.contextPath}/addTeacherAddrController.team2" method="post" class="form-horizontal">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">teacherNo</label>
 				<div class="col-sm-10">
-					<p class="form-control-static"><%=teacherNo %></p>
-					<input type="hidden" name="teacherNo" value="<%=teacherNo %>">
+					<p class="form-control-static">${teacherNo} </p>
+					<input type="hidden" name="teacherNo" value="${teacherNo}">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">teacherId</label>
 				<div class="col-sm-10">
-					<p class="form-control-static"><%=teacherId %></p>
+					<p class="form-control-static">${teacherId}</p>
 					
 				</div>
 			</div>
@@ -95,7 +95,7 @@
 				</div>
 			</div>
 			<button type="button" class="btn btn-default btn-lg btn-block">teacherAddress 추가</button>
-			<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/getTeacherListController.team2'">선생리스트으로 돌아가기</button>
+			<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/getTeacherListController.team2'">선생리스트으로 돌아가기</button>
 		</form>
 	</div>
 </body>

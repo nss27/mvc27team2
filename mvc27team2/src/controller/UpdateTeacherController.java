@@ -20,7 +20,6 @@ public class UpdateTeacherController extends HttpServlet {
 		request.setAttribute("teacher", teacher);
 		request.getRequestDispatcher("/WEB-INF/views/teacher/updateTeacher.jsp").forward(request, response);
 	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf8");
 		int teacherNo = Integer.parseInt(request.getParameter("teacherNo"));

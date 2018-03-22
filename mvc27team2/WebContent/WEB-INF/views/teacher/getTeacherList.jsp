@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="model.Teacher" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>getTeacherList</title>
@@ -22,7 +20,14 @@
 	</style>
 </head>
 <body>
-	<h2>getTeacherList</h2>
+	<div class="page-header">
+		<h1>
+			getTeacherList
+			<small>
+				선생님리스트
+			</small>
+		</h1>
+	</div>
 	<div class="center-block">
 		<table class="table table-hover table-condensed">
 			<thead>
@@ -48,36 +53,32 @@
 				</tr>
 			</thead>
 			<tbody>
-			<%
-				ArrayList<Teacher> list = (ArrayList<Teacher>)request.getAttribute("list");
-				for(Teacher teacher : list){
-			%>
-					<tr >
-						<td>
-							<%=teacher.getTeacherNo() %>
-						</td>
-						<td>
-							<%=teacher.getTeacherId() %>
-						</td>
-						<td>
-							*****
-						</td>
-						<td>
-							<a href="<%=request.getContextPath()%>/addTeacherAddrController.team2?teacherNo=<%=teacher.getTeacherNo() %>">주소추가</a>
-						</td>
-						<td>
-							<a href="<%=request.getContextPath()%>/updateTeacherController.team2?teacherNo=<%=teacher.getTeacherNo() %>">수정하기</a>
-						</td>
-						<td>
-							<a href="<%=request.getContextPath()%>/deleteTeacherController.team2?teacherNo=<%=teacher.getTeacherNo() %>">삭제하기</a>
-						</td>
-					</tr>
-			<%
-				}
-			%>
+
+				<c:forEach var="teacher" items="${list}">
+						<tr>
+							<td>
+								${teacher.teacherNo}
+							</td>
+							<td>
+								${teacher.teacherId}
+							</td>
+							<td>
+								*****
+							</td>
+							<td>
+								<a href="${pageContext.request.contextPath}/addTeacherAddrController.team2?teacherNo=${teacher.teacherNo}">주소추가</a>
+							</td>
+							<td>
+								<a href="${pageContext.request.contextPath}/updateTeacherController.team2?teacherNo=${teacher.teacherNo}">수정하기</a>
+							</td>
+							<td>
+								<a href="${pageContext.request.contextPath}/deleteTeacherController.team2?teacherNo=${teacher.teacherNo}">삭제하기</a>
+							</td>
+						</tr>
+				</c:forEach>
 			</tbody>
 		</table>
-		<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/indexController.team2'">메인으로 돌아가기</button>
+		<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'">메인으로 돌아가기</button>
 	</div>
 </body>
 </html>
