@@ -30,7 +30,8 @@
 					$('input:checkbox').prop('checked',true);
 				}else{
 					$('input:checkbox').prop('checked',false);
-				}
+				}				
+			}
 			});
 			$('button#delete').click(function(){
 				if($('input:checkbox').is(':checked')){
@@ -50,8 +51,9 @@
 					선생님주소리스트
 				</small>
 			</h1>
-		</div>
+		</div>			
 			<div class="center-block">
+			<jsp:include page="/WEB-INF/views/teacher/searchTeacherAddr.jsp"/>
 			<form action="${pageContext.request.contextPath}/deleteTeacherAddrController.team2" method="post">
 			<table class="table table-hover table-condensed">
 				<thead>

@@ -14,6 +14,7 @@ public class TeacherAddrDao {
 	 */
 	
 	public int updateTeacherAddr(TeacherAddr teacherAddr) {
+		System.out.println("updateTeacherAddr 주소정보수정처리 dao실행");
 		Connection connection =null;
 		PreparedStatement preparedStatement = null;
 		int result = 0;
@@ -41,6 +42,7 @@ public class TeacherAddrDao {
 	 */
 	
 	public TeacherAddr selectTeacherAddrOne(int teacherAddrNo) {
+		System.out.println("selectTeacherAddrOne 한명조회 dao실행");
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -75,6 +77,7 @@ public class TeacherAddrDao {
 	 * @return preparedStatement.executeUpdate();
 	 */
 	public int deleteTeacherAddr(int teacherAddrNo) {
+		System.out.println("deleteTeacherAddr 삭제 dao실행");
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		int result = 0;
@@ -100,7 +103,8 @@ public class TeacherAddrDao {
 	 * 선생님 주소 리스트 카운트 메서드
 	 * @return resultSet.getInt("countTeacherAddrList")
 	 */
-	public int countTeacherAddrList() {
+	public int countTeacherAddrList(int teacherNo) {
+		System.out.println("countTeacherAddrList 주소개수카운트 dao실행");
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -111,6 +115,7 @@ public class TeacherAddrDao {
 			//쿼리문 작성 및 실행
 			preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countTeacherAddrList FROM teacher_addr where teacher_no=?");
 			//resultSet에 결과값을 담는다.
+			preparedStatement.setInt(1, teacherNo);
 			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
@@ -134,10 +139,11 @@ public class TeacherAddrDao {
 	 */
 	
 	public ArrayList<TeacherAddr> selectTeacherAddrList() {
+		System.out.println("selectTeacherAddrList 리스트출력 dao실행");
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		TeacherAddr teacherAddr;
+		TeacherAddr teacherAddr = null;
 		ArrayList<TeacherAddr> list = null;
 		try {
 			//db연결 및 실행
@@ -177,6 +183,7 @@ public class TeacherAddrDao {
 	 */
 	
 	public int insertTeacherAddr(TeacherAddr teacherAddr) {
+		System.out.println("TeacherAddr 추가 dao실행");
 		int result = 0;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;

@@ -24,7 +24,7 @@ public class GetTeacherListController extends HttpServlet {
 		ArrayList<Teacher> list = teacherDao.selectTeacherList();
 		int teacherAddrCount = 0;
 		for(Teacher teacher : list) {
-			teacherAddrCount = teacherAddrDao.countTeacherAddrList();
+			teacherAddrCount = teacherAddrDao.countTeacherAddrList(teacher.getTeacherNo());
 			teacher.setTeacherAddrCount(teacherAddrCount);
 		}
 		request.setAttribute("list", list);

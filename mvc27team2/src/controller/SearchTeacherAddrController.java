@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SearchTeacherAddrController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		response.sendRedirect(request.getContextPath()+"/getTeacherAddrListController.team2");
 	}
 
 }

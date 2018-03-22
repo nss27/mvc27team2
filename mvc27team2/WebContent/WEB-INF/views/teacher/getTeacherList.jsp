@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>getTeacherList.jsp</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<style>
+	<style type="text/css">
 		body{
 			background: linear-gradient(to right,rgba(255,0,0,0.5), rgba(209,178,255,1));
 		}
@@ -41,8 +43,6 @@
 		</h1>
 	</div>
 	<div class="center-block">
-	<jsp:include page="/WEB-INF/views/teacher/searchTeacherAddr.jsp"" />
-
 		<table class="table table-hover table-condensed">
 			<thead>
 				<tr>
@@ -80,7 +80,7 @@
 								*****
 							</td>
 							<td>
-								<a href="${pageContext.request.contextPath}/addTeacherAddrController.team2?teacherNo=${teacher.teacherNo}">주소추가</a>
+								<a href="${pageContext.request.contextPath}/addTeacherAddrController.team2?teacherNo=${teacher.teacherNo}">주소추가<span class="teacherAddrCount badge">${teacher.teacherAddrCount}</span></a>
 							</td>
 							<td>
 								<a href="${pageContext.request.contextPath}/updateTeacherController.team2?teacherNo=${teacher.teacherNo}">수정하기</a>

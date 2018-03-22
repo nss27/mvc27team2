@@ -41,5 +41,4 @@ public class AddStudentAddrController extends HttpServlet {
 		studentAddrDao.insertStudentAddr(studentAddr);
 		response.sendRedirect(request.getContextPath()+"/getStudentAddrListController.team2");
 	}
-
 }
