@@ -21,6 +21,18 @@
 			background-color: rgba(245,245,245,.5);
 		}
 	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('a.delete').click(function(){
+				var count = $(this).parents('tr').find('span.studentAddrCount').text();
+				if(count != 0){
+					alert('등록된 주소 '+count+'개를 모두 지우시면 삭제가능합니다');
+					$(this).attr('href','#');
+				}
+			});
+		});
+	</script>
 </head>
 <body>
 	<div class="page-header">
@@ -32,6 +44,7 @@
 		</h1>
 	</div>
 	<div class="center-block">
+		<%@ include file="/WEB-INF/views/student/searchStudentAddr.jsp" %>
 		<table class="table table-hover table-condensed">
 			<thead>
 				<tr>
@@ -68,13 +81,13 @@
 							*****
 						</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/addStudentAddrController.team2?studentNo=${student.studentNo}">주소추가</a>
+							<a href="${pageContext.request.contextPath}/addStudentAddrController.team2?studentNo=${student.studentNo}">주소추가<span class="studentAddrCount badge">${student.studentAddrCount}</span></a>
 						</td>
 						<td>
 							<a href="${pageContext.request.contextPath}/updateStudentController.team2?studentNo=${student.studentNo}">수정하기</a>
 						</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/deleteStudentController.team2?studentNo=${student.studentNo}">삭제하기</a>
+							<a class="delete" href="${pageContext.request.contextPath}/deleteStudentController.team2?studentNo=${student.studentNo}" >삭제하기</a>
 						</td>
 					</tr>
 				</c:forEach>

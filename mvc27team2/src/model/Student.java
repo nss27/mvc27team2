@@ -5,6 +5,7 @@ public class Student {
 	private int studentNo;
 	private String studentId;
 	private String studentPw;
+	private int studentAddrCount;
 	public int getStudentNo() {
 		return studentNo;
 	}
@@ -23,8 +24,15 @@ public class Student {
 	public void setStudentPw(String studentPw) {
 		this.studentPw = studentPw;
 	}
+	public int getStudentAddrCount() {
+		return studentAddrCount;
+	}
+	public void setStudentAddrCount(int studentAddrCount) {
+		this.studentAddrCount = studentAddrCount;
+	}
 	@Override
 	public String toString() {
-		return "Student [studentNo=" + studentNo + ", studentId=" + studentId + ", studentPw=" + studentPw + "]";
+		return "Student [studentNo=" + studentNo + ", studentId=" + studentId + ", studentPw=" + studentPw
+				+ ", studentAddrCount=" + studentAddrCount + "]";
 	}
 }
