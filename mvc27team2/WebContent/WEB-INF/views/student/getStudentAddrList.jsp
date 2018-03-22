@@ -1,7 +1,6 @@
 <!-- 나성수 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="model.StudentAddr" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +52,7 @@
 		</h1>
 	</div>
 	<div class="center-block">
-		<form action="<%=request.getContextPath()%>/deleteStudentAddrController.team2" method="post">
+		<form action="${pageContext.request.contextPath}/deleteStudentAddrController.team2" method="post">
 			<table class="table table-hover table-condensed">
 				<thead>
 					<tr>
@@ -76,36 +75,31 @@
 					</tr>
 				</thead>
 				<tbody>
-				<%
-					ArrayList<StudentAddr> list = (ArrayList<StudentAddr>)request.getAttribute("list");
-					for(StudentAddr studentAddr : list){
-				%>
+					<c:forEach var="studentAddr" items="${list}">
 						<tr>
 							<td>
-								<input type="checkbox" name="studentAddrNo" value="<%=studentAddr.getStudentAddrNo() %>">
-								<%=studentAddr.getStudentAddrNo() %>
+								<input type="checkbox" name="studentAddrNo" value="${studentAddr.studentAddrNo}">
+								${studentAddr.studentAddrNo}
 							</td>
 							<td>
-								<%=studentAddr.getStudentNo() %>
+								${studentAddr.studentNo}
 							</td>
 							<td>
-								<%=studentAddr.getStudentId() %>
+								${studentAddr.studentId}
 							</td>
 							<td>
-								<%=studentAddr.getAddress() %>
+								${studentAddr.address}
 							</td>
 							<td>
-								<a href="<%=request.getContextPath()%>/updateStudentAddrController.team2?studentAddrNo=<%=studentAddr.getStudentAddrNo() %>">수정하기</a>
+								<a href="${pageContext.request.contextPath}/updateStudentAddrController.team2?studentAddrNo=${studentAddr.studentAddrNo}">수정하기</a>
 							</td>
 						</tr>
-				<%
-					}
-				%>
+					</c:forEach>
 				</tbody>
 			</table>
 		</form>
 		<button id="delete" type="button" class="btn btn-primary btn-lg btn-block">삭제하기</button>
-		<button type="button" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/indexController.team2'">메인으로 돌아가기</button>
+		<button type="button" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'">메인으로 돌아가기</button>
 	</div>
 </body>
 </html>

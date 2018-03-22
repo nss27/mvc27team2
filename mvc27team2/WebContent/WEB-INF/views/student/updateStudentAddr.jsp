@@ -1,6 +1,5 @@
 <!-- 나성수 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="model.StudentAddr" %>
 <!DOCTYPE html PUBLIC>
 <html>
 <head>
@@ -59,27 +58,24 @@
 			</small>
 		</h1>
 	</div>
-	<%
-	StudentAddr studentAddr = (StudentAddr)request.getAttribute("studentAddr");
-	%>
 	<div id="form">
-		<form action="<%=request.getContextPath() %>/updateStudentAddrController.team2" class="form-horizontal" method="post">
-			<input type="hidden" name="studentAddrNo" value="<%=studentAddr.getStudentAddrNo()%>">
+		<form action="${pageContext.request.contextPath}/updateStudentAddrController.team2" class="form-horizontal" method="post">
+			<input type="hidden" name="studentAddrNo" value="${studentAddr.studentAddrNo}">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">student_id</label>
 				<div class="col-sm-10">
-					<p class="form-control-static"><%=studentAddr.getStudentId()%></p>
+					<p class="form-control-static">${studentAddr.studentId}</p>
 				</div>
 			</div>
 			<div class="address form-group has-feedback">
 				<label for="address" class="col-sm-2 control-label">address</label>
 				<div class="col-sm-10">
-					<input type="text" class="address form-control" id="address" name="address" value="<%=studentAddr.getAddress()%>">
+					<input type="text" class="address form-control" id="address" name="address" value="${studentAddr.address}">
 					<span class="address form-control-feedback"></span>
 				</div>
 			</div>
 			<button type="button" id="change" class="btn btn-primary btn-lg btn-block">studentAddr 수정</button>
-			<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/getStudentAddrListController.team2'">학생주소리스트로 돌아가기</button>
+			<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/getStudentAddrListController.team2'">학생주소리스트로 돌아가기</button>
 		</form>
 	</div>
 </body>
