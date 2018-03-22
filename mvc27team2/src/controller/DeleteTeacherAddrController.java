@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.TeacherAddrDao;
+import model.TeacherDao;
 
 @WebServlet("/deleteTeacherAddrController.team2")
 public class DeleteTeacherAddrController extends HttpServlet {
@@ -19,9 +20,16 @@ public class DeleteTeacherAddrController extends HttpServlet {
 		for(int i = 0; i<checked.length; i++) {
 			int teacherAddrNo = Integer.parseInt(checked[i]);
 			teacherAddrDao = new TeacherAddrDao();
-			teacherAddrDao.deleteTeacherAddr(teacherAddrNo);
-		}
-		
+			int result = 0;
+			result = teacherAddrDao.deleteTeacherAddr(teacherAddrNo);
+			
+			if(result == 0) {
+				TeacherDao teacherDao = new TeacherDao();
+
+		}else {
 		response.sendRedirect(request.getContextPath()+"/getTeacherAddrListController.team2");
+		}
 	}
+}
+	
 }

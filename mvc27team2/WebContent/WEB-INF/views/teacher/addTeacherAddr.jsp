@@ -26,11 +26,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
- <%-- 	<%
+<%--	<%
 		int count = (int)request.getAttribute("count");
-	%> --%>
-		${count}
-		<%-- var count = <%=count%>; --%>
+		%> 
+		 var count = <%=count%>; --%>
+		var count = ${count};
 		if(count>=5){
 			$('input.address').attr('disabled','disabled');
 		}
@@ -69,8 +69,6 @@
 			</small>
 		</h1>
 	</div>
-		${teacherNo}
-		${teacherId}
 	<div id="form">
 		<form action="${pageContext.request.contextPath}/addTeacherAddrController.team2" method="post" class="form-horizontal">
 			<div class="form-group">
@@ -84,7 +82,6 @@
 				<label class="col-sm-2 control-label">teacherId</label>
 				<div class="col-sm-10">
 					<p class="form-control-static">${teacherId}</p>
-					
 				</div>
 			</div>
 			<div class="address form-group has-feedback">

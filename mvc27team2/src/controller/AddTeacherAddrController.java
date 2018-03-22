@@ -17,15 +17,18 @@ import model.TeacherDao;
 public class AddTeacherAddrController extends HttpServlet {
 	 private TeacherDao teacherDao;
 	 private TeacherAddrDao teacherAddrDao;
+	 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//주소추가할 선생님 한명의 데이터를 받아오기 위해
-		//여기서만 사용하도록 private 선언.
+		//teacherNo값을 가져온다.
 		Teacher teacher = new Teacher();;
 		int teacherNo=Integer.parseInt(request.getParameter("teacherNo"));
+		// 여기서만 사용할 것이기 때문에 this를 사용해 지정해주고 실행.
 		this.teacherDao = new TeacherDao();
 		teacher = this.teacherDao.selectTeacherOne(teacherNo); 
+		//화면에서 불러올 id, no의 속성값을 셋팅해준다.
 		request.setAttribute("teacherNo", teacher.getTeacherNo());
 		request.setAttribute("teacherId", teacher.getTeacherId());
+		//
 		request.getRequestDispatcher("/WEB-INF/views/teacher/addTeacherAddr.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -106,10 +106,11 @@ public class TeacherAddrDao {
 		ResultSet resultSet = null;
 		int result = 0;
 		try {
+			//db연결 및 실행
 			connection = DriverDB.driverDB();
-			
-			preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countTeacherAddrList FROM teacher_addr");
-			
+			//쿼리문 작성 및 실행
+			preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countTeacherAddrList FROM teacher_addr where teacher_no=?");
+			//resultSet에 결과값을 담는다.
 			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
@@ -139,12 +140,15 @@ public class TeacherAddrDao {
 		TeacherAddr teacherAddr;
 		ArrayList<TeacherAddr> list = null;
 		try {
+			//db연결 및 실행
 			connection = DriverDB.driverDB();
 			/*
 			 * select 구문 teacher 와 teacher_addr 내의 teacher_no, teacher_id, teacher_addr_no, teacher
 			 */
 			preparedStatement = connection.prepareStatement("SELECT teacher.teacher_no as teacherNo,teacher_addr_no as teacherAddrNo, teacher_id as teacherId, address FROM teacher JOIN teacher_addr ON teacher.teacher_no = teacher_addr.teacher_no ORDER BY teacher_addr_no ASC");
+			//결과값을 resultSet에 담는다.
 			resultSet = preparedStatement.executeQuery();
+			// 리스트를 출력하기 위한 생성자 메서드
 			list = new ArrayList<TeacherAddr>();
 			while(resultSet.next()) {
 				teacherAddr = new TeacherAddr();
@@ -152,6 +156,7 @@ public class TeacherAddrDao {
 				teacherAddr.setTeacherNo(resultSet.getInt("teacherNo"));
 				teacherAddr.setTeacherId(resultSet.getString("teacherId"));
 				teacherAddr.setAddress(resultSet.getString("address"));
+				//셋팅된 값을 list에 추가
 				list.add(teacherAddr);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
@@ -161,6 +166,7 @@ public class TeacherAddrDao {
 			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
 			if(connection != null)try {connection.close();}catch (SQLException e) {};
 		}
+		// 셋팅된 값이 추가된 list를 리턴
 		return list;
 	}	
 	
@@ -174,19 +180,25 @@ public class TeacherAddrDao {
 		int result = 0;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		try {		
+		try {
+			//db연결 및 실행
 			connection = DriverDB.driverDB();
+			// 쿼리문 작성 및 실행.
 			preparedStatement = connection.prepareStatement("INSERT INTO teacher_addr (teacher_no, address) VALUES (?,?)");
 			preparedStatement.setInt(1, teacherAddr.getTeacherNo());
 			preparedStatement.setString(2, teacherAddr.getAddress());
+			// 결과값을 sql에 저장.
 			result = preparedStatement.executeUpdate();
 			System.out.println(result);
+		//오류를 잡기위한 캐치절문
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+		//파이널에서 connection과 preparedStatement를 닫아준다.
 		} finally {
 			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
 			if(connection != null)try {connection.close();}catch (SQLException e) {};
 		}
+		//결과값 리턴
 		return result;
 	}
 }

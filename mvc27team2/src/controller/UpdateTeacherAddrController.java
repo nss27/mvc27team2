@@ -20,7 +20,6 @@ public class UpdateTeacherAddrController extends HttpServlet {
 		request.setAttribute("teacherAddr", teacherAddr);
 		request.getRequestDispatcher("/WEB-INF/views/teacher/updateTeacherAddr.jsp").forward(request, response);
 	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//사용자가 입력한 값을 받는 것이기때문에 인코딩을 적용시켜야 한다.
 		request.setCharacterEncoding("utf8");

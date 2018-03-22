@@ -75,7 +75,6 @@
 					</tr>
 				</thead>
 				<tbody>
-
 				<c:forEach var="teacherAddr" items="${list}">
 						<tr>
 							<td>
