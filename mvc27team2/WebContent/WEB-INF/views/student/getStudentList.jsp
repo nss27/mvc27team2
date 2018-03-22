@@ -44,7 +44,6 @@
 		</h1>
 	</div>
 	<div class="center-block">
-		<%@ include file="/WEB-INF/views/student/searchStudentAddr.jsp" %>
 		<table class="table table-hover table-condensed">
 			<thead>
 				<tr>

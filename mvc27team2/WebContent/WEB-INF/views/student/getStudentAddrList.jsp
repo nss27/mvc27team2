@@ -52,6 +52,7 @@
 		</h1>
 	</div>
 	<div class="center-block">
+		<%@ include file="/WEB-INF/views/student/searchStudentAddrList.jsp" %>
 		<form action="${pageContext.request.contextPath}/deleteStudentAddrController.team2" method="post">
 			<table class="table table-hover table-condensed">
 				<thead>
