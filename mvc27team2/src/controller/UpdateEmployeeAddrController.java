@@ -14,8 +14,8 @@ import model.StudentAddr;
 import model.StudentAddrDao;
 
 
-@WebServlet("/updateEmployeeAddrComtroller.team2")
-public class UpdateEmployeeAddrComtroller extends HttpServlet {
+@WebServlet("/updateEmployeeAddrController.team2")
+public class UpdateEmployeeAddrController extends HttpServlet {
 	private EmployeeAddrDao employeeAddrDao = null;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

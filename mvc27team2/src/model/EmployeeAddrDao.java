@@ -99,7 +99,7 @@ public class EmployeeAddrDao {
 	 * 직원 주소 리스트 카운트 메서드
 	 * @return 카운트 값
 	 */
-	public int countEmployeeAddrList() {
+	public int countEmployeeAddrList(int employeeNo) {
 		System.out.println("직원 주소 리스트 카운트 메서드 호출");
 		Connection connection =null;
 		PreparedStatement preparedStatement = null;
@@ -108,7 +108,7 @@ public class EmployeeAddrDao {
 		try {
 			connection = DriverDB.driverDB();
 			
-			preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countEmployeeAddrList FROM employee_addr");
+			preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countEmployeeAddrList FROM employee_addr WHERE employee_no=?");
 			
 			resultSet = preparedStatement.executeQuery();
 			

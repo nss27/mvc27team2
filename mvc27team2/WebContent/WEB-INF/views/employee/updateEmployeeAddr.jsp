@@ -60,7 +60,7 @@
 		</h1>	
 	</div>
 	<div id="form">
-		<form action="${pageContext.request.contextPath}/updateEmployeeAddrComtroller.team2" class="form-horizontal" method="post">
+		<form action="${pageContext.request.contextPath}/updateEmployeeAddrController.team2" class="form-horizontal" method="post">
 			<input type="hidden" name="employeeAddrNo" value="${employeeAddr.employeeAddrNo}">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">employee_id</label>

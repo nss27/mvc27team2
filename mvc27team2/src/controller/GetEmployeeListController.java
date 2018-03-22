@@ -18,6 +18,7 @@ public class GetEmployeeListController extends HttpServlet {
 	private EmployeeDao employeeDao = null;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf8");
 		employeeDao = new EmployeeDao();
 		ArrayList<Employee> list = employeeDao.selectEmployeeList();
 		request.setAttribute("list", list);

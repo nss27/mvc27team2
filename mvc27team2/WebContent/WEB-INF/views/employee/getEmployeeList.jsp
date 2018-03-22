@@ -1,5 +1,5 @@
-<!-- ¹è°ÇÇý -->
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="EUC-KR"%>
+<!-- ë°°ê±´í˜œ -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -28,7 +28,7 @@
 		<h1>
 			getEmployeeList
 			<small>
-				Á÷¿ø¸®½ºÆ®
+				ì§ì›ë¦¬ìŠ¤íŠ¸
 			</small>
 		</h1>		
 	</div>
@@ -46,13 +46,13 @@
 						employeePw
 					</th>
 					<th>
-						ÁÖ¼Ò
+						ì£¼ì†Œ
 					</th>
 					<th>
-						¼öÁ¤
+						ìˆ˜ì •
 					</th>
 					<th>
-						»èÁ¦
+						ì‚­ì œ
 					</th>
 	
 				</tr>
@@ -70,19 +70,19 @@
 							*************
 						</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/addEmployeeAddrController.team2?employeeNo=${employee.employeeNo}">ÁÖ¼ÒÃß°¡</a>
+							<a href="${pageContext.request.contextPath}/addEmployeeAddrController.team2?employeeNo=${employee.employeeNo}">ì£¼ì†Œì¶”ê°€</a>
 						</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/updateEmployeeController.team2?employeeNo=${employee.employeeNo}">¼öÁ¤ÇÏ±â</a>
+							<a href="${pageContext.request.contextPath}/updateEmployeeController.team2?employeeNo=${employee.employeeNo}">ìˆ˜ì •í•˜ê¸°</a>
 						</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/deleteEmployeeController.team2?employeeNo=${employee.employeeNo}">»èÁ¦ÇÏ±â</a>
+							<a href="${pageContext.request.contextPath}/deleteEmployeeController.team2?employeeNo=${employee.employeeNo}">ì‚­ì œí•˜ê¸°</a>
 						</td>
 					</tr>					
 				</c:forEach>
 			</tbody>
 		</table>	
-		<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'">¸ÞÀÎÀ¸·Î µ¹¾Æ°¡±â</button>	
+		<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'">ë©”ì¸ìœ¼ë¡œ ëŒì•„ê°€ê¸°</button>	
 	</div>
 </body>
 </html>

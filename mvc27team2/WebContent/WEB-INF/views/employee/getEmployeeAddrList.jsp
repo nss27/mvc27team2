@@ -91,7 +91,7 @@
 								${employeeAddr.address}
 							</td>
 							<td>
-								<a href="${pageContext.request.contextPath}/updateEmployeeAddrComtroller.team2?employeeAddrNo=${employeeAddr.employeeAddrNo}">수정하기</a>
+								<a href="${pageContext.request.contextPath}/updateEmployeeAddrController.team2?employeeAddrNo=${employeeAddr.employeeAddrNo}">수정하기</a>
 							</td>
 						</tr>					
 					</c:forEach>
