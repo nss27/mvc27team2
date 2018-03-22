@@ -1,7 +1,6 @@
 <!-- 배건혜 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="model.EmployeeAddr"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +52,7 @@
 		</h1>		
 	</div>
 	<div class="center-block">
-		<form action="<%=request.getContextPath()%>/deleteEmployeeAddrController.team2" method="post">
+		<form action="${pageContext.request.contextPath}/deleteEmployeeAddrController.team2" method="post">
 			<table class="table table-hover table-condensed ">
 				<thead>
 					<tr>
@@ -76,37 +75,32 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%
-						ArrayList<EmployeeAddr> list = (ArrayList<EmployeeAddr>) request.getAttribute("list");
-						for (EmployeeAddr employeeAddr : list) {
-					%>
-					<tr>
-						<td>
-							<input type="checkbox" name="employeeAddrNo" value="<%=employeeAddr.getEmployeeAddrNo()%>">
-							<%=employeeAddr.getEmployeeAddrNo()%>
-						</td>
-						<td>
-							<%=employeeAddr.getEmployeeNo()%>
-						</td>
-						<td>
-							<%=employeeAddr.getEmployeeId()%>
-						</td>
-						<td>
-							<%=employeeAddr.getAddress()%>
-						</td>
-						<td>
-							<a href="<%=request.getContextPath() %>/updateEmployeeAddrComtroller.team2?employeeAddrNo=<%=employeeAddr.getEmployeeAddrNo()%>">수정하기</a>
-						</td>
-					</tr>
-					<%
-						}
-					%>
+					<c:forEach var="employeeAddr" items="${list}">
+						<tr>
+							<td>
+								<input type="checkbox" name="employeeAddrNo" value="${employeeAddr.employeeAddrNo}">
+								${employeeAddr.employeeAddrNo}
+							</td>
+							<td>
+								${employeeAddr.employeeNo}
+							</td>
+							<td>
+								${employeeAddr.employeeId}
+							</td>
+							<td>
+								${employeeAddr.address}
+							</td>
+							<td>
+								<a href="${pageContext.request.contextPath}/updateEmployeeAddrComtroller.team2?employeeAddrNo=${employeeAddr.employeeAddrNo}">수정하기</a>
+							</td>
+						</tr>					
+					</c:forEach>
 				</tbody>
 	
 			</table>
 		</form>
 		<button id="delete" type="button" class="btn btn-primary btn-lg btn-block">삭제하기</button>
-		<button type="button" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/indexController.team2'">메인으로 돌아가기</button>
+		<button type="button" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'">메인으로 돌아가기</button>
 
 	</div>
 </body>

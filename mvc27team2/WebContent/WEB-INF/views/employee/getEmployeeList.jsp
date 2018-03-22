@@ -1,7 +1,6 @@
 <!-- 배건혜 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="EUC-KR"%>
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="model.Employee"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,36 +58,31 @@
 				</tr>
 			</thead>
 			<tbody>
-				<%
-					ArrayList<Employee> list = (ArrayList<Employee>) request.getAttribute("list");
-					for (Employee employee : list) {
-				%>
-				<tr>
-					<td>
-						<%=employee.getEmployeeNo()%>
-					</td>
-					<td>
-						<%=employee.getEmployeeId()%>
-					</td>
-					<td>
-						*************
-					</td>
-					<td>
-						<a href="<%=request.getContextPath()%>/addEmployeeAddrController.team2?employeeNo=<%=employee.getEmployeeNo()%>">주소추가</a>
-					</td>
-					<td>
-						<a href="<%=request.getContextPath()%>/updateEmployeeController.team2?employeeNo=<%=employee.getEmployeeNo()%>">수정하기</a>
-					</td>
-					<td>
-						<a href="<%=request.getContextPath()%>/deleteEmployeeController.team2?employeeNo=<%=employee.getEmployeeNo()%>">삭제하기</a>
-					</td>
-				</tr>
-				<%
-					}
-				%>
+				<c:forEach var="employee" items="${list}">
+					<tr>
+						<td>
+							${employee.employeeNo}
+						</td>
+						<td>
+							${employee.employeeId}
+						</td>
+						<td>
+							*************
+						</td>
+						<td>
+							<a href="${pageContext.request.contextPath}/addEmployeeAddrController.team2?employeeNo=${employee.employeeNo}">주소추가</a>
+						</td>
+						<td>
+							<a href="${pageContext.request.contextPath}/updateEmployeeController.team2?employeeNo=${employee.employeeNo}">수정하기</a>
+						</td>
+						<td>
+							<a href="${pageContext.request.contextPath}/deleteEmployeeController.team2?employeeNo=${employee.employeeNo}">삭제하기</a>
+						</td>
+					</tr>					
+				</c:forEach>
 			</tbody>
 		</table>	
-		<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/indexController.team2'">메인으로 돌아가기</button>	
+		<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'">메인으로 돌아가기</button>	
 	</div>
 </body>
 </html>

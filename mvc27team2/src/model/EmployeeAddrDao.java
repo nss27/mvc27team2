@@ -9,6 +9,67 @@ import java.util.ArrayList;
 
 public class EmployeeAddrDao {
 	/**
+	 * 직원 정보 수정 처리 메서드
+	 * @param employeeAddr
+	 * @return
+	 */
+	public int updateEmployeeAddr(EmployeeAddr employeeAddr) {
+		System.out.println("직원 주소 정보수정 처리 메서드 호출");
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+
+			preparedStatement = connection.prepareStatement("UPDATE employee_addr SET address=? WHERE employee_addr_no=?");
+			preparedStatement.setString(1, employeeAddr.getAddress());
+			preparedStatement.setInt(2, employeeAddr.getEmployeeAddrNo());
+			
+			result = preparedStatement.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}	
+		return result;
+	
+	}
+	/**
+	 * 직원 한명의 주소를 조회하는 메서드
+	 * @param employeeAddrNo
+	 * @return 직원 한명의 주소
+	 */
+	public EmployeeAddr selectEmployeeAddrOne(int employeeAddrNo) {
+		System.out.println("직원 한명의 주소를 조회하는 메서드 호출");
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		EmployeeAddr employeeAddr = null;
+		try {
+			connection = DriverDB.driverDB();
+
+			preparedStatement = connection.prepareStatement("SELECT employee_addr_no AS employeeAddrNo,employee_id AS employeeId,address FROM employee JOIN employee_addr ON employee.employee_no = employee_addr.employee_no WHERE employee_addr.employee_addr_no = ?");
+			preparedStatement.setInt(1, employeeAddrNo);
+			
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				employeeAddr = new EmployeeAddr();
+				employeeAddr.setEmployeeAddrNo(resultSet.getInt("employeeAddrNo"));
+				employeeAddr.setEmployeeId(resultSet.getString("employeeId"));
+				employeeAddr.setAddress(resultSet.getString("address"));
+			}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		return employeeAddr;
+	}
+	/**
 	 * 직원 주소 삭제하는 메서드
 	 * @param employeeAddrNo
 	 * @return preparedStatement.executeUpdate

@@ -28,15 +28,12 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			<%
-				int count = (int)request.getAttribute("count");
-			%>
-				var count = <%=count%>;
+				var count = ${count};
 				if(count>=5){
 					$('input.address').attr('disabled','disabled');
 				}
 				$("input.address").blur(function(){
-					if($($("input.address").val()=="")) {
+					if($("input.address").val()=="") {
 						$("div.address").removeClass("has-success");
 						$("div.address").addClass("has-error");
 						$("span.address").removeClass("glyphicon glyphicon-ok");
@@ -70,23 +67,19 @@
 			</small>
 		</h1>	
 	</div>
-	<%
-	int employeeNo = (int)request.getAttribute("employeeNo"); 
-	String employeeId = (String) request.getAttribute("employeeId");
-	%>
 	<div id="form">
-	<form action="<%=request.getContextPath()%>/addEmployeeAddrController.team2" method="post" class="form-horizontal">
+	<form action="${pageContext.request.contextPath}/addEmployeeAddrController.team2" method="post" class="form-horizontal">
 		<div class="form-group">
 			<label class="col-sm-2 control-label">employeeNo</label>
 			<div class="col-sm-10">
-				<p class="form-control-static"><%=employeeNo%></p>
-				<input type="hidden" name="employeeNo" value="<%=employeeNo%>">
+				<p class="form-control-static">${employeeNo}</p>
+				<input type="hidden" name="employeeNo" value="${employeeNo}">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-2 control-label">employeeId</label>
 			<div class="col-sm-10">
-				<p class="form-control-static"><%=employeeId%></p>
+				<p class="form-control-static">${employeeId}</p>
 			</div>
 		</div>
 		<div class="address form-group  has-feedback">
@@ -97,7 +90,7 @@
 			</div>
 		</div>
 		<button type="button" id="add" class="btn btn-primary btn-lg btn-block">employeeAddress 추가</button>
-		<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/getEmployeeListController.team2'">직원리스트로 돌아가기</button>
+		<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/getEmployeeListController.team2'">직원리스트로 돌아가기</button>
 	</form>
 	</div>
 </body>

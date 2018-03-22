@@ -24,7 +24,7 @@ public class DeleteEmployeeController extends HttpServlet {
 		if(result != 0) {
 			response.sendRedirect(request.getContextPath() + "/getEmployeeListController.team2");
 		}else {
-			response.setContentType("text/html;charset=euc-kr");
+			response.setContentType("text/html;charset=utf-8");
 	   		PrintWriter out=response.getWriter();
 	   		out.println("<script>");
 	   		out.println("alert('남아있는 주소가 존재해 삭제하실 수 없습니다.');");

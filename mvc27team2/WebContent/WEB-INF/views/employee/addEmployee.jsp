@@ -101,7 +101,7 @@
 		</h1>		
 	</div>
 	<div id="form">
-		<form method = "post" action="<%=request.getContextPath()%>/addEmployeeController.team2" class="form-horizontal">
+		<form method = "post" action="${pageContext.request.contextPath}/addEmployeeController.team2" class="form-horizontal">
 			 <div class="employeeId form-group has-feedback">
 				<label for="employeeId" class="col-sm-2 control-label">employee_id</label>
 				<div class="col-sm-10">
@@ -127,7 +127,7 @@
 				</div>
 			</div>
 	      	<button type="button" id="add" class="btn btn-primary btn-lg btn-block">employee추가</button>
-	      	<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='<%=request.getContextPath()%>/indexController.team2'">메인으로 돌아가기</button>
+	      	<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'">메인으로 돌아가기</button>
 		</form>
 	</div>
 </body>
