@@ -31,7 +31,6 @@
 				}else{
 					$('input:checkbox').prop('checked',false);
 				}				
-			}
 			});
 			$('button#delete').click(function(){
 				if($('input:checkbox').is(':checked')){
