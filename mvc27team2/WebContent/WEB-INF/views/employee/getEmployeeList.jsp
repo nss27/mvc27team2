@@ -81,7 +81,16 @@
 					</tr>					
 				</c:forEach>
 			</tbody>
-		</table>	
+		</table>
+			<a href="${pageContext.request.contextPath}/getEmployeeListController.team2?currentPage=${currentPage}">처음으로</a> 
+		<c:if test="${currentPage>1 }">
+			<a href="${pageContext.request.contextPath}/getEmployeeListController.team2?currentPage=${currentPage-1}">이전</a><!--  -->
+		</c:if>
+		<c:if test="${currentPage<lastPage }">
+			<a href="${pageContext.request.contextPath}/getEmployeeListController.team2?currentPage=${currentPage+1}">다음</a><!--  -->
+		</c:if>		
+			<a href="${pageContext.request.contextPath}/getEmployeeListController.team2?currentPage=${lastPage}">마지막으로</a>
+				
 		<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'">메인으로 돌아가기</button>	
 	</div>
 </body>

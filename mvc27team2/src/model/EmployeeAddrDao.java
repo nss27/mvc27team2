@@ -8,8 +8,53 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EmployeeAddrDao {
+	public ArrayList<EmployeeAddr> searchEmployeeAddrList(String employeeSelect,String employeeSearch){
+		System.out.println("직원 주소 리스트 검색 메서드 호출");
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		EmployeeAddr employeeAddr = null;
+		ArrayList<EmployeeAddr> list = null;
+		try {	
+			//드라이버 연결, 로딩
+			connection = DriverDB.driverDB();
+			if(employeeSelect.equals("employeeId")) {
+				preparedStatement = connection.prepareStatement("select employee_addr_no as employeeAddrNo, employee.employee_no as employeeNo, employee_id as employeeId, address from employee join employee_addr on  employee.employee_no= employee_addr.employee_no where employee_id=? ORDER BY employee.employee_no ASC");
+				preparedStatement.setString(1, employeeSearch);
+			}else if(employeeSelect.equals("address")) {
+				preparedStatement = connection.prepareStatement("select employee_addr_no as employeeAddrNo, employee.employee_no as employeeNo, employee_id as employeeId, address from employee join employee_addr on  employee.employee_no= employee_addr.employee_no where address=? ORDER BY employee.employee_no ASC");
+				preparedStatement.setString(1, employeeSearch);
+			}else if(employeeSelect.equals("employeeNo")) {
+				preparedStatement = connection.prepareStatement("select employee_addr_no as employeeAddrNo, employee.employee_no as employeeNo, employee_id as employeeId, address from employee join employee_addr on  employee.employee_no= employee_addr.employee_no where employee.employee_no=? ORDER BY employee.employee_no ASC");
+				preparedStatement.setInt(1, Integer.parseInt(employeeSearch));
+			}
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			list = new ArrayList<EmployeeAddr>();
+			while(resultSet.next()) {
+				employeeAddr = new EmployeeAddr();
+				employeeAddr.setEmployeeAddrNo(resultSet.getInt("employeeAddrNo"));
+				employeeAddr.setEmployeeNo(resultSet.getInt("employeeNo"));
+				employeeAddr.setEmployeeId(resultSet.getString("employeeId"));
+				employeeAddr.setAddress(resultSet.getString("address"));
+				list.add(employeeAddr);				
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
+			if(preparedStatement !=null) try{preparedStatement.close();} catch(SQLException e){}; 
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+				
+			}		
+		
+		
+		return list;
+	}
+	
 	/**
-	 * 직원 정보 수정 처리 메서드
+	 * 직원 주소 정보 수정 처리 메서드
 	 * @param employeeAddr
 	 * @return
 	 */
