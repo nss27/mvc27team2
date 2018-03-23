@@ -24,7 +24,7 @@
 			background-color: rgba(255,255,255,.5);
 			box-shadow: 5px 5px 5px rgba(58,58,58,.5);
 		}
-		label#title{
+		div.title{
 			font-family: 'Anton', sans-serif;
 			text-align: center;
 			font-size: 60pt;
@@ -120,14 +120,12 @@
 					<a class="nav-link" href="#">About</a>
 				</li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="text" placeholder="Search">
-				<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-			</form>
 		</div>
 	</nav>
 	
-	<label id="title">addStudent</label>
+	<div class="title">
+		<label>addStudent</label>
+	</div>
 	
 	<div id="form">
 		<form method="post" action="${pageContext.request.contextPath}/addStudentController.team2" class="form-horizontal">

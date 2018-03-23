@@ -17,7 +17,7 @@
 	});
 </script>
 <form action="${pageContext.request.contextPath}/getStudentAddrListController.team2" method="get">
-	<select name="studentSelect">
+	<select name="studentSelect" class="form-control" style="height: 34px;">
 		<option value="studentId" selected="selected">학생아이디</option>
 		<option value="address">학생주소</option>
 		<option value="studentNo">학생번호</option>
