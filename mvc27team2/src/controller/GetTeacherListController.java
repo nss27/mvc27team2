@@ -21,13 +21,38 @@ public class GetTeacherListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		teacherDao = new TeacherDao();
 		teacherAddrDao = new TeacherAddrDao();
-		ArrayList<Teacher> list = teacherDao.selectTeacherList();
+
+		int totalRowCount = teacherDao.teacherRowCount();
+		System.out.println(totalRowCount+":totalRowCount");
+		int pagePerRow = 10; // 요청페이지에서 받을 수도 있습니다.
+		int currentPage = 1;
+		
+		if(request.getParameter("currentPage") != null) {
+				currentPage = Integer.parseInt(request.getParameter("currentPage"));
+				System.out.println("currentPage:"+currentPage);
+		}
+
+		int startRow = (currentPage-1)*pagePerRow;
+
+		ArrayList<Teacher> list = teacherDao.selectTeacherList(startRow, pagePerRow);
+		
+		int lastPage = totalRowCount / pagePerRow;
+		System.out.println("lastPage:"+lastPage);
+
+		if(totalRowCount % pagePerRow != 0) {
+			lastPage++;
+			System.out.println("lastPage2:"+lastPage);
+		}
+		
 		int teacherAddrCount = 0;
-		for(Teacher teacher : list) {
-			teacherAddrCount = teacherAddrDao.countTeacherAddrList(teacher.getTeacherNo());
-			teacher.setTeacherAddrCount(teacherAddrCount);
+		
+		for(Teacher tea : list) {
+			teacherAddrCount = teacherAddrDao.countTeacherAddrList(tea.getTeacherNo());
+			tea.setTeacherAddrCount(teacherAddrCount);
 		}
 		request.setAttribute("list", list);
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("lastPage", lastPage);
 		request.getRequestDispatcher("/WEB-INF/views/teacher/getTeacherList.jsp").forward(request, response);
 	}
 }

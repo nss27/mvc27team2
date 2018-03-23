@@ -53,7 +53,7 @@
 			</h1>
 		</div>			
 			<div class="center-block">
-			<jsp:include page="/WEB-INF/views/teacher/searchTeacherAddr.jsp"/>
+			<jsp:include page="/WEB-INF/views/teacher/searchTeacherAddrList.jsp"/>
 			<form action="${pageContext.request.contextPath}/deleteTeacherAddrController.team2" method="post">
 			<table class="table table-hover table-condensed">
 				<thead>

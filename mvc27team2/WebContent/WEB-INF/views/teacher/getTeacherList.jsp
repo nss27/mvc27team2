@@ -93,6 +93,16 @@
 			</tbody>
 		</table>
 		<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'">메인으로 돌아가기</button>
+		<ul class="pager">
+		<li><a href="${pageContext.request.contextPath}/getTeacherListController.team2?currentPage=${startRow+1}">처음으로</a></li>
+		<c:if test="${currentPage>1}">
+		<li><a href="${pageContext.request.contextPath}/getTeacherListController.team2?currentPage=${currentPage-1}">이전</a></li><!--  -->
+		</c:if>
+		<c:if test="${currentPage<lastPage}">
+		<li><a href="${pageContext.request.contextPath}/getTeacherListController.team2?currentPage=${currentPage+1}">다음</a></li><!--  -->
+		</c:if>
+		<li><a href="${pageContext.request.contextPath}/getTeacherListController.team2?currentPage=${lastPage}">마지막으로</a></li>
+		</ul>
 	</div>
 </body>
 </html>

@@ -7,6 +7,56 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class TeacherAddrDao {
+	
+	/**
+	 * 선생님 주소 리스트 검색 메서드
+	 * @return 검색 결과(선생님 주소 리스트)
+	 */
+	public ArrayList<TeacherAddr> searchTeacherAddrList(String teacherSelect,String teacherSearch) {
+		System.out.println("searchTeacherAddrList");
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		TeacherAddr teacherAddr = null;
+		ArrayList<TeacherAddr> list = null;
+		try {
+			connection = DriverDB.driverDB();
+			/*
+			 * student와 student_addr테이블을 조인한 이유는
+			 * 학생 주소 등록 번호,학생 등록 번호,학생 아이디,학생 주소 값을 출력해서
+			 * 리스트로 보여주기 위함이다
+			 */
+			if(teacherSelect.equals("teacherId")) {
+				preparedStatement = connection.prepareStatement("SELECT teacher_addr_no as teacherAddrNo,teacher.teacher_no as teacherNo,teacher_id as teacherId,address FROM teacher join teacher_addr ON teacher.teacher_no = teacher_addr.teacher_no WHERE teacher_id=? ORDER BY teacher.teacher_no ASC");
+				preparedStatement.setString(1, teacherSearch);
+			}else if(teacherSelect.equals("address")) {
+				preparedStatement = connection.prepareStatement("SELECT teacher_addr_no as teacherAddrNo,teacher.teacher_no as teacherNo,teacher_id as teacherId,address FROM teacher join teacher_addr ON teacher.teacher_no = teacher_addr.teacher_no WHERE address=? ORDER BY teacher.teacher_no ASC");
+				preparedStatement.setString(1, teacherSearch);
+			}else if(teacherSelect.equals("teacherNo")) {
+				preparedStatement = connection.prepareStatement("SELECT teacher_addr_no as teacherAddrNo,teacher.teacher_no as teacherNo,teacher_id as teacherId,address FROM teacher join teacher_addr ON teacher.teacher_no = teacher_addr.teacher_no WHERE teacher.teacher_no=? ORDER BY teacher.teacher_no ASC");
+				preparedStatement.setInt(1, Integer.parseInt(teacherSearch));
+			}
+			resultSet = preparedStatement.executeQuery();
+			
+			list = new ArrayList<TeacherAddr>();
+			while(resultSet.next()) {
+				teacherAddr = new TeacherAddr();
+				teacherAddr.setTeacherAddrNo(resultSet.getInt("teacherAddrNo"));
+				teacherAddr.setTeacherNo(resultSet.getInt("teacherNo"));
+				teacherAddr.setTeacherId(resultSet.getString("teacherId"));
+				teacherAddr.setAddress(resultSet.getString("address"));
+				list.add(teacherAddr);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		
+		return list;
+	}
 	/**
 	 * 선생님 주소 정보 수정 처리 메서드
 	 * @param teacherAddr
@@ -100,6 +150,40 @@ public class TeacherAddrDao {
 	}
 	
 	/**
+	 * 선생님 리스트 목록 카운트
+	 * @return SELECT count(*) FROM teacher preparedStatement.executeUpdate();
+	 */
+	public int teacherAddrRowCount() {
+		System.out.println("teacherAddrRowCount 실행");
+		int count = 0;
+
+		ResultSet resultSet = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("SELECT count(*) AS teacherAddrRowCount FROM teacher_addr");
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				System.out.println("teacherRowCount쿼리결과확인 Gdao.java");
+				count = resultSet.getInt("teacherAddrRowCount");
+			
+			System.out.println("count:"+count);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		
+		return count;
+	}
+	
+	/**
 	 * 선생님 주소 리스트 카운트 메서드
 	 * @return resultSet.getInt("countTeacherAddrList")
 	 */
@@ -138,7 +222,7 @@ public class TeacherAddrDao {
 	 * @return list
 	 */
 	
-	public ArrayList<TeacherAddr> selectTeacherAddrList() {
+	public ArrayList<TeacherAddr> selectTeacherAddrList(int startRow,int pagePerRow) {
 		System.out.println("selectTeacherAddrList 리스트출력 dao실행");
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -151,8 +235,10 @@ public class TeacherAddrDao {
 			/*
 			 * select 구문 teacher 와 teacher_addr 내의 teacher_no, teacher_id, teacher_addr_no, teacher
 			 */
-			preparedStatement = connection.prepareStatement("SELECT teacher.teacher_no as teacherNo,teacher_addr_no as teacherAddrNo, teacher_id as teacherId, address FROM teacher JOIN teacher_addr ON teacher.teacher_no = teacher_addr.teacher_no ORDER BY teacher_addr_no ASC");
+			preparedStatement = connection.prepareStatement("SELECT teacher.teacher_no as teacherNo,teacher_addr_no as teacherAddrNo, teacher_id as teacherId, address FROM teacher JOIN teacher_addr ON teacher.teacher_no = teacher_addr.teacher_no FROM teacher_addr Limit ?,?");
 			//결과값을 resultSet에 담는다.
+			preparedStatement.setInt(1, startRow);
+			preparedStatement.setInt(2, pagePerRow);
 			resultSet = preparedStatement.executeQuery();
 			// 리스트를 출력하기 위한 생성자 메서드
 			list = new ArrayList<TeacherAddr>();

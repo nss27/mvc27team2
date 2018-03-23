@@ -5,16 +5,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class TeacherDao {
 
+
+	
 	/**
 	 * 선생님 삭제 메서드
 	 * @param teacherNo
 	 * @return preparedStatement.executeUpdate
 	 */
 	public int deleteTeacher(int teacherNo) { //Teacher teacher로 매개변수 변경 가능.
-
+		System.out.println("deleteTeacher dao실행");
 		int teacherdelete=0;
 		
 		Connection connection = null;
@@ -44,6 +47,7 @@ public class TeacherDao {
 	 * @return preparedStatement.executeUpdate
 	 */
 	public int updateTeacher(Teacher teacher) {
+		System.out.println("updateTeacher dao실행");
 		int result = 0;
 		
 		Connection connection = null;
@@ -73,7 +77,7 @@ public class TeacherDao {
 	 */
 	
 	public Teacher selectTeacherOne(int TeacherNo) {
-		
+		System.out.println("selectTeacherOne dao실행");	
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -103,13 +107,47 @@ public class TeacherDao {
 		}
 		return teacher;
 	}
+	/**
+	 * 선생님 리스트 목록 카운트
+	 * @return SELECT count(*) FROM teacher preparedStatement.executeUpdate();
+	 */
+	public int teacherRowCount() {
+		System.out.println("teacherRowCount 실행");
+		int count = 0;
+
+		ResultSet resultSet = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("SELECT count(*) AS teacherRowCount FROM teacher");
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				System.out.println("teacherRowCount쿼리결과확인 Gdao.java");
+				count = resultSet.getInt("teacherRowCount");
+			
+			System.out.println("count:"+count);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		
+		return count;
+	}
 	
 	/**
 	 * 선생님리스트 메서드
 	 * @param teacher
 	 * @return preparedStatement.executeQuery
 	 */
-	public ArrayList<Teacher> selectTeacherList() {
+	public ArrayList<Teacher> selectTeacherList(int startRow,int pagePerRow) {
+		System.out.println("selectTeacherList dao실행");	
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -118,8 +156,9 @@ public class TeacherDao {
 		try {
 			connection = DriverDB.driverDB();
 			
-			preparedStatement = connection.prepareStatement("SELECT teacher_no AS teacherNo,teacher_id AS teacherId FROM teacher ORDER BY teacher_no ASC");
-			
+			preparedStatement = connection.prepareStatement("SELECT teacher_no AS teacherNo,teacher_id AS teacherId FROM teacher Limit ?,?");
+			preparedStatement.setInt(1, startRow);
+			preparedStatement.setInt(2, pagePerRow);
 			resultSet = preparedStatement.executeQuery();
 			
 			list = new ArrayList<Teacher>();
@@ -144,6 +183,7 @@ public class TeacherDao {
 	 * @return preparedStatement.executeUpdate()
 	 */
 	public int insertTeacher(Teacher teacher) {
+		System.out.println("insertTeacher dao실행");	
 		int result = 0;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
