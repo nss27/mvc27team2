@@ -120,24 +120,35 @@
 		<!-- 나윤주 -->
 		<div id="teacher" class="row">
 			<div class="col-xs-6 col-md-4">
-				<a href="${pageContext.request.contextPath}/addTeacherController.team2" class="thumbnail">
-					<img src="${pageContext.request.contextPath}/image/sample2.svg" alt="...">
+				<a href="${pageContext.request.contextPath}/addTeacherController.team2">
+				<div class="thumbnail">
+					<img src="${pageContext.request.contextPath}/image/나윤주1.jpg" alt="...">
+					<div class="caption">
+						<label>teacher추가</label>
+					</div>
+				</div>
 				</a>
-				<label>teacher추가</label>
 			</div>
 			<div class="col-xs-6 col-md-4">
-				<a href="${pageContext.request.contextPath}/getTeacherListController.team2" class="thumbnail">
-					<img src="${pageContext.request.contextPath}/image/sample2.svg" alt="...">
+				<a href="${pageContext.request.contextPath}/getTeacherListController.team2">
+				<div class="thumbnail">
+					<img src="${pageContext.request.contextPath}/image/나윤주3.jpg" alt="...">
+					<div class="caption">
+						<label>teacher리스트</label>
+					</div>
+				</div>
 				</a>
-				<label>teacher리스트</label>
 			</div>
 			<div class="col-xs-6 col-md-4">
-				<a href="${pageContext.request.contextPath}/getTeacherAddrListController.team2" class="thumbnail">
-					<img src="${pageContext.request.contextPath}/image/sample2.svg" alt="...">
+				<a href="${pageContext.request.contextPath}/getTeacherAddrListController.team2">
+				<div class="thumbnail">
+					<img src="${pageContext.request.contextPath}/image/나윤주4.jpg" alt="...">
+					<div class="caption">
+						<label>teacherAddr리스트</label>
+					</div>
+				</div>
 				</a>
-				<label>teacherAddr리스트</label>
 			</div>
 		</div>
-	</div>
 </body>
 </html>
