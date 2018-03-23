@@ -16,7 +16,7 @@
 		});
 	});
 </script>
-<form action="${pageContext.request.contextPath}/getStudentAddrListController.team2" method="post">
+<form action="${pageContext.request.contextPath}/getStudentAddrListController.team2" method="get">
 	<select name="studentSelect">
 		<option value="studentId" selected="selected">학생아이디</option>
 		<option value="address">학생주소</option>

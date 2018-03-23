@@ -9,6 +9,36 @@ import java.util.ArrayList;
 
 public class StudentDao {
 	/**
+	 * 학생 리스트 카운트 메서드
+	 * @return 학생 리스트 카운트값
+	 */
+	public int countStudentListAll() {
+		System.out.println("학생 리스트 카운트 메서드 호출");
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countStudentListAll FROM student");
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				result = resultSet.getInt("countStudentListAll");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		
+		return result;
+	}
+	/**
 	 * 학생 데이터 삭제 메서드
 	 * @param studentNo
 	 * @return preparedStatement.executeUpdate
@@ -62,11 +92,12 @@ public class StudentDao {
 		return result;
 	}
 	/**
-	 * 학생한명의 데이터 출력 메서드
+	 * 학생 한명의 데이터 출력 메서드
+	 * @param studentNo
 	 * @return 학생 한명의 데이터
 	 */
 	public Student selectStudentOne(int studentNo) {
-		System.out.println("학생한명의 데이터 출력 메서드 호출");
+		System.out.println("학생 한명의 데이터 출력 메서드 호출");
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -96,10 +127,11 @@ public class StudentDao {
 	}
 	/**
 	 * 학생 리스트 출력 메서드
-	 * @param student
-	 * @return 학생리스트
+	 * @param startRow
+	 * @param pagePerRow
+	 * @return 학생 리스트
 	 */
-	public ArrayList<Student> selectStudentList() {
+	public ArrayList<Student> selectStudentList(int startRow,int pagePerRow) {
 		System.out.println("학생 리스트 출력 메서드 호출");
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -109,7 +141,9 @@ public class StudentDao {
 		try {
 			connection = DriverDB.driverDB();
 			
-			preparedStatement = connection.prepareStatement("SELECT student_no AS studentNo,student_id AS studentId FROM student ORDER BY student_no ASC");
+			preparedStatement = connection.prepareStatement("SELECT student_no AS studentNo,student_id AS studentId FROM student ORDER BY student_no ASC LIMIT ?,?");
+			preparedStatement.setInt(1, startRow);
+			preparedStatement.setInt(2, pagePerRow);
 			
 			resultSet = preparedStatement.executeQuery();
 			

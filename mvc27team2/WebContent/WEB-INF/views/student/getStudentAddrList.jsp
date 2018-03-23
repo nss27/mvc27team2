@@ -14,8 +14,12 @@
 		.page-header{
 			text-align: center;
 		}
-		.center-block{
+		#list.center-block{
 			width: 50%;
+		}
+		#page.center-block{
+			width: 100%;
+			text-align: center;
 		}
 		.table-hover > tbody > tr:hover{
 			background-color: rgba(245,245,245,.5);
@@ -51,8 +55,8 @@
 			</small>
 		</h1>
 	</div>
-	<div class="center-block">
-		<%@ include file="/WEB-INF/views/student/searchStudentAddrList.jsp" %>
+	<div id="list" class="center-block">
+		<%@ include file="/WEB-INF/views/student/searchStudentAddrList.jsp" %><br>
 		<form action="${pageContext.request.contextPath}/deleteStudentAddrController.team2" method="post">
 			<table class="table table-hover table-condensed">
 				<thead>
@@ -98,9 +102,22 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<div id="page" class="center-block">
+				<c:if test="${currentPage > 1}">
+					<a href="${pageContext.request.contextPath}/getStudentAddrListController.team2">처음으로</a>
+					<a href="${pageContext.request.contextPath}/getStudentAddrListController.team2?currentPage=${currentPage - 1}&studentSelect=${studentSelect}&studentSearch=${studentSearch}">이전</a>
+				</c:if>
+				<c:forEach var="pageNumber" items="${pageNumber}">
+					<a href="${pageContext.request.contextPath}/getStudentAddrListController.team2?currentPage=${pageNumber}&studentSelect=${studentSelect}&studentSearch=${studentSearch}">${pageNumber}</a>
+				</c:forEach>
+				<c:if test="${currentPage < lastPage}">
+					<a href="${pageContext.request.contextPath}/getStudentAddrListController.team2?currentPage=${currentPage + 1}&studentSelect=${studentSelect}&studentSearch=${studentSearch}">다음</a>
+					<a href="${pageContext.request.contextPath}/getStudentAddrListController.team2?currentPage=${lastPage}&studentSelect=${studentSelect}&studentSearch=${studentSearch}">마지막으로</a>
+				</c:if>
+			</div>
+			<button id="delete" type="button" class="btn btn-primary btn-lg btn-block">삭제하기</button>
+			<button type="button" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'">메인으로 돌아가기</button>
 		</form>
-		<button id="delete" type="button" class="btn btn-primary btn-lg btn-block">삭제하기</button>
-		<button type="button" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'">메인으로 돌아가기</button>
 	</div>
 </body>
 </html>
