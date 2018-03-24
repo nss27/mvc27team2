@@ -45,7 +45,8 @@ public class GetStudentListController extends HttpServlet {
 			studentAddrCount = studentAddrDao.countStudentAddrListOne(student.getStudentNo());
 			student.setStudentAddrCount(studentAddrCount);
 		}
-		System.out.println(list);
+		int sumCount = studentAddrDao.countStudentAddrListAll();
+		request.setAttribute("sumCount", sumCount);
 		request.setAttribute("list", list);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("lastPage", lastPage);
