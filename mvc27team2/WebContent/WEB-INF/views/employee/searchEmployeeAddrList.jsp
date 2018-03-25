@@ -17,7 +17,7 @@
 	});
 </script>
 <form action="${pageContext.request.contextPath}/getEmplyeeAddrListController.team2" method="post">
-	<select name="employeeSelect">
+	<select name="employeeSelect" class="form-control mr-sm-2">
 		<option value="employeeId" selected="selected">
 			직원아이디
 		</option>
@@ -28,6 +28,6 @@
 			직원번호 
 		</option>
 	</select>
-	<input type="text" name="employeeSearch" placeholder="검색할 아이디를 입력하세요.">
-	<button type="submit">검색하기</button>
+	<input type="text" name="employeeSearch" class="form-control mr-sm-2" placeholder="검색할 직원아이디를 입력하세요.">
+	<button type="submit" class="btn btn-secondary my-2 my-sm-0">검색하기</button>
 </form>

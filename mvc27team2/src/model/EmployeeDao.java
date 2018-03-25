@@ -8,7 +8,36 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EmployeeDao {
-	
+	/**
+	 * 직원 리스트 카운트 메서드
+	 * @return 직원 리스트 카운트값
+	 */
+	public int countEmployeeListAll() {
+		System.out.println("직원 리스트 카운트 메서드 호출");
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countEmployeeListAll FROM employee");
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				result = resultSet.getInt("countEmployeeListAll");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		
+		return result;
+	}
 	/**
 	 * 직원 삭제 처리 메서드
 	 * @param employeeNo

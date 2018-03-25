@@ -24,8 +24,7 @@ public class AddEmployeeAddrController extends HttpServlet {
 		employeeDao = new EmployeeDao();
 		employeeAddrDao = new EmployeeAddrDao();
 		Employee employee = employeeDao.selectEmployeeOne(employeeNo);
-		request.setAttribute("employeeNo",employee.getEmployeeNo());
-		request.setAttribute("employeeId",employee.getEmployeeId());
+		request.setAttribute("employee",employee);
 		int count = employeeAddrDao.countEmployeeAddrList(employeeNo);
 		request.setAttribute("count", count);
 		request.getRequestDispatcher("/WEB-INF/views/employee/addEmployeeAddr.jsp").forward(request,  response);

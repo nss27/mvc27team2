@@ -5,26 +5,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<style type="text/css">
-		body {
-			background: linear-gradient(to right, rgba(255, 0, 0, 0.5), rgba(209, 178, 255, 1));
-		}
-		
-		.page-header {
-			text-align: center;
-		
-		}
-		
-		div#form {
-			margin: 0 auto;
-			padding: 10px 10px 10px 10px;
-			width: 60%;
-			background-color: rgba(255, 255, 255, 5);
-			border-radius: 7px;
-			box-shadow: 5px, 5px, 5px rgba(58, 58, 58, 5);
-		}
-	</style>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/lux/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/team2_style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -33,16 +15,19 @@
 					$('input.address').attr('disabled','disabled');
 				}
 				$("input.address").blur(function(){
-					if($("input.address").val()=="") {
-						$("div.address").removeClass("has-success");
-						$("div.address").addClass("has-error");
-						$("span.address").removeClass("glyphicon glyphicon-ok");
-						$("span.address").addClass("glyphicon glyphicon-alert");	
+					$('div.invalid-feedback').hide();
+					if($(this).val() == ""){
+						$(this).parent().removeClass("has-success");
+						$(this).parent().addClass("has-danger");
+						$(this).removeClass("is-valid");
+						$(this).addClass("is-invalid");
+						$(this).parent().find('div').show();
 					}else{
-						$("div.address").removeClass("has-error");
-						$("div.address").addClass("has-success");
-						$("span.address").removeClass("glyphicon glyphicon-alert");
-						$("span.address").addClass("glyphicon glyphicon-ok");				
+						$(this).parent().removeClass("has-danger");
+						$(this).parent().addClass("has-success");
+						$(this).removeClass("is-invalid");
+						$(this).addClass("is-valid");
+						$(this).parent().find('div').hide();			
 					}
 				});
 				$("button#add").click(function() {
@@ -59,39 +44,50 @@
 	</script>
 </head>
 <body>
-	<div class="page-header">
-		<h1>
-			addEmployeeAddr
-			<small>
-				직원주소추가
-			</small>
-		</h1>	
+	<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+		<a class="navbar-brand" href="${pageContext.request.contextPath}/indexController.team2">TEAM2</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarColor01">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#student">student</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#employee">employee</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#teacher">teacher</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	
+	<div class="title">
+		<img alt="addEmployeeaddrList" src="${pageContext.request.contextPath}/image/addEmplyeeaddrList.png">
 	</div>
 	<div id="form">
-	<form action="${pageContext.request.contextPath}/addEmployeeAddrController.team2" method="post" class="form-horizontal">
-		<div class="form-group">
-			<label class="col-sm-2 control-label">employeeNo</label>
-			<div class="col-sm-10">
-				<p class="form-control-static">${employeeNo}</p>
-				<input type="hidden" name="employeeNo" value="${employeeNo}">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">employeeId</label>
-			<div class="col-sm-10">
-				<p class="form-control-static">${employeeId}</p>
-			</div>
-		</div>
-		<div class="address form-group  has-feedback">
-			<label for="address" class="col-sm-2 control-label">address</label>
-			<div class="col-sm-10">
-				<input type="text" class="address form-control" id="address" name="address" placeholder="주소를 입력해주세요">
-				<span class="address form-control-feedback"></span>
-			</div>
-		</div>
-		<button type="button" id="add" class="btn btn-primary btn-lg btn-block">employeeAddress 추가</button>
-		<button type="button" id="return" class="btn btn-default btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath}/getEmployeeListController.team2'">직원리스트로 돌아가기</button>
-	</form>
+		<button type="button" class="close" aria-label="Close" onclick="location.href='${pageContext.request.contextPath}/getStudentListController.team2'"><span aria-hidden="true">&times;</span></button>
+		<br>
+		<form action="${pageContext.request.contextPath}/addEmployeeAddrController.team2" method="post">
+			<fieldset>
+				<input type="hidden" name="employeeNo" value="${employee.employeeNo}">
+				<div class="form-group row">
+					<label for="employeeId" class="col-sm-2 control-label">employee_id</label>
+					<div class="col-sm-10">
+						<input type="text" readonly="readonly" class="form-control-plaintext" id="employeeId" value="${employee.employeeId}">
+					</div>
+				</div>
+				<div class="address form-group">
+					<label for="address" class="control-label">address</label>			
+					<input type="text" id="address" name="address"  class="address form-control form-control-sm"  placeholder="주소를 입력해주세요">
+					<div class="invalid-feedback">주소를 입력해주세요</div>
+				</div>
+				<button type="button" id="add" class="btn btn-outline-primary btn-lg btn-block">employeeAddress 추가</button>
+			</fieldset>
+		</form>
 	</div>
 </body>
 </html>

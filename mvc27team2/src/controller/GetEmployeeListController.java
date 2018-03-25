@@ -11,38 +11,47 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Employee;
+import model.EmployeeAddr;
+import model.EmployeeAddrDao;
 import model.EmployeeDao;
+import model.PageMaker;
+import model.Student;
+import model.StudentAddr;
+import model.StudentAddrDao;
 
 @WebServlet("/getEmployeeListController.team2")
 public class GetEmployeeListController extends HttpServlet {
 	private EmployeeDao employeeDao = null;
+	private EmployeeAddrDao employeeAddrDao = null;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf8");
-		
-		int pagePerRow = 10;
-		int currentPage = 1;//요청 페이지에서 받을 수도 있다.
-		if(request.getParameter("currentPage") != null) {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
-		
-		
-		int startRow = (currentPage-1)*pagePerRow;
-		
-		
 		employeeDao = new EmployeeDao();
-		ArrayList<Employee> list = employeeDao.selectEmployeeList(startRow,pagePerRow);
-		
-		int totalRowCount = employeeDao.employeeRowCount();
-		int lastPage = totalRowCount/pagePerRow;
-		if(totalRowCount % pagePerRow !=0) {
-			lastPage++;
+		employeeAddrDao = new EmployeeAddrDao();
+		int totalCurrentPage = 1;
+		if(request.getParameter("currentPage") != null) {
+			totalCurrentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
+		int totalCount  = employeeDao.countEmployeeListAll();
+		int cutRow = 5;
+		PageMaker pageMaker = new PageMaker(totalCount, cutRow, totalCurrentPage);
+		
+		ArrayList<Integer> pageNumber = new ArrayList<Integer>();
+		for(int number = pageMaker.getStartPage(); number<=pageMaker.getEndPage(); number++) {
+			pageNumber.add(number);
+		}
+		
+		ArrayList<Employee> list = employeeDao.selectEmployeeList(pageMaker.getStartRow(), pageMaker.getCutRow());
+		int employeeAddrCount = 0;
+		for(Employee employee : list) {
+			employeeAddrCount = employeeAddrDao.countEmployeeAddrListOne(employee.getEmployeeNo());
+			employee.setEmployeeAddrCount(employeeAddrCount);
+		}
+		int sumCount = employeeAddrDao.countEmployeeAddrListAll();
+		request.setAttribute("sumCount", sumCount);
 		request.setAttribute("list", list);
-		request.setAttribute("currentPage", currentPage);
-		request.setAttribute("lastPage", lastPage);
-		request.getRequestDispatcher("/WEB-INF/views/employee/getEmployeeList.jsp").forward(request,  response);
+		request.setAttribute("pageMaker", pageMaker);
+		request.setAttribute("pageNumber", pageNumber);
+		request.getRequestDispatcher("/WEB-INF/views/employee/getEmployeeList.jsp").forward(request, response);
 	}
 
 }
-

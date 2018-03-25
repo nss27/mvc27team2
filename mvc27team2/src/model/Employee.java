@@ -4,6 +4,7 @@ public class Employee {
 	private int employeeNo;
 	private String employeeId;
 	private String employeePw;
+	private int employeeAddrCount;
 	
 	public int getEmployeeNo() {
 		return employeeNo;
@@ -23,10 +24,13 @@ public class Employee {
 	public void setEmployeePw(String employeePw) {
 		this.employeePw = employeePw;
 	}
-	@Override
-	public String toString() {
-		return "Employee [employeeNo=" + employeeNo + ", employeeId=" + employeeId + ", employeePw=" + employeePw + "]";
+	public int getEmployeeAddrCount() {
+		return employeeAddrCount;
 	}
+	public void setEmployeeAddrCount(int employeeAddrCount) {
+		this.employeeAddrCount = employeeAddrCount;
+	}
+	
 	
 	
 	

@@ -8,6 +8,80 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EmployeeAddrDao {
+	/**
+	 * 검색된 직원 주소 리스트 카운트 메서드
+	 * @return 검색된 학생 주소 리스트 카운트값
+	 */
+	public int countSearchEmployeeAddrList(String employeeSelect,String employeeSearch) {
+		System.out.println("검색된 직원 주소 리스트 카운트 메서드 호출");
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countEmployeeAddrListAll FROM employee_addr");
+			
+			if(employeeSelect.equals("employeeId")) {
+				preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countSearchEmployeeAddrList FROM employee join employee_addr ON employee.employee_no = employee_addr.employee_no WHERE employee_id=?");
+				preparedStatement.setString(1, employeeSearch);
+			}else if(employeeSelect.equals("address")) {
+				preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countSearchEmployeeAddrList FROM employee join employee_addr ON employee.employee_no = employee_addr.employee_no WHERE address=?");
+				preparedStatement.setString(1, employeeSearch);
+			}else if(employeeSelect.equals("studentNo")) {
+				preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countSearchEmployeeAddrList FROM employee join employee_addr ON employee.employee_no = employee_addr.employee_no WHERE employee.employee_no=?");
+				preparedStatement.setInt(1, Integer.parseInt(employeeSearch));
+			}
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				result = resultSet.getInt("countSearchEmployeeAddrList");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		return result;
+	}
+	/**
+	 * 직원 주소 리스트 카운트 메서드
+	 * @return 직원 주소 리스트 카운트값
+	 */
+	public int countEmployeeAddrListAll() {
+		System.out.println("직원 주소 리스트 카운트 메서드 호출");
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countEmployeeAddrListAll FROM employee_addr");
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				result = resultSet.getInt("countEmployeeAddrListAll");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		return result;
+	}
+	
+	/**
+	 * 직원 주소 리스트 검색메서드
+	 * @return 검색결과(직원 주소 리스트)
+	 */
 	public ArrayList<EmployeeAddr> searchEmployeeAddrList(String employeeSelect,String employeeSearch){
 		System.out.println("직원 주소 리스트 검색 메서드 호출");
 		Connection connection =null;
@@ -144,7 +218,7 @@ public class EmployeeAddrDao {
 	 * 직원 주소 리스트 카운트 메서드
 	 * @return 카운트 값
 	 */
-	public int countEmployeeAddrList(int employeeNo) {
+	public int countEmployeeAddrListOne(int employeeNo) {
 		System.out.println("직원 주소 리스트 카운트 메서드 호출");
 		Connection connection =null;
 		PreparedStatement preparedStatement = null;
@@ -158,7 +232,7 @@ public class EmployeeAddrDao {
 			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
-				result = resultSet.getInt("countEmployeeAddrList");
+				result = resultSet.getInt("countEmployeeAddrListOne");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
