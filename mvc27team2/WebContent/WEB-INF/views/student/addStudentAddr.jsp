@@ -15,16 +15,19 @@
 				$('input.address').attr('disabled','disabled');
 			}
 			$("input.address").blur(function(){
+				$('div.invalid-feedback').hide();
 				if($(this).val() == ""){
 					$(this).parent().removeClass("has-success");
 					$(this).parent().addClass("has-danger");
 					$(this).removeClass("is-valid");
 					$(this).addClass("is-invalid");
+					$(this).parent().find('div').show();
 				}else{
 					$(this).parent().removeClass("has-danger");
 					$(this).parent().addClass("has-success");
 					$(this).removeClass("is-invalid");
 					$(this).addClass("is-valid");
+					$(this).parent().find('div').hide();
 				}
 			});
 			$("button#add").click(function(){
@@ -49,19 +52,14 @@
 
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">
-						Home<span class="sr-only">(current)</span>
-					</a>
+				<li class="nav-item">
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#student">student</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Features</a>
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#employee">employee</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Pricing</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">About</a>
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#teacher">teacher</a>
 				</li>
 			</ul>
 		</div>
@@ -74,28 +72,22 @@
 	<div id="form">
 		<button type="button" class="close" aria-label="Close" onclick="location.href='${pageContext.request.contextPath}/getStudentListController.team2'"><span aria-hidden="true">&times;</span></button>
 		<br>
-		<form action="${pageContext.request.contextPath}/addStudentAddrController.team2" method="post" class="form-horizontal">
-			<div class="form-group">
-				<label class="col-sm-2 control-label">studentNo</label>
-				<div class="col-sm-10">
-					<p class="form-control-static">${studentNo}</p>
-					<input type="hidden" name="studentNo" value="${studentNo}">
+		<form action="${pageContext.request.contextPath}/addStudentAddrController.team2" method="post">
+			<fieldset>
+				<input type="hidden" name="studentNo" value="${student.studentNo}">
+				<div class="form-group row">
+					<label for="studentId" class="col-sm-2 col-form-label">student_id</label>
+					<div class="col-sm-10">
+						<input type="text" readonly="readonly" class="form-control-plaintext" id="studentId" value="${student.studentId}">
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">studentId</label>
-				<div class="col-sm-10">
-					<p class="form-control-static">${studentId}</p>
+				<div class="address form-group">
+					<label for="address" class="control-label">address</label>
+					<input type="text" id="address" name="address" class="address form-control form-control-sm" placeholder="주소를 입력해주세요">
+					<div class="invalid-feedback">주소를 입력해주세요</div>
 				</div>
-			</div>
-			<div class="address form-group has-feedback">
-				<label for="address" class="col-sm-2 control-label">address</label>
-				<div class="col-sm-10">
-					<input type="text" class="address form-control" id="address" name="address" placeholder="주소를 입력해주세요">
-					<span class="address form-control-feedback"></span>
-				</div>
-			</div>
-			<button type="button" id="add" class="btn btn-outline-primary btn-lg btn-block">studentAddress 추가</button>
+				<button type="button" id="add" class="btn btn-outline-primary btn-lg btn-block">studentAddress 추가</button>
+			</fieldset>
 		</form>
 	</div>
 </body>

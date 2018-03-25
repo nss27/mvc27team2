@@ -10,17 +10,21 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
+			$('div.invalid-feedback').hide();
 			$("input.address").blur(function(){
-				if($("input.address").val() == ""){
-					$("div.address").removeClass("has-success");
-					$("div.address").addClass("has-error");
-					$("span.address").removeClass("glyphicon glyphicon-ok");
-					$("span.address").addClass("glyphicon glyphicon-alert");
+				$('div.invalid-feedback').hide();
+				if($(this).val() == ""){
+					$(this).parent().removeClass("has-success");
+					$(this).parent().addClass("has-danger");
+					$(this).removeClass("is-valid");
+					$(this).addClass("is-invalid");
+					$(this).parent().find('div').show();
 				}else{
-					$("div.address").removeClass("has-error");
-					$("div.address").addClass("has-success");
-					$("span.address").removeClass("glyphicon glyphicon-alert");
-					$("span.address").addClass("glyphicon glyphicon-ok");
+					$(this).parent().removeClass("has-danger");
+					$(this).parent().addClass("has-success");
+					$(this).removeClass("is-invalid");
+					$(this).addClass("is-valid");
+					$(this).parent().find('div').hide();
 				}
 			});
 			$("button#change").click(function(){
@@ -43,19 +47,14 @@
 
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">
-						Home<span class="sr-only">(current)</span>
-					</a>
+				<li class="nav-item">
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#student">student</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Features</a>
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#employee">employee</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Pricing</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">About</a>
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#teacher">teacher</a>
 				</li>
 			</ul>
 		</div>
@@ -68,22 +67,22 @@
 	<div id="form">
 		<button type="button" class="close" aria-label="Close" onclick="location.href='${pageContext.request.contextPath}/getStudentAddrListController.team2'"><span aria-hidden="true">&times;</span></button>
 		<br>
-		<form action="${pageContext.request.contextPath}/updateStudentAddrController.team2" class="form-horizontal" method="post">
-			<input type="hidden" name="studentAddrNo" value="${studentAddr.studentAddrNo}">
-			<div class="form-group">
-				<label class="col-sm-2 control-label">student_id</label>
-				<div class="col-sm-10">
-					<p class="form-control-static">${studentAddr.studentId}</p>
+		<form action="${pageContext.request.contextPath}/updateStudentAddrController.team2" method="post">
+			<fieldset>
+				<input type="hidden" name="studentAddrNo" value="${studentAddr.studentAddrNo}">
+				<div class="form-group row">
+					<label for="studentId" class="col-sm-2 col-form-label">student_id</label>
+					<div class="col-sm-10">
+						<input type="text" readonly="readonly" class="form-control-plaintext" id="studentId" value="${student.studentId}">
+					</div>
 				</div>
-			</div>
-			<div class="address form-group has-feedback">
-				<label for="address" class="col-sm-2 control-label">address</label>
-				<div class="col-sm-10">
-					<input type="text" class="address form-control" id="address" name="address" value="${studentAddr.address}">
-					<span class="address form-control-feedback"></span>
+				<div class="address form-group">
+					<label for="address" class="control-label">address</label>
+					<input type="text" id="address" name="address" class="address form-control form-control-sm" value="${studentAddr.address}">
+					<div class="invalid-feedback">주소를 입력해주세요</div>
 				</div>
-			</div>
-			<button type="button" id="change" class="btn btn-outline-primary btn-lg btn-block">studentAddr 수정</button>
+				<button type="button" id="change" class="btn btn-outline-primary btn-lg btn-block">studentAddr 수정</button>
+			</fieldset>
 		</form>
 	</div>
 </body>

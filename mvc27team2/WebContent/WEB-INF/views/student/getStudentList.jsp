@@ -30,19 +30,14 @@
 
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">
-						Home<span class="sr-only">(current)</span>
-					</a>
+				<li class="nav-item">
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#student">student</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Features</a>
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#employee">employee</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Pricing</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">About</a>
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#teacher">teacher</a>
 				</li>
 			</ul>
 			<form class="nav-link form-inline my-2 my-lg-0">
@@ -59,25 +54,25 @@
 	<div id="list" class="center-block">
 		<button type="button" class="close" aria-label="Close" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'"><span aria-hidden="true">&times;</span></button>
 		<br>
-		<table class="table table-hover table-condensed">
+		<table class="table table-hover table-light">
 			<thead>
 				<tr>
-					<th>
+					<th scope="col">
 						studentNo
 					</th>
-					<th>
+					<th scope="col">
 						studentId
 					</th>
-					<th>
+					<th scope="col">
 						studentPw
 					</th>
-					<th>
+					<th scope="col">
 						주소 <span class="badge badge-primary badge-pill">${sumCount}</span>
 					</th>
-					<th>
+					<th scope="col">
 						수정
 					</th>
-					<th>
+					<th scope="col">
 						삭제
 					</th>
 				</tr>
@@ -85,9 +80,9 @@
 			<tbody>
 				<c:forEach var="student" items="${list}">
 					<tr>
-						<td>
+						<th scope="row">
 							${student.studentNo}
-						</td>
+						</th>
 						<td>
 							${student.studentId}
 						</td>
@@ -112,7 +107,7 @@
 				<a href="${pageContext.request.contextPath}/getStudentListController.team2">처음으로</a>
 				<a href="${pageContext.request.contextPath}/getStudentListController.team2?currentPage=${currentPage - 1}">이전</a>
 			</c:if>
-			<c:forEach var="pageNumber" items="${pageNumber}">
+			<c:forEach var="pageNumber" items="${pageNumber}" begin="${currentPage - 1}" end="${currentPage + 4}">
 				<a href="${pageContext.request.contextPath}/getStudentListController.team2?currentPage=${pageNumber}">${pageNumber}</a>
 			</c:forEach>
 			<c:if test="${currentPage < lastPage}">

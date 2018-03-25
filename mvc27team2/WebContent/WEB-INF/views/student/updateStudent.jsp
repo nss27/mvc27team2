@@ -10,20 +10,20 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$("p.studentPw").hide();
+			$('div.invalid-feedback').hide();
 			$("input.studentPw").blur(function(){
-				if($("input.studentPw").val().length < 10){
-					$("div.studentPw").removeClass("has-success");
-					$("div.studentPw").addClass("has-error");
-					$("span.studentPw").removeClass("glyphicon glyphicon-ok");
-					$("span.studentPw").addClass("glyphicon glyphicon-alert");
-					$("p.studentPw").show();
+				if($(this).val().length < 10){
+					$(this).parent().removeClass("has-success");
+					$(this).parent().addClass("has-danger");
+					$(this).removeClass("is-valid");
+					$(this).addClass("is-invalid");
+					$(this).parent().find('div').show();
 				}else{
-					$("div.studentPw").removeClass("has-error");
-					$("div.studentPw").addClass("has-success");
-					$("span.studentPw").removeClass("glyphicon glyphicon-alert");
-					$("span.studentPw").addClass("glyphicon glyphicon-ok");
-					$("p.studentPw").hide();
+					$(this).parent().removeClass("has-danger");
+					$(this).parent().addClass("has-success");
+					$(this).removeClass("is-invalid");
+					$(this).addClass("is-valid");
+					$(this).parent().find('div').hide();
 				}
 			});
 			$("button#change").click(function(){
@@ -46,19 +46,14 @@
 
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">
-						Home<span class="sr-only">(current)</span>
-					</a>
+				<li class="nav-item">
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#student">student</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Features</a>
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#employee">employee</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Pricing</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">About</a>
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#teacher">teacher</a>
 				</li>
 			</ul>
 		</div>
@@ -71,23 +66,22 @@
 	<div id="form">
 		<button type="button" class="close" aria-label="Close" onclick="location.href='${pageContext.request.contextPath}/getStudentListController.team2'"><span aria-hidden="true">&times;</span></button>
 		<br>
-		<form action="${pageContext.request.contextPath}/updateStudentController.team2" class="form-horizontal" method="post">
-			<input type="hidden" name="studentNo" value="${student.studentNo}">
-			<div class="form-group">
-				<label class="col-sm-2 control-label">student_id</label>
-				<div class="col-sm-10">
-					<p class="form-control-static">${student.studentId}</p>
+		<form action="${pageContext.request.contextPath}/updateStudentController.team2" method="post">
+			<fieldset>
+				<input type="hidden" name="studentNo" value="${student.studentNo}">
+				<div class="form-group row">
+					<label for="studentId" class="col-sm-2 col-form-label">student_id</label>
+					<div class="col-sm-10">
+						<input type="text" readonly="readonly" class="form-control-plaintext" id="studentId" value="${student.studentId}">
+					</div>
 				</div>
-			</div>
-			<div class="studentPw form-group has-feedback">
-				<label for="studentPw" class="col-sm-2 control-label">student_pw</label>
-				<div class="col-sm-10">
-					<input type="text" class="studentPw form-control" id="studentPw" name="studentPw" value="${student.studentPw}">
-					<span class="studentPw form-control-feedback"></span>
-					<p class="studentPw">비밀번호는 10글자 이상입니다</p>
-				</div>
-			</div>
-			<button type="button" id="change" class="btn btn-outline-primary btn-lg btn-block">student수정</button>
+				<div class="studentPw form-group">
+					<label for="studentPw" class="control-label">student_pw</label>
+					<input type="password" id="studentPw" name="studentPw" class="studentPw form-control form-control-sm" value="${student.studentPw}">
+					<div class="invalid-feedback">비밀번호는 10글자 이상입니다</div>
+				</div>	
+				<button type="button" id="change" class="btn btn-outline-primary btn-lg btn-block">student수정</button>
+			</fieldset>
 		</form>
 	</div>
 </body>

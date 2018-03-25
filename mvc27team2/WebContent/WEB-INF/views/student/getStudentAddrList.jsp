@@ -11,7 +11,10 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$('input#allAddrNo').click(function(){
+			if(${pageMaker.totalCurrentPage} == $('a#'+${pageMaker.totalCurrentPage}).text()){
+				$('a#'+${pageMaker.totalCurrentPage}).parent().addClass('active');
+			}
+			$('input#allAddrNo').click(function(){				
 				var allCheck = $('input#allAddrNo').is(':checked');
 				if(allCheck == true){
 					$('input:checkbox').prop('checked',true);
@@ -38,19 +41,14 @@
 
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">
-						Home<span class="sr-only">(current)</span>
-					</a>
+				<li class="nav-item">
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#student">student</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Features</a>
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#employee">employee</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Pricing</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">About</a>
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#teacher">teacher</a>
 				</li>
 			</ul>
 			<%@ include file="/WEB-INF/views/student/searchStudentAddrList.jsp" %><br>
@@ -65,12 +63,14 @@
 		<button type="button" class="close" aria-label="Close" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'"><span aria-hidden="true">&times;</span></button>
 		<br>
 		<form action="${pageContext.request.contextPath}/deleteStudentAddrController.team2" method="post">
-			<table class="table table-hover">
+			<table class="table table-hover table-light">
 				<thead>
 					<tr>
 						<th scope="col">
-							<input type="checkbox" id="allAddrNo">
-							studentAddrNo
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="allAddrNo">
+								<label class="custom-control-label" for="allAddrNo">studentAddrNo</label>
+							</div>
 						</th>
 						<th scope="col">
 							studentNo
@@ -89,10 +89,12 @@
 				<tbody>
 					<c:forEach var="studentAddr" items="${list}">
 						<tr>
-							<td>
-								<input type="checkbox" name="studentAddrNo" value="${studentAddr.studentAddrNo}">
-								${studentAddr.studentAddrNo}
-							</td>
+							<th scope="row">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="${studentAddr.studentAddrNo}" name="studentAddrNo" value="${studentAddr.studentAddrNo}">
+									<label class="custom-control-label" for="${studentAddr.studentAddrNo}">${studentAddr.studentAddrNo}</label>
+								</div>
+							</th>
 							<td>
 								${studentAddr.studentNo}
 							</td>
@@ -109,18 +111,30 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<div id="page" class="center-block">
-				<c:if test="${currentPage > 1}">
-					<a href="${pageContext.request.contextPath}/getStudentAddrListController.team2">처음으로</a>
-					<a href="${pageContext.request.contextPath}/getStudentAddrListController.team2?currentPage=${currentPage - 1}&studentSelect=${studentSelect}&studentSearch=${studentSearch}">이전</a>
-				</c:if>
-				<c:forEach var="pageNumber" items="${pageNumber}">
-					<a href="${pageContext.request.contextPath}/getStudentAddrListController.team2?currentPage=${pageNumber}&studentSelect=${studentSelect}&studentSearch=${studentSearch}">${pageNumber}</a>
-				</c:forEach>
-				<c:if test="${currentPage < lastPage}">
-					<a href="${pageContext.request.contextPath}/getStudentAddrListController.team2?currentPage=${currentPage + 1}&studentSelect=${studentSelect}&studentSearch=${studentSearch}">다음</a>
-					<a href="${pageContext.request.contextPath}/getStudentAddrListController.team2?currentPage=${lastPage}&studentSelect=${studentSelect}&studentSearch=${studentSearch}">마지막으로</a>
-				</c:if>
+			<div id="paging" class="center-block">
+				<ul class="pagination pagination-sm">
+					<c:if test="${pageMaker.totalCurrentPage > 1}">
+						<li class="page-item">
+					      <a class="page-link" href="${pageContext.request.contextPath}/getStudentAddrListController.team2">&laquo;</a>
+					    </li>
+						<li class="page-item">
+					      <a class="page-link" href="${pageContext.request.contextPath}/getStudentAddrListController.team2?currentPage=${pageMaker.totalCurrentPage - 1}&studentSelect=${studentSelect}&studentSearch=${studentSearch}">이전</a>
+					    </li>
+					</c:if>
+					<c:forEach var="pageNumber" items="${pageNumber}">
+						<li id="pageNumber" class="page-item">
+					      <a class="page-link" id="${pageNumber}" href="${pageContext.request.contextPath}/getStudentAddrListController.team2?currentPage=${pageNumber}&studentSelect=${studentSelect}&studentSearch=${studentSearch}">${pageNumber}</a>
+					    </li>
+					</c:forEach>
+					<c:if test="${pageMaker.totalCurrentPage < pageMaker.totalPage}">
+						<li class="page-item">
+					      <a class="page-link" href="${pageContext.request.contextPath}/getStudentAddrListController.team2?currentPage=${pageMaker.totalCurrentPage + 1}&studentSelect=${studentSelect}&studentSearch=${studentSearch}">다음</a>
+					    </li>
+						<li class="page-item">
+					      <a class="page-link" href="${pageContext.request.contextPath}/getStudentAddrListController.team2?currentPage=${pageMaker.totalPage}&studentSelect=${studentSelect}&studentSearch=${studentSearch}">&raquo;</a>
+					    </li>
+					</c:if>
+				</ul>
 			</div>
 			<br>
 			<button id="delete" type="button" class="btn btn-outline-primary btn-lg btn-block">삭제하기</button>

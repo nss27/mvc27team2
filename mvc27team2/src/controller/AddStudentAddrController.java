@@ -23,8 +23,7 @@ public class AddStudentAddrController extends HttpServlet {
 		studentDao = new StudentDao();
 		studentAddrDao = new StudentAddrDao();
 		Student student = studentDao.selectStudentOne(studentNo);
-		request.setAttribute("studentNo", student.getStudentNo());
-		request.setAttribute("studentId", student.getStudentId());
+		request.setAttribute("student", student);
 		int count = studentAddrDao.countStudentAddrListOne(studentNo);
 		request.setAttribute("count", count);
 		request.getRequestDispatcher("/WEB-INF/views/student/addStudentAddr.jsp").forward(request, response);

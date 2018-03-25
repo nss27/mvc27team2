@@ -82,19 +82,14 @@
 
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">
-						Home<span class="sr-only">(current)</span>
-					</a>
+				<li class="nav-item">
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#student">student</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Features</a>
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#employee">employee</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Pricing</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">About</a>
+					<a class="nav-link" href="${pageContext.request.contextPath}/indexController.team2?#teacher">teacher</a>
 				</li>
 			</ul>
 		</div>
@@ -108,22 +103,24 @@
 		<button type="button" class="close" aria-label="Close" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'"><span aria-hidden="true">&times;</span></button>
 		<br>
 		<form method="post" action="${pageContext.request.contextPath}/addStudentController.team2">
-			<div class="studentId form-group">
-				<label for="studentId" class="control-label">student_id</label>
-				<input type="text" id="studentId" name="studentId" class="studentId form-control form-control-sm" placeholder="아이디를 입력하세요">
-				<div class="invalid-feedback">아이디는 5글자 이상입니다</div>
-			</div>
-			<div class="studentPw form-group">
-				<label for="studentPw" class="control-label">student_pw</label>
-				<input type="password" id="studentPw" name="studentPw" class="studentPw form-control form-control-sm" placeholder="비밀번호를 입력하세요">
-				<div class="invalid-feedback">비밀번호는 10글자 이상입니다</div>
-			</div>
-			<div class="studentPwCheck form-group">
-				<label for="studentPwCheck" class="control-label">student_pw 확인</label>
-				<input type="password" id="studentPwCheck" name="studentPwCheck" class="studentPwCheck form-control form-control-sm"  placeholder="입력한 비밀번호를 확인해주세요">
-				<div class="invalid-feedback">비밀번호가 일치하지 않습니다</div>
-			</div>	
-			<button type="button" id="add" class="btn btn-outline-primary btn-lg btn-block">student추가</button>	
+			<fieldset>
+				<div class="studentId form-group">
+					<label for="studentId" class="control-label">student_id</label>
+					<input type="text" id="studentId" name="studentId" class="studentId form-control form-control-sm" placeholder="아이디를 입력하세요">
+					<div class="invalid-feedback">아이디는 5글자 이상입니다</div>
+				</div>
+				<div class="studentPw form-group">
+					<label for="studentPw" class="control-label">student_pw</label>
+					<input type="password" id="studentPw" name="studentPw" class="studentPw form-control form-control-sm" placeholder="비밀번호를 입력하세요">
+					<div class="invalid-feedback">비밀번호는 10글자 이상입니다</div>
+				</div>
+				<div class="studentPwCheck form-group">
+					<label for="studentPwCheck" class="control-label">student_pw 확인</label>
+					<input type="password" id="studentPwCheck" name="studentPwCheck" class="studentPwCheck form-control form-control-sm"  placeholder="입력한 비밀번호를 확인해주세요">
+					<div class="invalid-feedback">비밀번호가 일치하지 않습니다</div>
+				</div>	
+				<button type="button" id="add" class="btn btn-outline-primary btn-lg btn-block">student추가</button>
+			</fieldset>
 		</form>
 	</div>
 </body>

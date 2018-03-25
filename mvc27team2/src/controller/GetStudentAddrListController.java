@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.PageMaker;
 import model.StudentAddr;
 import model.StudentAddrDao;
 
@@ -23,54 +24,48 @@ public class GetStudentAddrListController extends HttpServlet {
 		String studentSearch = request.getParameter("studentSearch");
 		if(studentSelect == null && studentSearch == null || studentSearch == "") {
 			studentAddrDao = new StudentAddrDao();
-			int currentPage = 0;
+			
+			int totalCurrentPage = 1;
 			if(request.getParameter("currentPage") != null) {
-				currentPage = Integer.parseInt(request.getParameter("currentPage"));
-			}else {
-				currentPage = 1;
+				totalCurrentPage = Integer.parseInt(request.getParameter("currentPage"));
 			}
-			int pagePerRow = 10;
-			int startRow = (currentPage - 1)*pagePerRow;
-			int countStudentAddrListAll = studentAddrDao.countStudentAddrListAll();
-			int lastPage = countStudentAddrListAll / pagePerRow;
-			if(countStudentAddrListAll % pagePerRow != 0) {
-				++lastPage;
-			}
+			int totalCount  = studentAddrDao.countStudentAddrListAll();
+			int cutRow = 5;
+			PageMaker pageMaker = new PageMaker(totalCount, cutRow, totalCurrentPage);
+			
 			ArrayList<Integer> pageNumber = new ArrayList<Integer>();
-			for(int number = 1; number<=lastPage; number++) {
+			for(int number = pageMaker.getStartPage(); number<=pageMaker.getEndPage(); number++) {
 				pageNumber.add(number);
 			}
-			ArrayList<StudentAddr> list = studentAddrDao.selectStudentAddrList(startRow, pagePerRow);
+			
+			ArrayList<StudentAddr> list = studentAddrDao.selectStudentAddrList(pageMaker.getStartRow(), pageMaker.getCutRow());
+			
 			request.setAttribute("list", list);
-			request.setAttribute("currentPage", currentPage);
-			request.setAttribute("lastPage", lastPage);
+			request.setAttribute("pageMaker", pageMaker);
 			request.setAttribute("pageNumber", pageNumber);
 			request.setAttribute("studentSelect", studentSelect);
 			request.setAttribute("studentSearch", studentSearch);
 			request.getRequestDispatcher("/WEB-INF/views/student/getStudentAddrList.jsp").forward(request, response);
 		}else {
 			studentAddrDao = new StudentAddrDao();
-			int currentPage = 0;
+			
+			int totalCurrentPage = 1;
 			if(request.getParameter("currentPage") != null) {
-				currentPage = Integer.parseInt(request.getParameter("currentPage"));
-			}else {
-				currentPage = 1;
+				totalCurrentPage = Integer.parseInt(request.getParameter("currentPage"));
 			}
-			int pagePerRow = 10;
-			int startRow = (currentPage - 1)*pagePerRow;
-			int countSearchStudentAddrList = studentAddrDao.countSearchStudentAddrList(studentSelect, studentSearch);
-			int lastPage = countSearchStudentAddrList / pagePerRow;
-			if(countSearchStudentAddrList % pagePerRow != 0) {
-				++lastPage;
-			}
+			int totalCount  = studentAddrDao.countStudentAddrListAll();
+			int cutRow = 5;
+			PageMaker pageMaker = new PageMaker(totalCount, cutRow, totalCurrentPage);
+			
 			ArrayList<Integer> pageNumber = new ArrayList<Integer>();
-			for(int number = 1; number<=lastPage; number++) {
+			for(int number = pageMaker.getStartPage(); number<=pageMaker.getEndPage(); number++) {
 				pageNumber.add(number);
 			}
-			ArrayList<StudentAddr> list = studentAddrDao.searchStudentAddrList(studentSelect, studentSearch, startRow, pagePerRow);
+			
+			ArrayList<StudentAddr> list = studentAddrDao.searchStudentAddrList(studentSelect, studentSearch, pageMaker.getStartRow(), pageMaker.getCutRow());
+			
 			request.setAttribute("list", list);
-			request.setAttribute("currentPage", currentPage);
-			request.setAttribute("lastPage", lastPage);
+			request.setAttribute("pageMaker", pageMaker);
 			request.setAttribute("pageNumber", pageNumber);
 			request.setAttribute("studentSelect", studentSelect);
 			request.setAttribute("studentSearch", studentSearch);
