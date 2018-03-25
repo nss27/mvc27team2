@@ -11,6 +11,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
+			if(${pageMaker.totalCurrentPage} == $('a#'+${pageMaker.totalCurrentPage}).text()){
+				$('a#'+${pageMaker.totalCurrentPage}).parent().addClass('active');
+			}
 			$('a.delete').click(function(){
 				var count = $(this).parents('tr').find('span').text();
 				if(count != 0){
@@ -102,18 +105,30 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<div id="page" class="center-block">
-			<c:if test="${currentPage > 1}">
-				<a href="${pageContext.request.contextPath}/getStudentListController.team2">처음으로</a>
-				<a href="${pageContext.request.contextPath}/getStudentListController.team2?currentPage=${currentPage - 1}">이전</a>
-			</c:if>
-			<c:forEach var="pageNumber" items="${pageNumber}" begin="${currentPage - 1}" end="${currentPage + 4}">
-				<a href="${pageContext.request.contextPath}/getStudentListController.team2?currentPage=${pageNumber}">${pageNumber}</a>
-			</c:forEach>
-			<c:if test="${currentPage < lastPage}">
-				<a href="${pageContext.request.contextPath}/getStudentListController.team2?currentPage=${currentPage + 1}">다음</a>
-				<a href="${pageContext.request.contextPath}/getStudentListController.team2?currentPage=${lastPage}">마지막으로</a>
-			</c:if>
+		<div id="paging" class="center-block">
+			<ul class="pagination pagination-sm">
+				<c:if test="${pageMaker.totalCurrentPage > 1}">
+					<li class="page-item">
+				      <a class="page-link" href="${pageContext.request.contextPath}/getStudentListController.team2">&laquo;</a>
+				    </li>
+					<li class="page-item">
+				      <a class="page-link" href="${pageContext.request.contextPath}/getStudentListController.team2?currentPage=${pageMaker.totalCurrentPage - 1}">이전</a>
+				    </li>
+				</c:if>
+				<c:forEach var="pageNumber" items="${pageNumber}">
+					<li id="pageNumber" class="page-item">
+				      <a class="page-link" id="${pageNumber}" href="${pageContext.request.contextPath}/getStudentListController.team2?currentPage=${pageNumber}">${pageNumber}</a>
+				    </li>
+				</c:forEach>
+				<c:if test="${pageMaker.totalCurrentPage < pageMaker.totalPage}">
+					<li class="page-item">
+				      <a class="page-link" href="${pageContext.request.contextPath}/getStudentListController.team2?currentPage=${pageMaker.totalCurrentPage + 1}">다음</a>
+				    </li>
+					<li class="page-item">
+				      <a class="page-link" href="${pageContext.request.contextPath}/getStudentListController.team2?currentPage=${pageMaker.totalPage}">&raquo;</a>
+				    </li>
+				</c:if>
+			</ul>
 		</div>
 	</div>
 </body>

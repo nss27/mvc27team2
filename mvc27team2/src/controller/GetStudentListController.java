@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.PageMaker;
 import model.Student;
 import model.StudentAddrDao;
 import model.StudentDao;
@@ -22,24 +23,21 @@ public class GetStudentListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		studentDao = new StudentDao();
 		studentAddrDao = new StudentAddrDao();
-		int currentPage = 0;
+		
+		int totalCurrentPage = 1;
 		if(request.getParameter("currentPage") != null) {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}else {
-			currentPage = 1;
+			totalCurrentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		int pagePerRow = 10;
-		int startRow = (currentPage - 1)*pagePerRow;
-		int countStudentAddrListAll = studentDao.countStudentListAll();
-		int lastPage = countStudentAddrListAll / pagePerRow;
-		if(countStudentAddrListAll % pagePerRow != 0) {
-			++lastPage;
-		}
+		int totalCount  = studentDao.countStudentListAll();
+		int cutRow = 5;
+		PageMaker pageMaker = new PageMaker(totalCount, cutRow, totalCurrentPage);
+		
 		ArrayList<Integer> pageNumber = new ArrayList<Integer>();
-		for(int number = 1; number<=lastPage; number++) {
+		for(int number = pageMaker.getStartPage(); number<=pageMaker.getEndPage(); number++) {
 			pageNumber.add(number);
 		}
-		ArrayList<Student> list = studentDao.selectStudentList(startRow, pagePerRow);
+		
+		ArrayList<Student> list = studentDao.selectStudentList(pageMaker.getStartRow(), pageMaker.getCutRow());
 		int studentAddrCount = 0;
 		for(Student student : list) {
 			studentAddrCount = studentAddrDao.countStudentAddrListOne(student.getStudentNo());
@@ -48,8 +46,7 @@ public class GetStudentListController extends HttpServlet {
 		int sumCount = studentAddrDao.countStudentAddrListAll();
 		request.setAttribute("sumCount", sumCount);
 		request.setAttribute("list", list);
-		request.setAttribute("currentPage", currentPage);
-		request.setAttribute("lastPage", lastPage);
+		request.setAttribute("pageMaker", pageMaker);
 		request.setAttribute("pageNumber", pageNumber);
 		request.getRequestDispatcher("/WEB-INF/views/student/getStudentList.jsp").forward(request, response);
 	}
