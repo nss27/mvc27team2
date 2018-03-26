@@ -74,7 +74,7 @@
 		</div>
 	</nav>
 	<div class="title">
-	<img src="./image/addTeacherList.png"/>
+	<img src="./image/getTeacherList.png"/>
 	</div>
 	<div id="list" class="center-block">
 		<table class="table table-hover table-condensed">

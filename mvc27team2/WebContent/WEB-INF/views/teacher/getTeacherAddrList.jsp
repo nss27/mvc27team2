@@ -90,7 +90,7 @@
 		</div>
 	</nav>
 	<div class="title">
-	<img src="./image/addTeacheraddr.png"/>
+	<img src="./image/getTeacheraddr.png"/>
 	</div>
 	<div id="list" class="center-block">
 			<form action="${pageContext.request.contextPath}/deleteTeacherAddrController.team2" method="post">
