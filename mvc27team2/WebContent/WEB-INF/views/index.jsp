@@ -100,19 +100,19 @@
 		<div id="employee" class="row">
 			<div class="col-xs-6 col-md-4">
 				<a href="${pageContext.request.contextPath}/addEmployeeController.team2" class="thumbnail">
-					<img src="${pageContext.request.contextPath}/image/sample2.svg" alt="...">
+					<img src="${pageContext.request.contextPath}/image/건혜언니1.png" alt="...">
 				</a>
 				<label>employee추가</label>
 			</div>
 			<div class="col-xs-6 col-md-4">
 				<a href="${pageContext.request.contextPath}/getEmployeeListController.team2" class="thumbnail">
-					<img src="${pageContext.request.contextPath}/image/sample2.svg" alt="...">
+					<img src="${pageContext.request.contextPath}/image/건혜언니2.png" alt="...">
 				</a>
 				<label>employee리스트</label>
 			</div>
 			<div class="col-xs-6 col-md-4">
 				<a href="${pageContext.request.contextPath}/getEmplyeeAddrListController.team2" class="thumbnail">
-					<img src="${pageContext.request.contextPath}/image/sample2.svg" alt="...">
+					<img src="${pageContext.request.contextPath}/image/건혜언니3.png" alt="...">
 				</a>
 				<label>employeeAddr리스트</label>
 			</div>
