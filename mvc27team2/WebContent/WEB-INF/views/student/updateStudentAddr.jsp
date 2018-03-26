@@ -39,7 +39,7 @@
 	</script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand" href="${pageContext.request.contextPath}/indexController.team2">TEAM2</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -61,7 +61,7 @@
 	</nav>
 	
 	<div class="title">
-		<img alt="addStudent" src="${pageContext.request.contextPath}/image/addStudent.png">
+		<img alt="addStudent" src="${pageContext.request.contextPath}/image/updateStudentaddr.png">
 	</div>
 	
 	<div id="form">

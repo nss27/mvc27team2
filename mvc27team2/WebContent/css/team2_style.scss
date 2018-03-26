@@ -48,7 +48,12 @@ div{
 	}
 	
 	&#paging{
-		width: 50%;
+		position:absolute;
+		left:50%;
+		transform:translate(-50%, -50%);
+		margin:{
+			top : 10px;
+		}
 	}
 }
 
@@ -60,11 +65,4 @@ nav{
 	a{
 		margin-top: 7px;
 	}
-}
-ul.pagination{
-	width: 300px;
-	margin:{
-			left: auto;
-			right: auto;
-		}
 }

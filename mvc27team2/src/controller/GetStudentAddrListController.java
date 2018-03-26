@@ -22,7 +22,7 @@ public class GetStudentAddrListController extends HttpServlet {
 		request.setCharacterEncoding("utf8");
 		String studentSelect = request.getParameter("studentSelect");
 		String studentSearch = request.getParameter("studentSearch");
-		if(studentSelect == null && studentSearch == null || studentSearch == "") {
+		if(studentSelect == null && studentSearch == null || studentSelect != null && studentSearch == "") {
 			studentAddrDao = new StudentAddrDao();
 			
 			int totalCurrentPage = 1;
@@ -46,14 +46,14 @@ public class GetStudentAddrListController extends HttpServlet {
 			request.setAttribute("studentSelect", studentSelect);
 			request.setAttribute("studentSearch", studentSearch);
 			request.getRequestDispatcher("/WEB-INF/views/student/getStudentAddrList.jsp").forward(request, response);
-		}else {
+		}else if(studentSelect != null){
 			studentAddrDao = new StudentAddrDao();
 			
 			int totalCurrentPage = 1;
 			if(request.getParameter("currentPage") != null) {
 				totalCurrentPage = Integer.parseInt(request.getParameter("currentPage"));
 			}
-			int totalCount  = studentAddrDao.countStudentAddrListAll();
+			int totalCount  = studentAddrDao.countSearchStudentAddrList(studentSelect, studentSearch);
 			int cutRow = 5;
 			PageMaker pageMaker = new PageMaker(totalCount, cutRow, totalCurrentPage);
 			
