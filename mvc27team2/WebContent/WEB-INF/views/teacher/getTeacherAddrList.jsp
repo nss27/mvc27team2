@@ -87,11 +87,10 @@
 					<a role="presentation" class="nav-link" href="#teacher">TEACHER</a>
 				</li>
 			</ul>
-		<%@ include file="/WEB-INF/views/teacher/searchTeacherAddrList.jsp" %><br>
 		</div>
 	</nav>
 	<div class="title">
-	<img src="./image/addTeacheraddrList.png"/>
+	<img src="./image/addTeacheraddr.png"/>
 	</div>
 	<div id="list" class="center-block">
 			<form action="${pageContext.request.contextPath}/deleteTeacherAddrController.team2" method="post">
