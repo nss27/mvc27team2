@@ -33,7 +33,7 @@
 	</script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand" href="${pageContext.request.contextPath}/indexController.team2">TEAM2</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -55,13 +55,13 @@
 			</div>
 		</nav>
 		<div class="title">
-			<img alt="addEmploee" src="${pageContext.request.contextPath}/image/addEmployee.png">
+			<img alt="addEmploee" src="${pageContext.request.contextPath}/image/getEmployeeaddrList.png">
 		</div>
 		<div id="list" class="center-block">
 			<button type="button" class="close" aria-label="Close" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'"><span aria-hidden="true">&times;</span></button>
 			<br>
 			<form action="${pageContext.request.contextPath}/deleteEmployeeAddrController.team2" method="post">
-				<table class="table table-hover table-condensed ">
+				<table class="table table-hover table-light">
 					<thead>
 						<tr>
 							<th scope="col">
@@ -109,7 +109,7 @@
 						</c:forEach>
 					</tbody>		
 				</table>
-				<div id="paging" class="center-block">
+				<div id="paging">
 				<ul class="pagination pagination-sm">
 					<c:if test="${pageMaker.totalCurrentPage > 1}">
 						<li class="page-item">

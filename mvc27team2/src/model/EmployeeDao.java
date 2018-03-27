@@ -129,47 +129,16 @@ public class EmployeeDao {
 	
 	/**
 	 * 직원리스트출력 메서드
-	 * @param employee
+	 * @param startRow
+	 * @param pagePerRow
 	 * @return 직원리스트
 	 */
-public int employeeRowCount() {
-	Connection connection = null;
-	PreparedStatement preparedStatement = null;
-	ResultSet resultSet = null;
-	ArrayList<Employee> list = null;
-	
-	int count = 0;
+
 	/*
-	 * SELECT count(*) FROM employee
+	 * 매개변수 int startRow - > select 결과물의 시작행
+	 * 매개변수 int pagePerRow-> select 결과물의 갯수
+	 * return : EmployeeList
 	 */
-	
-	try {	
-		//드라이버 연결, 로딩
-		connection = DriverDB.driverDB();
-		//쿼리 실행
-		preparedStatement = connection.prepareStatement("SELECT count(*) FROM ORDER BY employee_no ASC ");
-		resultSet = preparedStatement.executeQuery();
-		list = new ArrayList<Employee>();
-		while(resultSet.next()) {
-			count = resultSet.getInt("employeeRowCount"); 
-			
-		}
-	} catch (ClassNotFoundException | SQLException e) {
-		e.printStackTrace();
-	}finally {
-		if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
-		if(preparedStatement !=null) try{preparedStatement.close();} catch(SQLException e){}; 
-		if(connection != null)try {connection.close();}catch (SQLException e) {};
-			
-		}	
-	return count;
-}
-	
-/*
- * 매개변수 int startRow - > select 결과물의 시작행
- * 매개변수 int pagePerRow-> select 결과물의 갯수
- * return : EmployeeList
- */
 	public ArrayList<Employee> selectEmployeeList(int startRow, int pagePerRow) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -179,10 +148,10 @@ public int employeeRowCount() {
 			//드라이버 연결, 로딩
 			connection = DriverDB.driverDB();
 			//쿼리 실행
-			preparedStatement = connection.prepareStatement("SELECT employee_no AS employeeNo, employee_id AS employeeId FROM employee LIMIT ?,? ORDER BY employee_no ASC ");
-			resultSet = preparedStatement.executeQuery();
+			preparedStatement = connection.prepareStatement("SELECT employee_no AS employeeNo, employee_id AS employeeId FROM employee ORDER BY employee_no ASC LIMIT ?,?");		
 			preparedStatement.setInt(1, startRow);
 			preparedStatement.setInt(2, pagePerRow);
+			resultSet = preparedStatement.executeQuery();
 			list = new ArrayList<Employee>();
 			while(resultSet.next()) {
 				Employee employee = new Employee();

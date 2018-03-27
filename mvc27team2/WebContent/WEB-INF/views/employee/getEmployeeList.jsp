@@ -25,7 +25,7 @@
 	</script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand" href="${pageContext.request.contextPath}/indexController.team2">TEAM2</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -51,7 +51,7 @@
 	</nav>
 
 	<div class="title">
-		<img alt="addEmployee" src="${pageContext.request.contextPath}/image/addEmployee.png">	
+		<img alt="addEmployee" src="${pageContext.request.contextPath}/image/getEmployeeList.png">	
 	</div>
 	<div id="list" class="center-block">
 		<button type="button" class="close" aria-label="Close" onclick="location.href='${pageContext.request.contextPath}/indexController.team2'"><span aria-hidden="true">&times;</span></button>
@@ -104,7 +104,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<div id="paging" class="center-block">
+		<div id="paging">
 			<ul class="pagination pagination-sm">
 				<c:if test="${pageMaker.totalCurrentPage > 1}">
 					<li class="page-item">

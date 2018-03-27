@@ -29,7 +29,7 @@ public class EmployeeAddrDao {
 			}else if(employeeSelect.equals("address")) {
 				preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countSearchEmployeeAddrList FROM employee join employee_addr ON employee.employee_no = employee_addr.employee_no WHERE address=?");
 				preparedStatement.setString(1, employeeSearch);
-			}else if(employeeSelect.equals("studentNo")) {
+			}else if(employeeSelect.equals("employeeNo")) {
 				preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countSearchEmployeeAddrList FROM employee join employee_addr ON employee.employee_no = employee_addr.employee_no WHERE employee.employee_no=?");
 				preparedStatement.setInt(1, Integer.parseInt(employeeSearch));
 			}
@@ -82,7 +82,7 @@ public class EmployeeAddrDao {
 	 * 직원 주소 리스트 검색메서드
 	 * @return 검색결과(직원 주소 리스트)
 	 */
-	public ArrayList<EmployeeAddr> searchEmployeeAddrList(String employeeSelect,String employeeSearch){
+	public ArrayList<EmployeeAddr> searchEmployeeAddrList(String employeeSelect,String employeeSearch, int startRow, int pagePerRow){
 		System.out.println("직원 주소 리스트 검색 메서드 호출");
 		Connection connection =null;
 		PreparedStatement preparedStatement = null;
@@ -93,14 +93,20 @@ public class EmployeeAddrDao {
 			//드라이버 연결, 로딩
 			connection = DriverDB.driverDB();
 			if(employeeSelect.equals("employeeId")) {
-				preparedStatement = connection.prepareStatement("select employee_addr_no as employeeAddrNo, employee.employee_no as employeeNo, employee_id as employeeId, address from employee join employee_addr on  employee.employee_no= employee_addr.employee_no where employee_id=? ORDER BY employee.employee_no ASC");
+				preparedStatement = connection.prepareStatement("select employee_addr_no as employeeAddrNo, employee.employee_no as employeeNo, employee_id as employeeId, address from employee join employee_addr on  employee.employee_no= employee_addr.employee_no where employee_id=? ORDER BY employee.employee_no ASC LIMIT ?,?");
 				preparedStatement.setString(1, employeeSearch);
+				preparedStatement.setInt(2, startRow);
+				preparedStatement.setInt(3, pagePerRow);
 			}else if(employeeSelect.equals("address")) {
-				preparedStatement = connection.prepareStatement("select employee_addr_no as employeeAddrNo, employee.employee_no as employeeNo, employee_id as employeeId, address from employee join employee_addr on  employee.employee_no= employee_addr.employee_no where address=? ORDER BY employee.employee_no ASC");
+				preparedStatement = connection.prepareStatement("select employee_addr_no as employeeAddrNo, employee.employee_no as employeeNo, employee_id as employeeId, address from employee join employee_addr on  employee.employee_no= employee_addr.employee_no where address=? ORDER BY employee.employee_no ASC LIMIT ?,?");
 				preparedStatement.setString(1, employeeSearch);
+				preparedStatement.setInt(2, startRow);
+				preparedStatement.setInt(3, pagePerRow);
 			}else if(employeeSelect.equals("employeeNo")) {
-				preparedStatement = connection.prepareStatement("select employee_addr_no as employeeAddrNo, employee.employee_no as employeeNo, employee_id as employeeId, address from employee join employee_addr on  employee.employee_no= employee_addr.employee_no where employee.employee_no=? ORDER BY employee.employee_no ASC");
+				preparedStatement = connection.prepareStatement("select employee_addr_no as employeeAddrNo, employee.employee_no as employeeNo, employee_id as employeeId, address from employee join employee_addr on  employee.employee_no= employee_addr.employee_no where employee.employee_no=? ORDER BY employee.employee_no ASC LIMIT ?,?");
 				preparedStatement.setInt(1, Integer.parseInt(employeeSearch));
+				preparedStatement.setInt(2, startRow);
+				preparedStatement.setInt(3, pagePerRow);
 			}
 			
 			resultSet = preparedStatement.executeQuery();
@@ -227,8 +233,8 @@ public class EmployeeAddrDao {
 		try {
 			connection = DriverDB.driverDB();
 			
-			preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countEmployeeAddrList FROM employee_addr WHERE employee_no=?");
-			
+			preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countEmployeeAddrListOne FROM employee_addr WHERE employee_no=?");
+			preparedStatement.setInt(1,employeeNo);
 			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
@@ -248,7 +254,7 @@ public class EmployeeAddrDao {
 	 * 직원 주소리스트 출력 메서드
 	 * @return 직원 주소리스트
 	 */
-	public ArrayList<EmployeeAddr> selectEmployeeAddrList() {
+	public ArrayList<EmployeeAddr> selectEmployeeAddrList(int startRow, int pagePerRow) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -258,7 +264,9 @@ public class EmployeeAddrDao {
 			//드라이버 연결, 로딩
 			connection = DriverDB.driverDB();
 			//쿼리 실행
-			preparedStatement = connection.prepareStatement("select employee_addr_no as employeeAddrNo, employee.employee_no as employeeNo, employee_id as employeeId, address from employee_addr left join employee on employee_addr.employee_no= employee.employee_no ORDER BY employee_addr.employee_addr_no ASC");
+			preparedStatement = connection.prepareStatement("select employee_addr_no as employeeAddrNo, employee.employee_no as employeeNo, employee_id as employeeId, address from employee join employee_addr on employee.employee_no= employee_addr.employee_no ORDER BY employee.employee_no ASC LIMIT ?,?");
+			preparedStatement.setInt(1, startRow);
+			preparedStatement.setInt(2, pagePerRow);
 			resultSet = preparedStatement.executeQuery();
 			
 			list = new ArrayList<EmployeeAddr>();

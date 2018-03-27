@@ -44,7 +44,7 @@
 	</script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand" href="${pageContext.request.contextPath}/indexController.team2">TEAM2</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -69,13 +69,13 @@
 		<img alt="addEmployeeaddrList" src="${pageContext.request.contextPath}/image/addEmplyeeaddrList.png">
 	</div>
 	<div id="form">
-		<button type="button" class="close" aria-label="Close" onclick="location.href='${pageContext.request.contextPath}/getStudentListController.team2'"><span aria-hidden="true">&times;</span></button>
+		<button type="button" class="close" aria-label="Close" onclick="location.href='${pageContext.request.contextPath}/getEmployeeListController.team2'"><span aria-hidden="true">&times;</span></button>
 		<br>
 		<form action="${pageContext.request.contextPath}/addEmployeeAddrController.team2" method="post">
 			<fieldset>
 				<input type="hidden" name="employeeNo" value="${employee.employeeNo}">
 				<div class="form-group row">
-					<label for="employeeId" class="col-sm-2 control-label">employee_id</label>
+					<label for="employeeId" class="col-sm-2 control-form-label">employee_id</label>
 					<div class="col-sm-10">
 						<input type="text" readonly="readonly" class="form-control-plaintext" id="employeeId" value="${employee.employeeId}">
 					</div>

@@ -38,7 +38,7 @@
 	</script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand" href="${pageContext.request.contextPath}/indexController.team2">TEAM2</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -60,10 +60,10 @@
 	</nav>
 	
 	<div class="title">
-		<img alt="addEmployee" src="${pageContext.request.contextPath}/image/addEmployee.png">
+		<img alt="addEmployee" src="${pageContext.request.contextPath}/image/updateEmployeeaddr.png">
 	</div>
 	<div id="form">
-		<button type="button" class="close" aria-label="Close" onclick="location.href='${pageContext.request.contextPath}/getStudentAddrListController.team2'"><span aria-hidden="true">&times;</span></button>
+		<button type="button" class="close" aria-label="Close" onclick="location.href='${pageContext.request.contextPath}/getEmployeeAddrListController.team2'"><span aria-hidden="true">&times;</span></button>
 		<br>
 		<form action="${pageContext.request.contextPath}/updateEmployeeAddrController.team2" method="post">
 			<fieldset>
@@ -71,12 +71,12 @@
 				<div class="form-group row">
 					<label for="employeeId" class="col-sm-2 control-form-label">employee_id</label>
 					<div class="col-sm-10">
-						<input type="text" readonly="readonly" calss="form-control-plaintext" id="employeeId" value="${employeeAddr.employeeId}">			
+						<input type="text" readonly="readonly" calss="form-control-plaintext" id="employeeId" value="${employee.employeeId}">			
 					</div>			
 				</div>
 				<div class="address form-group">
 					<label for="address" class="control-label">address</label>
-						<input type="text" class="address form-control form-control-sm" id="address" name="address" value="${employeeAddr.address}">
+						<input type="text" id="address" name="address" class="address form-control form-control-sm" value="${employeeAddr.address}">
 						<div class="invalid-feedback">주소를 입력하세요</div>			
 				</div>
 				<button type="button" id="change" class="btn btn-outline-primary btn-lg btn-block">employeeAddr 수정</button>

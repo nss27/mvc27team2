@@ -16,7 +16,7 @@
 		});
 	});
 </script>
-<form action="${pageContext.request.contextPath}/getEmplyeeAddrListController.team2" method="post">
+<form action="${pageContext.request.contextPath}/getEmplyeeAddrListController.team2" method="get" class="form-inline my-2 my-lg-0">
 	<select name="employeeSelect" class="form-control mr-sm-2">
 		<option value="employeeId" selected="selected">
 			직원아이디
