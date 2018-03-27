@@ -56,7 +56,7 @@
 	</nav>
 	
 	<div class="title">
-		<img alt="addStudent" src="${pageContext.request.contextPath}/image/addStudent.png">
+		<img alt="addStudent" src="${pageContext.request.contextPath}/image/getStudentaddrList.png">
 	</div>
 	
 	<div id="list" class="center-block">
