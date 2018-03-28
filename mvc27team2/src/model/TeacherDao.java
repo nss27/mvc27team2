@@ -8,9 +8,36 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class TeacherDao {
-
-
-	
+	/**
+	 * 선생님 리스트 카운트 메서드
+	 * @return 선생님 리스트 카운트값
+	 */
+	public int countTeacherListAll() {
+		System.out.println("선생님 리스트 카운트 메서드 호출");
+		Connection connection =null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int result = 0;
+		try {
+			connection = DriverDB.driverDB();
+			
+			preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS countTeacherListAll FROM teacher");
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				result = resultSet.getInt("countTeacherListAll");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(resultSet != null)try {resultSet.close();}catch(SQLException e) {};
+			if(preparedStatement != null)try {preparedStatement.close();}catch (SQLException e) {};
+			if(connection != null)try {connection.close();}catch (SQLException e) {};
+		}
+		
+		return result;
+	}
 	/**
 	 * 선생님 삭제 메서드
 	 * @param teacherNo
